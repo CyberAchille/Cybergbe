@@ -1,0 +1,72 @@
+# CyberGbe : arnaque ou pas ?
+
+Site gratuit pour apprendre à reconnaître les arnaques du téléphone et d'internet, **en français et en ewe** (Eʋegbe), avec des exemples du Togo : Mobile Money (Mixx by Yas, Flooz), WhatsApp, faux recrutements, faux profils.
+
+> « Gbe » veut dire « la langue » : la cybersécurité dans la langue de tous les jours.
+
+## Ce que contient le site
+
+- **5 thèmes, 15 leçons courtes** : codes secrets, Mobile Money, WhatsApp, fausses offres d'emploi, réseaux sociaux.
+- **Un quiz par thème** (4 questions avec explications).
+- **« Arnaque ou pas ? »** : 13 messages réalistes (SMS, WhatsApp, appel, Facebook, e-mail) à juger, dont 4 messages normaux pour ne pas apprendre à se méfier de tout.
+- **Un petit dictionnaire** de 25 mots, avec une colonne ewe.
+- **Une page « En cas d'arnaque »** : les 6 bons réflexes et les contacts du CERT.tg.
+- **Une bande de progression tissée** façon kente : chaque leçon et chaque quiz terminés ajoutent un fil.
+- **Aux couleurs du Togo** (vert, jaune, rouge), avec une navigation en bas de l'écran sur mobile, comme une application.
+- **Vivant et ludique** : messages qui arrivent en direct sur un faux téléphone, confettis, séries de bonnes réponses, étoiles, badges à gagner par thème, bandeau défilant des phrases d'escrocs. Les animations se coupent automatiquement si le téléphone demande de réduire les mouvements.
+
+## Pensé pour son public
+
+- Fonctionne sur les petits téléphones, **hors connexion** une fois ouvert (service worker).
+- **Aucune inscription, aucune donnée envoyée** : la progression reste dans le téléphone.
+- Polices **Unbounded** (titres) et **Onest** (texte), choisies parce qu'elles affichent toutes les lettres ewe (ɖ ƒ ɣ ŋ ɔ ɛ ʋ).
+- Icônes **Phosphor**, embarquées dans le site (aucune requête externe).
+- **Lecture à voix haute** des leçons en français ; emplacements prévus pour l'**audio en ewe**.
+- Tout texte pas encore traduit en ewe s'affiche en français, avec une petite étiquette « FR ».
+
+## Lancer le site sur son ordinateur
+
+Aucune installation : c'est un site statique sans framework.
+
+```bash
+python3 -m http.server 8000
+# puis ouvrir http://localhost:8000
+```
+
+## Mettre en ligne avec GitHub Pages
+
+1. Dans le dépôt : **Settings › Pages**.
+2. **Source** : *Deploy from a branch*, branche `main`, dossier `/ (root)`.
+3. Le site est disponible à `https://cyberachille.github.io/Cybergbe/` après une minute.
+
+À chaque mise à jour, change `VERSION` dans `sw.js` pour que les téléphones récupèrent les nouveaux fichiers.
+
+## Organisation
+
+| Fichier | Rôle |
+|---|---|
+| `js/config.js` | Nom du site, liens, couleurs des thèmes, coordonnées du CERT.tg |
+| `js/content/fr.js` | Tout le contenu en français (référence) |
+| `js/content/ee.js` | Le contenu en ewe, même structure |
+| `js/app.js` | Navigation, quiz, jeu, progression, badges, animations, langues |
+| `js/icones.js` | Icônes Phosphor utilisées par le site (généré par `scripts/icones.js`) |
+| `scripts/modele-ewe.js` | Outil de traduction (mise à jour de `ee.js`, export/import CSV) |
+| `docs/PLAN.md` | Arborescence, contenu, feuille de route, partenaires |
+| `docs/TRADUCTION.md` | Guide pour les traducteurs et les voix ewe |
+
+## Contribuer
+
+- **Tu parles ewe ?** Lis [docs/TRADUCTION.md](docs/TRADUCTION.md) : le plus simple est de remplir le tableau `docs/traduction-ewe.csv`.
+- **Tu as vu une nouvelle arnaque ?** Ouvre une *Issue* pour qu'on l'ajoute au jeu.
+- **Modifier le contenu français** : `js/content/fr.js`, puis `node scripts/modele-ewe.js` pour mettre l'ewe à jour.
+
+## Sources
+
+- CERT.tg, avis et alertes publiés sur [cert.tg](https://cert.tg/) (fausses offres d'emploi, fausses plateformes d'investissement, phishing Mobile Money).
+- ANCy, Stratégie nationale de cybersécurité 2024-2028.
+
+## Licences
+
+- Code : MIT (voir `LICENSE`).
+- Polices Unbounded et Onest : SIL Open Font License 1.1 (voir `fonts/OFL-unbounded.txt` et `fonts/OFL-onest.txt`).
+- Icônes Phosphor : MIT (voir `js/LICENCE-phosphor.txt`).
