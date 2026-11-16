@@ -10,7 +10,7 @@
  * par exemple : "audio": "audio/ee/codes-1.mp3"
  *
  * Fichier généré par  node scripts/modele-ewe.js  (les traductions existantes sont conservées).
- * Avancement : 1 textes traduits sur 1489.
+ * Avancement : 1 textes traduits sur 1493.
  */
 window.CG_CONTENU = window.CG_CONTENU || {};
 window.CG_CONTENU.ee = {
@@ -2070,6 +2070,10 @@ window.CG_CONTENU.ee = {
           "texte": ""  // FR : Avant de renvoyer quoi que ce soit, vérifie ton solde dans le menu officiel de ton opérateur. Le faux SMS de transfert vient souvent d'un numéro ordinaire.
         },
         {
+          "titre": "",  // FR : Un faux SMS de transfert
+          "texte": ""  // FR : Ce message de « transfert reçu » vient d'un numéro ordinaire. Les vrais messages Mobile Money arrivent avec le nom de l'opérateur. Vérifie ton solde dans le menu officiel avant de croire quoi que ce soit.
+        },
+        {
           "titre": "",  // FR : On te demande de payer d'abord
           "texte": ""  // FR : Un vrai employeur, un vrai concours ou un vrai gain ne te demande jamais de payer des frais à l'avance. C'est le signe le plus sûr d'une arnaque.
         },
@@ -2104,6 +2108,10 @@ window.CG_CONTENU.ee = {
         {
           "titre": "",  // FR : Demande d'argent
           "texte": ""  // FR : Avant d'envoyer de l'argent, appelle la personne par un appel normal. Les escrocs se font souvent passer pour un proche en difficulté.
+        },
+        {
+          "titre": "",  // FR : Une histoire pour t'émouvoir
+          "texte": ""  // FR : Un malade à l'hôpital, un accident, un décès : l'escroc joue sur ta pitié pour que tu agisses vite, sans vérifier. Appelle la famille sur un numéro que tu connais déjà.
         },
         {
           "titre": "",  // FR : On te demande le secret

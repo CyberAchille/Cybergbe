@@ -1701,6 +1701,7 @@ window.CG_CONTENU.fr = {
       signaux: [
         { id: "code", titre: "Demande de code secret", texte: "Personne de sérieux ne te demande ton code PIN ni un code reçu par SMS : ni ton opérateur, ni WhatsApp, ni ta banque. Celui qui a ce code peut vider ton compte ou voler ton WhatsApp." },
         { id: "erreur", titre: "Le coup du « transfert par erreur »", texte: "Avant de renvoyer quoi que ce soit, vérifie ton solde dans le menu officiel de ton opérateur. Le faux SMS de transfert vient souvent d'un numéro ordinaire." },
+        { id: "faux_sms", titre: "Un faux SMS de transfert", texte: "Ce message de « transfert reçu » vient d'un numéro ordinaire. Les vrais messages Mobile Money arrivent avec le nom de l'opérateur. Vérifie ton solde dans le menu officiel avant de croire quoi que ce soit." },
         { id: "frais", titre: "On te demande de payer d'abord", texte: "Un vrai employeur, un vrai concours ou un vrai gain ne te demande jamais de payer des frais à l'avance. C'est le signe le plus sûr d'une arnaque." },
         { id: "chantage", titre: "Chantage", texte: "Ne paie pas : payer n'arrête presque jamais le chantage. Garde les preuves, bloque la personne et signale-la au CERT.tg." },
         { id: "installer", titre: "On te demande d'installer une application", texte: "Une application envoyée par un inconnu peut prendre le contrôle de ton téléphone et de ton Mobile Money. N'installe que depuis le magasin officiel, et seulement si tu l'as choisie toi-même." },
@@ -1710,6 +1711,7 @@ window.CG_CONTENU.fr = {
         { id: "gain", titre: "Cadeau ou argent trop facile", texte: "Personne ne gagne à un jeu auquel il n'a pas joué, et aucun placement sérieux ne double ton argent en quelques jours." },
         { id: "numero", titre: "Changement de numéro ou de canal", texte: "« J'ai changé de numéro », « écris-moi sur WhatsApp » : appelle la personne sur son ancien numéro pour vérifier que c'est bien elle." },
         { id: "argent", titre: "Demande d'argent", texte: "Avant d'envoyer de l'argent, appelle la personne par un appel normal. Les escrocs se font souvent passer pour un proche en difficulté." },
+        { id: "emotion", titre: "Une histoire pour t'émouvoir", texte: "Un malade à l'hôpital, un accident, un décès : l'escroc joue sur ta pitié pour que tu agisses vite, sans vérifier. Appelle la famille sur un numéro que tu connais déjà." },
         { id: "secret", titre: "On te demande le secret", texte: "« N'en parle à personne » : l'escroc veut t'empêcher de demander conseil. Parles-en toujours à quelqu'un de confiance." },
         { id: "identite", titre: "Demande d'informations personnelles", texte: "Ta pièce d'identité, ta date de naissance ou un mot de passe permettent de se faire passer pour toi. Ne les envoie pas à un inconnu." },
         { id: "emploi", titre: "Offre d'emploi à vérifier", texte: "« Sans diplôme », « sans entretien », gros salaire : vérifie l'offre sur le site officiel de l'entreprise, ou colle-la dans ArnaKO." },

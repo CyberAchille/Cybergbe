@@ -1444,32 +1444,46 @@
     { id: "code", poids: 3, lecon: "codes-1", motifs: [
       [rx("\\b" + DEMANDE + "(?:[- ]moi|[- ]nous|[- ]le|[- ]la)?(?:\\s+(?:vite|rapidement|vitement|stp|svp|maintenant|juste|seulement|directement))?\\s+(?:le|les|ton|tes|votre|vos|ce|ces|un|une|mon|du|l')\\s*(?:nouveau\\s+|bon\\s+)?(?:code|codes|pin|mot de passe|otp|chiffres)\\b"), { negation: true, poids: 5 }],
       [rx("\\b(?:me|nous)\\s+le\\s+(?:renvoyer|envoyer|transferer|donner|transmettre|dicter)\\b|\\b(?:renvoie|renvoyez|envoie|envoyez|transfere|transferez|donne|donnez)[- ]le[- ]moi\\b"), { si: /\bcode\b/, poids: 5 }],
-      [rx("\\bcode (?:pin|secret|de (?:validation|confirmation|verification|retrait|securite|transaction)|a \\d chiffres|recu par sms)\\b"), { mention: true }],
-      [rx("\\b(?:pin|otp)\\b"), { mention: true }]
+      [rx("\\bcode (?:pin|secret|de (?:validation|confirmation|verification|retrait|securite|transaction)|a \\d chiffres|recu par sms)\\b"), { mention: true, poids: 1 }],
+      [rx("\\b(?:pin|otp)\\b"), { mention: true, poids: 1 }]
     ] },
     { id: "erreur", poids: 3, lecon: "mobile-money-1", motifs: [
       [rx("\\bpar erreur\\b")],
       [rx("\\b(?:me suis|s'est|t'es|se sont|nous sommes) trompee?s? de (?:numero|personne|destinataire|compte)\\b")],
-      [rx("\\b(?:renvoie|renvoyer|renvoyez|retourne|retourner|retournez|rembourse|rembourser|remboursez|reverse|reverser|reversez|restitue|restituer|restituez)(?:[- ]moi|[- ]le|[- ]les|[- ]nous)?\\b(?=[^.!?\\n]{0,30}?(?:" + MONTANT + "|argent|somme|sous\\b|transfert|depot|\\bau \\d|\\bsur (?:ce|mon) numero))"), { poids: 2 }]
+      [rx("\\b(?:me suis|s'est|t'es|se sont|nous sommes|je suis)\\s+trompee?s?\\b(?=[^.!?]{0,40}(?:envo|transf|depo|numero|argent|credit|unites|" + MONTANT + "))")],
+      [rx("\\b(?:renvoie|renvoyer|renvoyez|retourne|retourner|retournez|rembourse|rembourser|remboursez|reverse|reverser|reversez|restitue|restituer|restituez)(?:[- ](?:moi|le|les|nous|la|l'))?\\b"), { si: /par erreur|trompe/, poids: 5 }],
+      [rx("\\b(?:renvoie|renvoyer|renvoyez|retourne|retourner|retournez|rembourse|rembourser|remboursez|reverse|reverser|reversez|restitue|restituer|restituez)(?:[- ](?:moi|le|les|nous|la|l'))?\\b"), { si: new RegExp(MONTANT), poids: 2 }],
+      [rx("\\b(?:renvoie|renvoyer|renvoyez|retourne|retourner|retournez|rembourse|rembourser|remboursez|reverse|reverser|reversez|restitue|restituer|restituez)(?:[- ]moi|[- ]le|[- ]les|[- ]nous)?\\b(?=[^.!?]{0,30}?(?:" + MONTANT + "|argent|somme|sous\\b|transfert|depot|\\bau \\d|\\bsur (?:ce|mon) numero))"), { poids: 2 }]
+    ] },
+    { id: "faux_sms", poids: 3, lecon: "mobile-money-1", motifs: [
+      [rx("\\b(?:vous avez recu|tu as recu|transfert recu|depot recu|reception de|vous avez re[cç]u)\\b(?=[^]{0,120}nouveau solde)"), { si: /\+?228\s*[79]|\b[79]\d(?:[\s.]?\d{2}){3}\b/ }]
     ] },
     { id: "frais", poids: 3, lecon: "emploi-1", motifs: [
       [rx("\\b(?:frais|droits?) d(?:e |')(?:dossier|inscription|formation|visite(?: medicale)?|traitement|deblocage|activation|dedouanement|livraison|enregistrement|validation|candidature|tenue|badge)\\b")],
-      [rx("\\b(?:payer|payez|paie|verser|versez|verse|regler|reglez|deposer|deposez)\\b[^.!?\\n]{0,40}?" + MONTANT), { poids: 2 }]
+      [rx("\\b(?:payer|payez|paie|paye|payes|paieront|paierez|verser|versez|verse|regler|reglez|deposer|deposez|depose)\\b[^.!?]{0,40}?" + MONTANT), { poids: 2 }],
+      [rx("\\b(?:inscription|adhesion|cotisation|caution|dossier|badge|tenue|formation|visa|livraison|dedouanement|activation|deblocage)\\s*:?\\s*(?:de\\s+)?" + MONTANT)],
+      [rx(MONTANT + "\\s+(?:de\\s+|d'|pour\\s+(?:le\\s+|la\\s+|les\\s+|l')?)(?:frais\\s+(?:de\\s+|d'))?(?:livraison|dossier|inscription|transport|dedouanement|activation|deblocage|formation|visa|badge|tenue|billet)")],
+      [rx("\\b(?:il faut|il te faut|il vous faut|tu dois|vous devez)\\s+(?:juste\\s+|seulement\\s+|d'abord\\s+|payer\\s+|verser\\s+|envoyer\\s+)*(?:un depot de\\s+)?" + MONTANT)],
+      [rx("\\bpour debloquer\\b(?=[^.!?]{0,60}(?:depot|payer|verser|frais|" + MONTANT + "))")]
     ] },
     { id: "chantage", poids: 3, lecon: "reseaux-2", motifs: [
       [rx("\\b(?:sinon|ou bien|ou)\\s+(?:je|on|nous)\\s+(?:vais\\s+|va\\s+|allons\\s+)?(?:les\\s+|la\\s+|le\\s+|tout\\s+)?(?:publier|publie|diffuser|diffuse|envoyer|envoie|montrer|montre|partager|partage|balancer|balance|poster|poste)\\b")],
       [rx("\\b(?:je vais|on va|nous allons)\\s+(?:les\\s+|la\\s+|le\\s+|tout\\s+)?(?:publier|diffuser|balancer|poster)\\b")],
+      [rx("\\b(?:j'envoie|je publie|je poste|je montre|je partage|je diffuse|je balance)\\s+(?:la|les|ta|tes|cette|ces|notre|nos)\\s+(?:video|photo|image|capture|appel)s?\\b")],
+      [rx("\\b(?:j'ai|on a)\\s+(?:enregistre|filme|capture)\\b")],
       [rx("\\b(?:photos?|videos?|images?|captures?)\\s+(?:\\S+\\s+){0,2}?(?:intimes?|nue?s?|compromettantes?|privees?)\\b")]
     ] },
     { id: "installer", poids: 3, motifs: [
-      [rx("\\b(?:installe|installer|installez|telecharge|telecharger|telechargez)\\b[^.!?\\n]{0,25}?\\b(?:application|appli|app|apk|logiciel)\\b")],
+      [rx("\\b(?:installe|installer|installez|telecharge|telecharger|telechargez)\\b[^.!?]{0,25}?\\b(?:application|appli|app|apk|logiciel)\\b")],
       [rx("\\.apk\\b")],
       [rx("\\b(?:anydesk|teamviewer|rustdesk|quicksupport)\\b")]
     ] },
     { id: "urgence", poids: 2, motifs: [
       [rx("\\b(?:urgent|urgente|urgence|urgemment|immediatement|tout de suite|sans tarder|au plus vite|au plus tard|rapidement|vite|derniere chance|dernier delai|dernier rappel|dernier avertissement|expire|expirera|expiration)\\b")],
       [rx("\\b(?:avant|d'ici)\\s+(?:ce soir|demain|minuit|midi|la fin de (?:la )?journee|\\d{1,2}\\s?h(?:\\d{2})?\\b)")],
-      [rx("\\b(?:dans|sous)\\s+(?:les\\s+)?\\d+\\s?(?:h|heures?|min|minutes?)\\b")],
+      [rx("\\b(?:dans|sous)\\s+(?:les\\s+)?\\d+\\s?(?:min|minutes?)\\b")],
+      [rx("\\b(?:valable|valide|expire)\\s+(?:seulement\\s+|uniquement\\s+|pendant\\s+)?\\d+\\s?(?:h|heures?|min|minutes?|jours?)\\b")],
+      [rx("\\b(?:depeche[sz]?|depechez)(?:[- ](?:toi|vous))?\\b|\\bplaces? (?:tres |tres tres )?limitees?\\b|\\boffre limitee\\b|\\bderniers? jours?\\b")],
       [rx("\\baujourd'hui (?:seulement|uniquement)\\b")]
     ] },
     { id: "blocage", poids: 2, lecon: "mobile-money-2", motifs: [
@@ -1478,10 +1492,14 @@
     ] },
     { id: "gain", poids: 2, lecon: "mobile-money-3", motifs: [
       [rx("\\b(?:vous avez gagne|tu as gagne|vous etes (?:le |la )?(?:grande? )?gagnante?|heureux gagnant|heureuse gagnante|tirage au sort|loterie|tombola|jackpot)\\b")],
-      [rx("\\b(?:doubler|double|tripler|triple|multiplier|multiplie)\\b[^.!?\\n]{0,30}?\\b(?:argent|mise|investissement|capital|somme|gains?)\\b"), { poids: 3 }],
-      [rx("\\b(?:argent|mise|investissement|capital)\\b[^.!?\\n]{0,20}?\\b(?:double|triple|multiplie)\\b"), { poids: 3 }],
+      [rx("\\b(?:doubler|double|tripler|triple|multiplier|multiplie)\\b[^.!?]{0,30}?\\b(?:argent|mise|investissement|capital|somme|gains?)\\b"), { poids: 3 }],
+      [rx("\\b(?:argent|mise|investissement|capital)\\b[^.!?]{0,20}?\\b(?:double|triple|multiplie)\\b"), { poids: 3 }],
       [rx("\\d+\\s?%\\s*(?:par|chaque|en|tous les)\\s+(?:jour|jours|semaine|mois|\\d+\\s+jours)\\b"), { poids: 3 }],
-      [rx("\\b(?:gagnante?|remporte)\\b"), { poids: 1 }],
+      [rx("\\b(?:placez|placer|place|investis|investissez|misez|mise|depose|deposez)\\s+" + MONTANT + "[^.!?]{0,50}?\\b(?:recevez|recois|reçois|gagnez|gagne|touchez|obtenez|recuperez)\\s+" + MONTANT), { poids: 3 }],
+      [rx("\\b(?:recevez|recois|touchez|touche|gagnez|gagne|gagner|gagnes)\\s+(?:jusqu'a\\s+)?" + MONTANT + "\\s*(?:par|chaque|/|en|dans)\\s*\\d*\\s*(?:jours?|heures?|semaines?|mois|minutes?)"), { poids: 3 }],
+      [rx("\\b(?:en|juste en)\\s+(?:aimant|likant|regardant|partageant|commentant)\\b|\\btaches? (?:simples?|remunerees?)\\b"), { poids: 3 }],
+      [rx("\\b(?:gagnez|gagner|gagne|remportez)\\s+(?:un|une|des|" + MONTANT + ")"), { poids: 2 }],
+      [rx("\\b(?:gagnante?|remporte|offerts?|offertes?)\\b"), { poids: 1 }],
       [rx("\\b(?:investis|investir|investissez|placement|trading|crypto|bitcoin|forex)\\b"), { poids: 1 }]
     ] },
     { id: "numero", poids: 2, lecon: "whatsapp-3", motifs: [
@@ -1489,18 +1507,22 @@
       [rx("\\b(?:ecris|ecrivez|contacte|contactez|ajoute|ajoutez|joins|joignez)[- ](?:moi|nous)\\s+(?:sur|au|via|en prive|directement sur)\\b")]
     ] },
     { id: "argent", poids: 2, lecon: "whatsapp-3", motifs: [
-      [rx("\\b(?:envoie|envoyez|envoyer|prete|pretez|preter|depanne|depannez|aide|aidez|fais|faites)(?:[- ](?:moi|nous))?\\s+(?:avec\\s+)?(?:un peu d'argent|de l'argent|l'argent|du credit|des unites|un depot|un transfert|" + MONTANT + ")")],
+      [rx("\\b(?:envoie|envoies|envoyez|envoyer|prete|pretez|preter|depanne|depannez|aide|aidez|fais|faites)(?:[- ](?:moi|nous))?\\s+(?:pas\\s+)?(?:avec\\s+)?(?:un peu d'argent|de l'argent|l'argent|du credit|des unites|un depot|un transfert|" + MONTANT + ")")],
       [rx("\\b(?:j'ai|jai)\\s+(?:un\\s+)?(?:gros\\s+)?(?:probleme|souci|accident)\\b"), { poids: 1 }]
+    ] },
+    { id: "emotion", poids: 1, motifs: [
+      [rx("\\b(?:hopital|malade|maladie|accident|accidente|deces|decede|decedee|funerailles|enterrement|operation chirurgicale|ordonnance|clinique|urgence medicale|en prison|garde a vue|commissariat|bloquee? a la frontiere)\\b")]
     ] },
     { id: "secret", poids: 2, motifs: [
       [rx("\\b(?:ne (?:le |la |les |l'|en )?(?:dis|dites|parle|parlez|raconte|racontez|montre|montrez)\\s+(?:rien\\s+|pas\\s+|ca\\s+)?a\\s+(?:personne|papa|maman|ton pere|ta mere|ton mari|ta femme|tes parents|ta famille|la famille)|n'en (?:parle|parlez|dis|dites) (?:rien |pas )?a personne|garde(?:r|z)? (?:le|la|ca|cela) (?:pour toi|pour vous|secret)|reste entre nous|entre nous|confidentiel(?:le)?|en toute discretion)\\b")]
     ] },
     { id: "identite", poids: 2, lecon: "reseaux-3", motifs: [
-      [rx("\\b(?:numero de (?:carte|cni|piece|passeport|compte)|carte d'identite|piece d'identite|cni|passeport|date de naissance|photo de (?:ta|votre|la) (?:carte|piece|cni)|selfie avec|mot de passe)\\b")]
+      [rx("\\b(?:numero de (?:carte|cni|piece|passeport|compte)|carte d'identite|piece d'identite|cni|passeport|date de naissance|photo de (?:ta|votre|la) (?:carte|piece|cni)|selfie avec)\\b")]
     ] },
     { id: "emploi", poids: 2, lecon: "emploi-1", motifs: [
       [rx("\\bsans (?:diplome|experience|entretien|concours|cv|test)\\b")],
-      [rx("\\b(?:recrutement|recrute|recrutons|embauche|offre d'emploi|concours direct|integration directe|poste a pourvoir)\\b"), { poids: 1 }]
+      [rx("\\b(?:recrutement|recrute|recrutons|embauche|offre d'emploi|concours direct|integration directe|poste a pourvoir|travail au|travail a l'etranger)\\b"), { poids: 1 }],
+      [rx("\\bsalaire\\s*:?\\s*(?:de\\s+)?" + MONTANT), { poids: 1 }]
     ] },
     { id: "officiel", poids: 1, lecon: "mobile-money-2", motifs: [
       [rx("\\b(?:service client(?:ele)?|service technique|support technique|equipe (?:technique|whatsapp|facebook|support|yas|moov|mixx|flooz|togocom)|conseiller|direction generale|ministere|gouvernement|police|gendarmerie|douane|impots|tresor public)\\b")]
@@ -1510,7 +1532,7 @@
     ] }
   ];
   var PROTECTION = rx("\\b(?:ne (?:le |la |les |l')?(?:partage|partagez|communique|communiquez|donne|donnez|transmets|transmettez|divulgue|divulguez|revele|revelez)\\w*\\s+(?:\\S+\\s+){0,3}?(?:jamais|pas|a personne|a quiconque)\\b|ne (?:le |la )?(?:partagez|communiquez|donnez|transmettez) (?:a|avec) personne|personne ne (?:vous|te) (?:le )?demandera|ne (?:vous|te) (?:le )?demander(?:a|ons) jamais)");
-  var URL_RE = /(?:https?:\/\/)?(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:com|net|org|info|biz|xyz|top|online|site|click|link|live|tk|ml|ga|cf|gq|ly|me|tg|io|co|cc|ru|cn|shop|store|app|vip|win|bid|loan|work|fr|africa|gl|gd|ws|to|pw|icu|buzz|club|space|website|tech|pro|money|cash|bet|gy|at|id|do|st)\b(?:\/[^\s]*)?/g;
+  var URL_RE = /(?:https?:\/\/)?(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.|\[\.\]))+(?:com|net|org|info|biz|xyz|top|online|site|click|link|live|tk|ml|ga|cf|gq|ly|me|tg|io|co|cc|ru|cn|shop|store|app|vip|win|bid|loan|work|fr|africa|gl|gd|ws|to|pw|icu|buzz|club|space|website|tech|pro|money|cash|bet|gy|at|id|do|st)\b(?:\/[^\s]*)?/g;
   var RACCOURCIS = ["bit.ly", "tinyurl.com", "cutt.ly", "t.ly", "is.gd", "shorturl.at", "rb.gy", "tiny.cc", "ow.ly", "s.id", "t.co", "goo.gl", "rebrand.ly", "wa.link", "bit.do", "v.gd", "shorte.st"];
   var MARQUES = ["yas", "mixx", "moov", "flooz", "togocom", "tmoney", "whatsapp", "facebook", "meta", "instagram", "tiktok", "google", "gmail", "youtube", "ecobank", "orabank", "uba", "coris", "bceao", "banque", "bank", "gouv", "gouvernement", "ministere", "ancy", "cert", "onu", "unicef", "oms", "paypal", "western", "moneygram", "wave", "orange", "mtn"];
   var APPATS = ["officiel", "officielle", "verification", "verif", "verify", "bonus", "promo", "gratuit", "free", "cadeau", "gift", "gagnant", "winner", "securite", "secure", "login", "connexion", "compte", "account", "support", "recrutement", "emploi", "job", "subvention", "prime", "aide", "update", "remboursement"];
@@ -1532,7 +1554,7 @@
   }
 
   function analyserLien(url) {
-    var hote = url.replace(/^https?:\/\//, "").split(/[\/?#]/)[0].replace(/^www\./, "");
+    var hote = url.replace(/\[\.\]/g, ".").replace(/^https?:\/\//, "").split(/[\/?#]/)[0].replace(/^www\./, "");
     var etiquettes = hote.split(".");
     var nom = etiquettes.length > 1 ? etiquettes[etiquettes.length - 2] : hote;
     var domaine = etiquettes.slice(-2).join(".");
@@ -1825,7 +1847,11 @@
               });
             });
             // Lignes d'un même paragraphe reliées par une espace, paragraphes séparés par un retour à la ligne
-            var texte = lignes.length ? lignes.map(function (l, i) { return l + (i === lignes.length - 1 ? "" : (paragraphes.indexOf(i) !== -1 ? "\n" : " ")); }).join("") : String(r.data.text || "").trim();
+            var texte = lignes.length ? lignes.map(function (l, i) {
+              if (i === lignes.length - 1) return l;
+              var suite = /^[a-zà-öø-ÿ0-9(«"']/.test(lignes[i + 1]);
+              return l + (suite || paragraphes.indexOf(i) === -1 ? " " : "\n");
+            }).join("") : String(r.data.text || "").trim();
             if (!texte) { URL.revokeObjectURL(prep.url); return; }
             if (morceaux.length) decalage += 2;
             mots.forEach(function (mo) { mo.d += decalage; mo.f += decalage; mo.ligne = k + ":" + mo.ligne; });
