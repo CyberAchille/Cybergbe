@@ -37,7 +37,8 @@ Salle de jeux (#jeux)                6 jeux, record enregistré pour chacun
 ├── Casse-mot de passe (#mot-de-passe)  Testeur de solidité + 6 duels
 ├── La journée d'Afi (#histoire)     Histoire à choix, 7 scènes, 60 000 F à protéger
 └── Mémo des réflexes (#memo)        Associer chaque piège au bon réflexe
-Vérifie un message (#verifier)       Analyse d'un SMS collé, signaux surlignés et expliqués
+Vérifie un message (#verifier)       Texte collé, captures d'écran ou discussion exportée : signaux surlignés et expliqués
+Raconte ta situation (#assistant)    Assistant en discussion : questions, verdict, type d'arnaque, plan d'action
 Ton attestation (#attestation)       Image à son nom après les 5 thèmes, avec QR code
 Mode animateur (#animer)             Séance en groupe : vote à main levée, bilan et QR code
 Affiches (#affiche)                  Affiche A4 et 8 cartes par page, à imprimer
@@ -68,6 +69,7 @@ js/content/ee.js         Le même contenu en ewe (à remplir)
 js/app.js                Navigation, quiz, salle de jeux, progression, records, badges, animations
 js/icones.js             Icônes Phosphor (licence MIT)
 js/qrcode.js             Génération des QR codes (licence MIT)
+vendor/tesseract/        Lecture des captures d'écran dans le navigateur (licence Apache 2.0)
 sw.js                    Mode hors connexion
 fonts/                   Unbounded et Onest (licence OFL), avec les lettres ewe
 audio/ee/                Enregistrements des leçons en ewe
@@ -93,7 +95,8 @@ docs/                    Ce plan, le guide de traduction, le tableau CSV
 - Observer : où bloquent-elles ? quels mots ne comprennent-elles pas ? quels messages du jeu les piègent ?
 
 **V2 : diffuser et grandir**
-- Fait : mode animateur pour les séances en groupe, affiche A4 et cartes à imprimer avec QR code, attestation de fin de parcours, outil « Vérifie un message ».
+- Fait : mode animateur pour les séances en groupe, affiche A4 et cartes à imprimer avec QR code, attestation de fin de parcours, outil « Vérifie un message » (texte, captures d'écran, discussion exportée), assistant « Raconte ta situation ».
+- Étape suivante possible : un assistant conversationnel libre, en option et clairement annoncé, si un partenaire peut l'encadrer et le financer (serveur, coût par conversation, données envoyées à un service extérieur, relecture des réponses).
 - Fiches imprimables par thème pour les animateurs (radios communautaires, associations, groupements de femmes, églises).
 - Nouveaux messages du jeu à partir des alertes du CERT.tg et des arnaques signalées par les utilisateurs.
 - Enrichir « Vérifie un message » avec les tournures ewe et mina des escrocs, dès que la traduction avance.

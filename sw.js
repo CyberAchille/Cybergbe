@@ -2,7 +2,7 @@
  * Service worker : garde le site disponible hors connexion.
  * Change VERSION à chaque mise en ligne pour que les téléphones récupèrent les nouveaux fichiers.
  */
-const VERSION = "cybergbe-v6";
+const VERSION = "cybergbe-v7";
 
 const FICHIERS = [
   "./",
@@ -48,7 +48,8 @@ self.addEventListener("fetch", (ev) => {
   const req = ev.request;
   if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
 
-  const lourd = /\.(woff2|png|svg|mp3|ogg|m4a)$/.test(new URL(req.url).pathname);
+  const chemin = new URL(req.url).pathname;
+  const lourd = /\.(woff2|png|svg|mp3|ogg|m4a|gz)$/.test(chemin) || chemin.indexOf("/vendor/") !== -1;
 
   if (lourd) {
     ev.respondWith(

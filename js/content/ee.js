@@ -10,7 +10,7 @@
  * par exemple : "audio": "audio/ee/codes-1.mp3"
  *
  * Fichier généré par  node scripts/modele-ewe.js  (les traductions existantes sont conservées).
- * Avancement : 1 textes traduits sur 1358.
+ * Avancement : 1 textes traduits sur 1489.
  */
 window.CG_CONTENU = window.CG_CONTENU || {};
 window.CG_CONTENU.ee = {
@@ -1377,7 +1377,8 @@ window.CG_CONTENU.ee = {
         "titre": "",  // FR : Tes données
         "paragraphes": [
           "",  // FR : Le site ne collecte aucune donnée personnelle : pas de compte, pas de cookies, pas de publicité, pas de mesure d'audience.
-          ""  // FR : Ta progression et la langue choisie sont enregistrées uniquement dans ton navigateur. Tu peux les effacer à tout moment avec « Effacer ma progression », en bas de page.
+          "",  // FR : Ta progression et la langue choisie sont enregistrées uniquement dans ton navigateur. Tu peux les effacer à tout moment avec « Effacer ma progression », en bas de page.
+          ""  // FR : Les messages, captures d'écran et réponses que tu donnes dans « Vérifie un message » et « Raconte ta situation » sont analysés dans ton téléphone. Ils ne sont ni envoyés ni enregistrés.
         ]
       },
       {
@@ -1395,7 +1396,7 @@ window.CG_CONTENU.ee = {
       {
         "titre": "",  // FR : Licences
         "paragraphes": [
-          ""  // FR : Code sous licence MIT. Polices Unbounded et Onest sous licence SIL Open Font License. Icônes Phosphor Icons sous licence MIT.
+          ""  // FR : Code sous licence MIT. Polices Unbounded et Onest sous licence SIL Open Font License. Icônes Phosphor Icons sous licence MIT. QR codes générés avec QR Code Generator (licence MIT). Lecture des captures d'écran avec Tesseract.js (licence Apache 2.0), directement dans le téléphone.
         ]
       }
     ],
@@ -1979,6 +1980,23 @@ window.CG_CONTENU.ee = {
       "placeholder": "",  // FR : Colle ou recopie le message ici…
       "coller": "",  // FR : Coller
       "coller_aide": "",  // FR : Appuie longuement dans la case, puis choisis « Coller ».
+      "effacer": "",  // FR : Effacer
+      "ajouter": "",  // FR : Ajouter une capture
+      "ajouter_aide": "",  // FR : Une ou plusieurs captures d'écran, ou une discussion WhatsApp exportée (fichier .txt).
+      "onglet_message": "",  // FR : Un message
+      "onglet_situation": "",  // FR : Toute une situation
+      "lecture": "",  // FR : Lecture de la capture…
+      "lecture_n": "",  // FR : Lecture de la capture {n} sur {total}…
+      "lecture_premiere": "",  // FR : La première fois, le site télécharge son outil de lecture (environ 4 Mo). Ensuite, c'est plus rapide, même hors connexion.
+      "lecture_echec": "",  // FR : Impossible de lire cette image. Vérifie ta connexion la première fois, ou recopie le texte du message dans la case.
+      "lecture_vide": "",  // FR : Aucun texte trouvé sur l'image. Essaie une capture plus nette, ou recopie le message.
+      "capture_titre": "",  // FR : Ta capture, avec les passages suspects encadrés
+      "capture_alt": "",  // FR : Ta capture d'écran
+      "texte_lu": "",  // FR : Texte lu sur l'image. S'il y a une erreur, corrige-le dans la case plus haut, puis vérifie à nouveau.
+      "fichier_txt": "",  // FR : Discussion importée : {n} lignes.
+      "fichier_inconnu": "",  // FR : Ce fichier n'est pas une image ni un fichier texte.
+      "situation_titre": "",  // FR : C'est toute une discussion ?
+      "situation_texte": "",  // FR : Raconte la situation en quelques questions : on t'aide à comprendre et à savoir quoi faire.
       "analyser": "",  // FR : Vérifier le message
       "prive": "",  // FR : Le message reste dans ton téléphone : rien n'est envoyé ni enregistré.
       "exemples_titre": "",  // FR : Pas de message sous la main ? Essaie un exemple :
@@ -2041,6 +2059,7 @@ window.CG_CONTENU.ee = {
       "accueil_texte": "",  // FR : Colle un SMS ou un message WhatsApp : les signaux d'alerte s'allument, avec l'explication de chacun.
       "accueil_exemple": "",  // FR : Envoie-moi vite le code reçu par SMS, sinon ton compte sera bloqué ce soir.
       "accueil_bouton": "",  // FR : Vérifier un message
+      "accueil_bouton_situation": "",  // FR : Raconter ma situation
       "signaux": [
         {
           "titre": "",  // FR : Demande de code secret
@@ -2111,6 +2130,252 @@ window.CG_CONTENU.ee = {
           "texte": ""  // FR : Les escrocs se font passer pour un opérateur, une banque ou l'État. Rappelle toi-même le numéro officiel, jamais celui donné dans le message.
         }
       ]
+    },
+    "assistant": {
+      "titre": "",  // FR : Raconte ta situation
+      "intro": "",  // FR : Une discussion bizarre, un appel, une offre trop belle ? Réponds à quelques questions : on t'aide à comprendre ce qui se passe et quoi faire.
+      "prive": "",  // FR : Tes réponses restent dans ton téléphone : rien n'est envoyé ni enregistré.
+      "bot": "",  // FR : CyberGbe
+      "bonjour": "",  // FR : Bonjour ! Je vais te poser quelques questions pour comprendre ce qui se passe. Réponds avec les boutons, il n'y a pas de mauvaise réponse.
+      "questions": [
+        {
+          "texte": "",  // FR : Qui t'a contacté ?
+          "choix": [
+            {
+              "texte": ""  // FR : Un numéro ou un compte inconnu
+            },
+            {
+              "texte": ""  // FR : Quelqu'un qui dit être un proche
+            },
+            {
+              "texte": ""  // FR : Un « service client », une banque ou un opérateur
+            },
+            {
+              "texte": ""  // FR : Un recruteur, une offre d'emploi ou un concours
+            },
+            {
+              "texte": ""  // FR : Une personne rencontrée sur internet
+            },
+            {
+              "texte": ""  // FR : Un contact que je connais vraiment
+            }
+          ]
+        },
+        {
+          "texte": "",  // FR : Par quel moyen ?
+          "choix": [
+            {
+              "texte": ""  // FR : SMS
+            },
+            {
+              "texte": ""  // FR : WhatsApp
+            },
+            {
+              "texte": ""  // FR : Appel téléphonique
+            },
+            {
+              "texte": ""  // FR : Facebook, TikTok, Instagram…
+            },
+            {
+              "texte": ""  // FR : E-mail
+            },
+            {
+              "texte": ""  // FR : En personne
+            }
+          ]
+        },
+        {
+          "texte": "",  // FR : Que te demande-t-on ? Tu peux choisir plusieurs réponses.
+          "choix": [
+            {
+              "texte": ""  // FR : D'envoyer ou de renvoyer de l'argent
+            },
+            {
+              "texte": ""  // FR : Un code : PIN, code reçu par SMS, code WhatsApp
+            },
+            {
+              "texte": ""  // FR : De payer d'abord des frais (dossier, inscription, livraison…)
+            },
+            {
+              "texte": ""  // FR : De cliquer sur un lien ou d'installer une application
+            },
+            {
+              "texte": ""  // FR : Mes informations : pièce d'identité, photos, date de naissance
+            },
+            {
+              "texte": ""  // FR : De payer pour qu'on ne publie pas des photos ou des vidéos
+            },
+            {
+              "texte": ""  // FR : D'investir pour gagner plus
+            },
+            {
+              "texte": ""  // FR : Rien pour l'instant, on discute
+            }
+          ]
+        },
+        {
+          "texte": "",  // FR : Est-ce qu'on te presse, ou qu'on te demande de garder le secret ?
+          "choix": [
+            {
+              "texte": ""  // FR : On me presse, c'est « urgent »
+            },
+            {
+              "texte": ""  // FR : On me demande de ne rien dire
+            },
+            {
+              "texte": ""  // FR : On me menace
+            },
+            {
+              "texte": ""  // FR : Non, rien de tout ça
+            }
+          ]
+        },
+        {
+          "texte": "",  // FR : As-tu déjà fait quelque chose ?
+          "choix": [
+            {
+              "texte": ""  // FR : J'ai envoyé de l'argent
+            },
+            {
+              "texte": ""  // FR : J'ai donné un code
+            },
+            {
+              "texte": ""  // FR : J'ai cliqué sur le lien ou installé l'application
+            },
+            {
+              "texte": ""  // FR : J'ai envoyé des photos ou des documents
+            },
+            {
+              "texte": ""  // FR : Non, rien encore
+            }
+          ]
+        }
+      ],
+      "valider": "",  // FR : Valider
+      "revenir": "",  // FR : Revenir à la question précédente
+      "message_question": "",  // FR : Dernière chose : tu as le message reçu ? Colle-le ou ajoute une capture d'écran, je le vérifie aussi.
+      "message_ecrire": "",  // FR : Coller ou écrire le message
+      "message_capture": "",  // FR : Ajouter une capture
+      "message_passer": "",  // FR : Passer
+      "message_placeholder": "",  // FR : Le message reçu…
+      "message_envoyer": "",  // FR : Envoyer
+      "message_capture_moi": "",  // FR : Voici ma capture.
+      "message_signaux": "",  // FR : Dans le message, je repère {n} signaux d'alerte : {liste}.
+      "message_signaux_un": "",  // FR : Dans le message, je repère un signal d'alerte : {liste}.
+      "message_rien": "",  // FR : Dans le message, je ne repère aucun piège connu.
+      "reflexion": "",  // FR : Voici ce que j'en pense.
+      "niveaux": [
+        {
+          "titre": "",  // FR : Pas de signal clair pour l'instant
+          "texte": ""  // FR : Rien ne ressemble à une arnaque connue. Reste prudent : au moindre doute, demande conseil à un proche de confiance.
+        },
+        {
+          "titre": "",  // FR : À surveiller
+          "texte": ""  // FR : Il y a un point qui demande de la prudence. Ne donne rien et ne paie rien avant d'avoir vérifié.
+        },
+        {
+          "titre": "",  // FR : Ça ressemble à une arnaque
+          "texte": ""  // FR : Plusieurs éléments correspondent aux techniques des escrocs. Arrête-toi et vérifie avant toute chose.
+        },
+        {
+          "titre": "",  // FR : C'est très probablement une arnaque
+          "texte": ""  // FR : Tout correspond à une arnaque connue. Ne réponds plus, ne donne aucun code et n'envoie pas d'argent.
+        }
+      ],
+      "type_titre": "",  // FR : À quoi ça ressemble
+      "types": [
+        {
+          "titre": "",  // FR : Le chantage
+          "texte": ""  // FR : On te menace de publier des images pour obtenir de l'argent. Payer n'arrête presque jamais le chantage : l'escroc en redemande.
+        },
+        {
+          "titre": "",  // FR : Le faux service client
+          "texte": ""  // FR : Un vrai agent de ton opérateur ou de ta banque ne te demande jamais ton code, et ne te fait pas cliquer sur un lien pour « débloquer » ton compte.
+        },
+        {
+          "titre": "",  // FR : Le vol de code
+          "texte": ""  // FR : Avec ton code, l'escroc peut vider ton Mobile Money ou prendre ton compte WhatsApp, puis piéger tes contacts.
+        },
+        {
+          "titre": "",  // FR : Le faux recrutement
+          "texte": ""  // FR : Un vrai employeur ou un vrai concours ne te fait jamais payer pour un dossier, une formation, une tenue ou un badge.
+        },
+        {
+          "titre": "",  // FR : L'argent facile
+          "texte": ""  // FR : Personne ne double ton argent en quelques jours. Les premiers « gains » servent à te mettre en confiance avant de tout prendre.
+        },
+        {
+          "titre": "",  // FR : Le faux proche
+          "texte": ""  // FR : L'escroc se fait passer pour un parent ou un ami (« j'ai changé de numéro », « mon téléphone est gâté ») pour te demander de l'argent.
+        },
+        {
+          "titre": "",  // FR : Le compte piraté
+          "texte": ""  // FR : Le compte d'une personne que tu connais a peut-être été volé. Appelle-la par un appel normal avant d'envoyer quoi que ce soit.
+        },
+        {
+          "titre": "",  // FR : Le faux transfert par erreur
+          "texte": ""  // FR : Un inconnu dit t'avoir envoyé de l'argent par erreur. Souvent, l'argent n'est jamais arrivé : vérifie ton solde dans le menu officiel.
+        },
+        {
+          "titre": "",  // FR : Le faux profil
+          "texte": ""  // FR : Une personne rencontrée en ligne gagne ta confiance, puis finit par demander de l'argent ou des photos. Ne lui envoie rien.
+        },
+        {
+          "titre": "",  // FR : Les frais à payer d'abord
+          "texte": ""  // FR : On te promet quelque chose (cadeau, gain, colis, emploi) à condition de payer d'abord. C'est le signe le plus sûr d'une arnaque.
+        },
+        {
+          "titre": "",  // FR : Le lien piégé
+          "texte": ""  // FR : Un lien ou une application reçus par message peuvent voler tes codes ou prendre le contrôle de ton téléphone.
+        },
+        {
+          "titre": "",  // FR : Le vol d'informations
+          "texte": ""  // FR : Avec ta pièce d'identité ou tes photos, un escroc peut se faire passer pour toi ou te faire chanter.
+        },
+        {
+          "titre": "",  // FR : Une demande d'argent
+          "texte": ""  // FR : Avant d'envoyer de l'argent, vérifie par un appel normal que la personne est bien celle qu'elle prétend être.
+        },
+        {
+          "titre": "",  // FR : Rien de précis pour l'instant
+          "texte": ""  // FR : Personne ne te demande encore rien. Reste attentif : si la discussion finit par une demande d'argent, de code ou de frais, c'est le signal.
+        }
+      ],
+      "urgent_titre": "",  // FR : Tu as déjà agi : fais ceci tout de suite
+      "plan_titre": "",  // FR : Ce que tu peux faire maintenant
+      "actions": {
+        "paye": [
+          "",  // FR : Appelle tout de suite le service client officiel de ton opérateur (le numéro écrit au guichet ou sur son site, jamais celui donné par la personne) et demande de bloquer la transaction.
+          "",  // FR : Garde la référence de la transaction et des captures de la discussion.
+          ""  // FR : N'envoie plus rien, même si on te promet de te rembourser : c'est souvent la suite de l'arnaque.
+        ],
+        "code": [
+          "",  // FR : Change tout de suite ton code PIN dans le menu officiel de ton opérateur.
+          "",  // FR : Si c'est un code WhatsApp : ouvre WhatsApp, reconnecte-toi avec ton numéro, puis active la vérification en deux étapes.
+          ""  // FR : Préviens tes contacts que ton compte a peut-être été volé.
+        ],
+        "lien": [
+          "",  // FR : Si tu as installé une application, désinstalle-la tout de suite.
+          "",  // FR : Change ton code PIN et tes mots de passe, depuis un appareil sûr.
+          ""  // FR : Surveille ton solde et tes comptes dans les jours qui viennent.
+        ],
+        "infos": [
+          "",  // FR : Ne paie pas si on te menace, et garde toutes les preuves (captures, numéros, noms de profils).
+          "",  // FR : Signale le compte dans l'application (Facebook, WhatsApp, TikTok…).
+          ""  // FR : Si tu es menacé, tu peux aussi porter plainte.
+        ],
+        "prudence": [
+          "",  // FR : Ne réponds plus et ne clique sur rien.
+          "",  // FR : Vérifie par toi-même : appelle la personne ou le service sur un numéro que tu connais déjà.
+          "",  // FR : Bloque le numéro ou le compte, puis signale-le dans l'application.
+          ""  // FR : Parles-en à quelqu'un de confiance avant de décider quoi que ce soit.
+        ]
+      },
+      "cert": "",  // FR : Signale aussi l'arnaque au CERT.tg : {tel}.
+      "appeler": "",  // FR : Appeler le CERT.tg
+      "aide": "",  // FR : Que faire en cas d'arnaque
+      "recommencer": "",  // FR : Recommencer
+      "accueil_texte": ""  // FR : C'est toute une discussion ? Raconte la situation en quelques questions.
     },
     "attestation": {
       "titre": "",  // FR : Ton attestation

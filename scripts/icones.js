@@ -32,7 +32,8 @@ const ICONES = {
   loupe: "detective", coller: "clipboard-text", attestation: "certificate", animer: "projector-screen", imprimer: "printer",
   qr: "qr-code", telecharger: "download-simple", pleinecran: "arrows-out", main: "hand-palm", fermer: "x-circle",
   megaphone: "megaphone", identite: "identification-card", lienbrise: "link-break", billet: "money", changement: "user-switch",
-  codepin: "password", sablier: "hourglass-high", stop2: "warning-octagon", tableau: "chalkboard-teacher", effacer: "trash", crayon: "pencil-simple"
+  codepin: "password", sablier: "hourglass-high", stop2: "warning-octagon", tableau: "chalkboard-teacher", effacer: "trash", crayon: "pencil-simple",
+  image: "image", gomme: "eraser", discussion: "chats-circle", revenir: "arrow-u-up-left", fichier: "file-text", trombone: "paperclip", secours: "first-aid"
 };
 const STYLES = ["bold", "duotone", "fill"];
 
