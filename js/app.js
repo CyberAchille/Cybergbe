@@ -1862,7 +1862,7 @@
 
   /* Encadrés sur l'image, alignés sur les passages surlignés dans le texte */
   function boitesImage(im, res) {
-    var numeros = {}, marques = [], boites = [];
+    var numeros = {}, marques = [], boites = [], dejaNumerote = {};
     res.signaux.forEach(function (s, k) { numeros[s.id] = { n: k + 1, poids: Math.min(3, s.poids) }; });
     (function aplatir(l) { l.forEach(function (mk) { marques.push(mk); if (mk.enfants) aplatir(mk.enfants); }); })(res.marques);
     marques.forEach(function (mk) {
@@ -1875,7 +1875,10 @@
         var x0 = Math.min.apply(null, l.map(function (m) { return m.x0; })), y0 = Math.min.apply(null, l.map(function (m) { return m.y0; }));
         var x1 = Math.max.apply(null, l.map(function (m) { return m.x1; })), y1 = Math.max.apply(null, l.map(function (m) { return m.y1; }));
         var marge = Math.max(3, (y1 - y0) * .22);
-        boites.push({ x: x0 - marge, y: y0 - marge, w: x1 - x0 + 2 * marge, h: y1 - y0 + 2 * marge, bon: !!mk.bon, poids: info ? info.poids : 0, n: j === 0 && info ? info.n : 0 });
+        // Un seul numéro par signal et par image, pour ne pas surcharger la capture
+        var numero = j === 0 && info && !dejaNumerote[mk.id] ? info.n : 0;
+        if (numero) dejaNumerote[mk.id] = true;
+        boites.push({ x: x0 - marge, y: y0 - marge, w: x1 - x0 + 2 * marge, h: y1 - y0 + 2 * marge, bon: !!mk.bon, poids: info ? info.poids : 0, n: numero });
       });
     });
     return boites;
