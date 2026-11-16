@@ -27,7 +27,8 @@ Leçons (#lecons)
     ├── Quiz du thème, 4 questions (#quiz-<id>)
     └── Entraînement ciblé (#jeu-<id>)
 
-Arnaque ou pas ? (#jeu)              13 messages à juger, dont 4 normaux
+Arnaque ou pas ? (#jeu)              48 messages en 3 niveaux, dont 14 normaux
+Mentions (#mentions)                 Indépendance, données, licences
 Petit dictionnaire (#dictionnaire)   25 mots, colonne ewe à remplir
 En cas d'arnaque (#signaler)         6 étapes + contacts CERT.tg
 À propos (#a-propos)                 Projet, appel aux traducteurs et voix
@@ -63,7 +64,7 @@ docs/                    Ce plan, le guide de traduction, le tableau CSV
 ## 5. Feuille de route
 
 **V1 : maintenant**
-- 5 thèmes, 15 leçons, 20 questions de quiz, 13 messages à juger, dictionnaire, page d'aide.
+- 5 thèmes, 15 leçons, 20 questions de quiz, 48 messages à juger en 3 niveaux, dictionnaire, page d'aide, badges, partage WhatsApp.
 - Lecture à voix haute du français (voix du téléphone).
 - Site prêt pour l'ewe : la structure est là, chaque texte non traduit s'affiche en français.
 

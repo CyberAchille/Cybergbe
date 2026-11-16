@@ -619,6 +619,56 @@ main.entree > * { animation: page-entree 450ms var(--doux) both; }
 .bouton-lien { background: none; border: 0; padding: 0; color: rgba(255, 255, 255, .72); text-decoration: underline; cursor: pointer; font-size: .875rem; }
 .bouton-lien:hover { color: var(--blanc); }
 
+/* --- Partage ----------------------------------------------------------- */
+.partage { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+.resultat .partage { justify-content: center; padding-top: 1.25rem; border-top: 1px dashed var(--trait); }
+.bouton-whatsapp { background: #128C4A; color: var(--blanc); }
+.bouton-whatsapp:hover { background: #0E7A40; }
+.bloc-partage {
+  display: grid; gap: 1.25rem; align-items: center; padding: 1.75rem; border-radius: 28px;
+  background: radial-gradient(420px 220px at 0% 100%, rgba(255, 206, 0, .25), transparent 65%), var(--blanc);
+  border: 1px solid var(--trait); box-shadow: var(--ombre);
+}
+.bloc-partage h2 { font-size: 1.5rem; margin-bottom: .3rem; }
+.bloc-partage p { margin: 0; color: var(--gris); }
+.bloc-partage .partage { margin-top: 0; }
+.bloc-partage-icone { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 18px; background: var(--jaune-pale); color: #8A6500; }
+.bloc-partage-icone svg { width: 2rem; height: 2rem; animation: deriver 4s ease-in-out infinite alternate; }
+@media (min-width: 52rem) { .bloc-partage { grid-template-columns: auto 1fr auto; padding: 2rem 2.25rem; } }
+
+/* --- Choix du niveau --------------------------------------------------- */
+.choix-niveau { max-width: 52rem; margin: 0 auto; }
+.choix-niveau h2 { font-size: 1.5rem; margin-bottom: .25rem; }
+.niveaux { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .9rem; }
+@media (min-width: 40rem) { .niveaux { grid-template-columns: 1fr 1fr; } }
+.niveau {
+  --c: var(--vert); width: 100%; height: 100%; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; column-gap: 1rem; row-gap: .15rem;
+  text-align: left; cursor: pointer; padding: 1.15rem 1.25rem; border-radius: 22px; background: var(--blanc); border: 2px solid var(--trait);
+  box-shadow: var(--ombre); transition: border-color 200ms, transform 350ms var(--ressort), box-shadow 300ms;
+}
+.niveau:hover { border-color: var(--c); transform: translateY(-3px) rotate(-.4deg); box-shadow: 0 22px 40px -24px rgba(15, 35, 26, .45); }
+.niveau-facile { --c: #0B7A4B; --fc: #E3F4EA; }
+.niveau-moyen { --c: #B88700; --fc: var(--jaune-pale); }
+.niveau-expert { --c: var(--rouge); --fc: var(--rouge-pale); }
+.niveau-tout { --c: var(--vert-fonce); --fc: var(--vert-clair); }
+.niveau-icone { grid-row: 1 / span 3; display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 16px; background: var(--fc); color: var(--c); transition: transform 450ms var(--ressort); }
+.niveau-icone svg { width: 1.9rem; height: 1.9rem; }
+.niveau:hover .niveau-icone { transform: rotate(-10deg) scale(1.1); }
+.niveau-nom { font-family: var(--police-titre); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; }
+.niveau-texte { color: var(--gris); font-size: .9688rem; line-height: 1.45; }
+.niveau-nb { font-size: .8125rem; font-weight: 700; color: var(--c); margin-top: .2rem; }
+.niveau-puce { display: inline-block; font-size: .75rem; font-weight: 700; border-radius: 999px; padding: .1rem .55rem; margin-right: auto; margin-left: .5rem; }
+.niveau-puce.niveau-facile { background: #E3F4EA; color: #0B6B42; }
+.niveau-puce.niveau-moyen { background: var(--jaune-pale); color: #6A5200; }
+.niveau-puce.niveau-expert { background: var(--rouge-pale); color: var(--rouge-fonce); }
+
+/* --- Pied : indépendance, mentions ------------------------------------- */
+.pied .independance { margin-top: .9rem; font-size: .8125rem; color: rgba(255, 255, 255, .55); max-width: 34rem; }
+.mentions section { padding: 1.1rem 0; border-bottom: 1px solid var(--trait); }
+.mentions section:first-child { padding-top: 0; }
+.mentions h2 { font-size: 1.125rem; margin: 0 0 .4rem; }
+.mentions p { margin: 0 0 .5rem; }
+
 /* --- Notifications ----------------------------------------------------- */
 .annonce { position: fixed; left: 50%; bottom: calc(var(--hauteur-onglets) + 1rem); z-index: 60; display: flex; align-items: center; gap: .85rem; width: max-content; max-width: calc(100% - 2rem); background: var(--vert-nuit); color: var(--blanc); border-radius: 18px; padding: .8rem 1.15rem; font-size: .9688rem; box-shadow: var(--ombre-forte); opacity: 0; pointer-events: none; transform: translate(-50%, 24px) scale(.96); transition: opacity 300ms, transform 450ms var(--ressort); }
 .annonce.visible { opacity: 1; transform: translate(-50%, 0) scale(1); }

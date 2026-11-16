@@ -5,6 +5,13 @@
 window.CG_CONFIG = {
   nomSite: "CyberGbe",
 
+  /* Adresse publique du site (utilisée dans les messages de partage).
+     À changer si tu utilises un nom de domaine, et dans index.html (balises og:). */
+  siteUrl: "https://cyberachille.github.io/Cybergbe/",
+
+  /* Nom affiché dans la page « Mentions et confidentialité » */
+  auteur: "HODOME Kokou Achille",
+
   /* Lien du dépôt GitHub (pied de page et page « À propos ») */
   depot: "https://github.com/CyberAchille/Cybergbe",
 

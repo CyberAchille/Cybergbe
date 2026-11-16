@@ -8,9 +8,11 @@ Site gratuit pour apprendre à reconnaître les arnaques du téléphone et d'int
 
 - **5 thèmes, 15 leçons courtes** : codes secrets, Mobile Money, WhatsApp, fausses offres d'emploi, réseaux sociaux.
 - **Un quiz par thème** (4 questions avec explications).
-- **« Arnaque ou pas ? »** : 13 messages réalistes (SMS, WhatsApp, appel, Facebook, e-mail) à juger, dont 4 messages normaux pour ne pas apprendre à se méfier de tout.
+- **« Arnaque ou pas ? »** : 48 messages réalistes (SMS, WhatsApp, appel, Facebook, e-mail) en 3 niveaux (facile, moyen, expert), dont 14 messages normaux pour ne pas apprendre à se méfier de tout. Parties de 10 messages tirés au hasard.
+- **Partage sur WhatsApp** du site ou de son score, avec une image d'aperçu soignée.
 - **Un petit dictionnaire** de 25 mots, avec une colonne ewe.
 - **Une page « En cas d'arnaque »** : les 6 bons réflexes et les contacts du CERT.tg.
+- **Une page « Mentions et confidentialité »** : projet indépendant, aucune donnée collectée.
 - **Une bande de progression tissée** façon kente : chaque leçon et chaque quiz terminés ajoutent un fil.
 - **Aux couleurs du Togo** (vert, jaune, rouge), avec une navigation en bas de l'écran sur mobile, comme une application.
 - **Vivant et ludique** : messages qui arrivent en direct sur un faux téléphone, confettis, séries de bonnes réponses, étoiles, badges à gagner par thème, bandeau défilant des phrases d'escrocs. Les animations se coupent automatiquement si le téléphone demande de réduire les mouvements.
@@ -40,6 +42,8 @@ python3 -m http.server 8000
 3. Le site est disponible à `https://cyberachille.github.io/Cybergbe/` après une minute.
 
 À chaque mise à jour, change `VERSION` dans `sw.js` pour que les téléphones récupèrent les nouveaux fichiers.
+
+Si tu passes à un nom de domaine, change l'adresse dans `js/config.js` (`siteUrl`), dans les balises `og:` de `index.html`, et ajoute un fichier `CNAME` contenant le domaine.
 
 ## Organisation
 

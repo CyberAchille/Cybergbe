@@ -24,7 +24,9 @@ const ICONES = {
   bouclier: "shield-check", feu: "fire", trophee: "trophy", medaille: "medal", etoile: "star", etincelle: "sparkle",
   cadenas: "lock-simple", profil: "user-circle", cadeau: "gift", code: "code", cle: "lock-key",
   argent: "hand-coins", mallette: "briefcase", personnes: "users-three", oeil: "eye", sceau: "seal-check",
-  cible: "crosshair", lecture: "play", livre2: "book-bookmark"
+  cible: "crosshair", lecture: "play", livre2: "book-bookmark",
+  partager: "share-network", copier: "copy", lien: "link", balance: "scales", envoyer: "paper-plane-tilt",
+  pousse: "plant", jauge: "gauge", crane: "skull", melange: "shuffle"
 };
 const STYLES = ["bold", "duotone", "fill"];
 

@@ -11,7 +11,8 @@
   var CFG = window.CG_CONFIG;
   var BRUT = window.CG_CONTENU;
   var ICONES = window.CG_ICONES || { bold: {}, duotone: {}, fill: {} };
-  var CHAMPS_TECHNIQUES = { id: 1, module: 1, lecon: 1, canal: 1, verdict: 1, bonne: 1, scenario_accueil: 1, url: 1 };
+  var CHAMPS_TECHNIQUES = { id: 1, module: 1, lecon: 1, canal: 1, verdict: 1, bonne: 1, scenario_accueil: 1, url: 1, niveau: 1 };
+  var TAILLE_PARTIE = 10;
   var CALME = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   if (!CALME) document.documentElement.classList.add("js-anime");
 
@@ -336,6 +337,25 @@
   }
   function ariane(href, texte) { return '<a class="ariane" href="' + href + '">' + ic("gauche") + "<span>" + h(texte) + "</span></a>"; }
 
+  /* Boutons de partage : lien WhatsApp (marche partout) + copie du lien */
+  function partageHTML(texte) {
+    var message = typo(texte.split("{url}").join(CFG.siteUrl).split("{site}").join(CFG.nomSite));
+    return '<div class="partage">' +
+      '<a class="bouton bouton-whatsapp" href="https://wa.me/?text=' + encodeURIComponent(message) + '" target="_blank" rel="noopener">' + ic("partager", "fill") + h(t("partage_whatsapp")) + "</a>" +
+      '<button type="button" class="bouton bouton-second" data-copier>' + ic("lien") + h(t("partage_copier")) + "</button></div>";
+  }
+  function copierLien() {
+    var echec = function () { annoncer(t("partage_copie_echec", { url: CFG.siteUrl }), { icone: "lien", duree: 6000 }); };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(CFG.siteUrl).then(function () { annoncer(t("partage_copie_ok"), { icone: "copier" }); }, echec);
+      } else { echec(); }
+    } catch (e) { echec(); }
+  }
+  function niveauPuce(n) {
+    return '<span class="niveau-puce niveau-' + n + '">' + h(t("niveau_" + n)) + "</span>";
+  }
+
   function parcours(m, courant) {
     var items = m.lecons.map(function (l, i) {
       var cls = [leconFaite(m.id, i + 1) ? "faite" : "", courant === i + 1 ? "courante" : ""].join(" ").trim();
@@ -416,6 +436,11 @@
         return "<li" + revele(i, 110) + '><span class="atout-icone">' + ic(icAtouts[i] || "bouclier", "duotone") + "</span><div><h3>" + h(p.titre) + "</h3><p>" + h(p.texte) + "</p></div></li>";
       }).join("") + "</ul>" +
       "</div></section>" +
+
+      '<section class="section" style="padding-top:0"><div class="conteneur"><div class="bloc-partage"' + revele(0) + ">" +
+      '<span class="bloc-partage-icone">' + ic("envoyer", "duotone") + "</span>" +
+      "<div><h2>" + h(t("partage_titre")) + "</h2><p>" + h(t("partage_texte").split("{site}").join(CFG.nomSite)) + "</p></div>" +
+      partageHTML(t("partage_site")) + "</div></div></section>" +
 
       '<section class="section" style="padding-top:0"><div class="conteneur"><div class="aide"' + revele(0) + ">" +
       '<div class="aide-texte">' + ic("bouee", "duotone") + "<div><h2>" + h(t("accueil_aide_titre")) + "</h2><p>" + h(t("accueil_aide_texte")) + "</p></div></div>" +
@@ -526,7 +551,8 @@
         '<p class="score">' + q.score + " / " + total + "</p>" +
         "<p><strong>" + h(tp("quiz_fin", q.score, { score: q.score, total: total })) + "</strong><br>" + h(t(bravo ? "quiz_fin_bravo" : "quiz_fin_revoir")) + "</p>" +
         '<div class="actions"><button type="button" class="bouton bouton-second" data-recommencer>' + ic("rejouer") + h(t("quiz_recommencer")) + "</button>" +
-        '<a class="bouton" href="#lecons">' + h(t("quiz_autre_theme")) + ic("fleche") + "</a></div></div>";
+        '<a class="bouton" href="#lecons">' + h(t("quiz_autre_theme")) + ic("fleche") + "</a></div>" +
+        partageHTML(t("partage_quiz", { score: q.score, total: total, theme: m.titre })) + "</div>";
     }
     var item = m.quiz[q.i];
     var traduit = estTraduit("modules", r.i, "quiz", q.i, "question");
@@ -539,12 +565,30 @@
       '<div data-quiz-retour aria-live="polite"></div>';
   }
 
+  function nouvellePartie(filtre, niveau) {
+    var liste = C.scenarios.filter(function (s) {
+      return (!filtre || s.module === filtre) && (!niveau || niveau === "tout" || s.niveau === niveau);
+    }).map(function (s) { return s.id; });
+    etat.jeu = { filtre: filtre || null, niveau: niveau || null, ordre: melanger(liste).slice(0, TAILLE_PARTIE), i: 0, score: 0, serie: 0, termine: false };
+  }
+
   pages.jeu = function (filtre) {
     if (filtre && !trouverModule(filtre)) return pages.introuvable();
     var f = filtre || null;
-    if (!etat.jeu || etat.jeu.filtre !== f || etat.jeu.termine) {
-      var liste = C.scenarios.filter(function (s) { return !f || s.module === f; }).map(function (s) { return s.id; });
-      etat.jeu = { filtre: f, ordre: melanger(liste), i: 0, score: 0, serie: 0, termine: false };
+    var aChoisir = !f && (!etat.jeu || etat.jeu.filtre || etat.jeu.termine || etat.jeu.choix);
+    if (f && (!etat.jeu || etat.jeu.filtre !== f || etat.jeu.termine)) nouvellePartie(f, null);
+    if (aChoisir) {
+      return pageTete('<h1 tabindex="-1">' + h(t("jeu_titre")) + "</h1><p>" + h(t("jeu_intro")) + "</p>") +
+        '<div class="page"><div class="conteneur"><div class="choix-niveau"><h2>' + h(t("jeu_choisir")) + "</h2>" +
+        '<p class="discret">' + h(t("jeu_choisir_texte")) + '</p><ul class="niveaux">' +
+        [["facile", "pousse"], ["moyen", "jauge"], ["expert", "crane"], ["tout", "melange"]].map(function (n, k) {
+          var nb = C.scenarios.filter(function (s) { return n[0] === "tout" || s.niveau === n[0]; }).length;
+          return "<li" + revele(k, 80) + '><button type="button" class="niveau niveau-' + n[0] + '" data-niveau="' + n[0] + '">' +
+            '<span class="niveau-icone">' + ic(n[1], "duotone") + "</span>" +
+            '<span class="niveau-nom">' + h(t("niveau_" + n[0])) + "</span>" +
+            '<span class="niveau-texte">' + h(t("niveau_" + n[0] + "_texte")) + "</span>" +
+            '<span class="niveau-nb">' + h(t("niveau_messages", { n: Math.min(nb, TAILLE_PARTIE) })) + "</span></button></li>";
+        }).join("") + "</ul></div></div></div>";
     }
     var tete = (f ? ariane("#theme-" + f, trouverModule(f).m.titre) : "") +
       '<h1 tabindex="-1">' + h(t("jeu_titre")) + "</h1><p>" + h(t("jeu_intro")) + "</p>";
@@ -570,10 +614,12 @@
         (rang ? '<p><span class="rang">' + h(rang) + "</span></p>" : "") +
         "<p>" + h(tp("jeu_fin_score", j.score, { score: j.score, total: j.ordre.length })) + "</p>" +
         '<div class="actions"><button type="button" class="bouton" data-rejouer>' + ic("rejouer") + h(t("jeu_rejouer")) + "</button>" +
-        '<a class="bouton bouton-second" href="#lecons">' + h(t("accueil_lecons_titre")) + "</a></div></div>";
+        (j.filtre ? '<a class="bouton bouton-second" href="#theme-' + j.filtre + '">' + h(trouverModule(j.filtre).m.titre) + "</a>"
+                  : '<button type="button" class="bouton bouton-second" data-changer-niveau>' + h(t("jeu_changer_niveau")) + "</button>") + "</div>" +
+        partageHTML(t("partage_jeu", { score: j.score, total: j.ordre.length, rang: rang })) + "</div>";
     }
     var sc = trouverScenario(j.ordre[j.i]).s;
-    return '<div class="jeu-tete"><span class="compteur" tabindex="-1">' + h(t("jeu_compteur", { n: j.i + 1, total: j.ordre.length })) + "</span>" +
+    return '<div class="jeu-tete"><span class="compteur" tabindex="-1">' + h(t("jeu_compteur", { n: j.i + 1, total: j.ordre.length })) + "</span>" + niveauPuce(sc.niveau) +
       '<span data-jetons>' + jetonsJeu() + "</span></div>" +
       '<div class="barre-progres" aria-hidden="true"><span style="width:' + Math.round(j.i / j.ordre.length * 100) + '%"></span></div>' +
       scenarioHTML(sc, "jeu", false);
@@ -647,6 +693,19 @@
       "</div></div></div>";
   };
 
+  pages.mentions = function () {
+    var mt = C.mentions;
+    var remplir = function (x) { return x.split("{site}").join(CFG.nomSite).split("{auteur}").join(CFG.auteur || ""); };
+    return pageTete('<h1 tabindex="-1">' + h(mt.titre) + "</h1>") +
+      '<div class="page"><div class="conteneur"><div class="apropos mentions">' +
+      mt.sections.map(function (sec, i) {
+        return "<section" + revele(i, 60) + "><h2>" + h(sec.titre) + "</h2>" +
+          sec.paragraphes.map(function (p) { return "<p>" + h(remplir(p)) + "</p>"; }).join("") + "</section>";
+      }).join("") +
+      "<p>" + h(mt.contact) + ' <a href="' + esc(CFG.depot) + '/issues" target="_blank" rel="noopener">' + h(t("pied_contact")) + "</a></p>" +
+      "</div></div></div>";
+  };
+
   pages.introuvable = function () {
     return pageTete('<h1 tabindex="-1">' + h(t("page_introuvable")) + "</h1>") +
       '<div class="page"><div class="conteneur"><a class="bouton" href="#accueil">' + ic("maison", "fill") + h(t("retour_accueil")) + "</a></div></div>";
@@ -668,6 +727,7 @@
     if (ancre === "dictionnaire") return { nom: "dictionnaire", html: pages.dictionnaire() };
     if (ancre === "signaler") return { nom: "signaler", html: pages.signaler() };
     if (ancre === "a-propos") return { nom: "apropos", html: pages.apropos() };
+    if (ancre === "mentions") return { nom: "mentions", html: pages.mentions() };
     return { nom: "", html: pages.introuvable() };
   }
 
@@ -741,10 +801,12 @@
       '<div class="drapeau-ligne" aria-hidden="true"><span></span><span></span><span></span></div>' +
       '<div class="conteneur pied-corps"><div>' +
       '<a class="marque" href="#accueil">' + document.querySelector(".entete .marque-logo").outerHTML + '<span class="marque-nom">' + esc(CFG.nomSite) + "</span></a>" +
-      "<p>" + h(t("pied_texte")) + "</p></div>" +
+      "<p>" + h(t("pied_texte")) + "</p>" +
+      '<p class="independance">' + h(t("independance").split("{site}").join(CFG.nomSite)) + "</p></div>" +
       '<ul class="pied-liens">' +
       '<li><a href="#signaler">' + ic("bouee") + h(t("menu_signaler")) + "</a></li>" +
       '<li><a href="#a-propos">' + ic("info") + h(t("menu_apropos")) + "</a></li>" +
+      '<li><a href="#mentions">' + ic("balance") + h(t("menu_mentions")) + "</a></li>" +
       '<li><a href="' + esc(CFG.depot) + '" target="_blank" rel="noopener">' + ic("code") + h(t("pied_code")) + "</a></li>" +
       '<li><a href="' + esc(CFG.depot) + '/issues" target="_blank" rel="noopener">' + ic("message") + h(t("pied_contact")) + "</a></li>" +
       "</ul></div>" +
@@ -1033,7 +1095,15 @@
       if (etat.jeu.termine && etat.jeu.score / etat.jeu.ordre.length >= 0.7) setTimeout(function () { confettis(window.innerWidth / 2, window.innerHeight * .3, 160); }, 350);
       return;
     }
-    if (el.hasAttribute("data-rejouer")) { etat.jeu = null; rendre(); return; }
+    if (el.hasAttribute("data-rejouer")) {
+      var ancien = etat.jeu || {};
+      nouvellePartie(ancien.filtre, ancien.niveau);
+      rendre();
+      return;
+    }
+    if (el.hasAttribute("data-niveau")) { nouvellePartie(null, el.getAttribute("data-niveau")); rendre(); return; }
+    if (el.hasAttribute("data-changer-niveau")) { etat.jeu = { choix: true }; rendre(); return; }
+    if (el.hasAttribute("data-copier")) { copierLien(); return; }
     if (el.hasAttribute("data-option")) { repondreQuiz(parseInt(el.getAttribute("data-option"), 10), el); return; }
     if (el.hasAttribute("data-quiz-suivant")) { quizSuivant(); return; }
     if (el.hasAttribute("data-recommencer")) { etat.quiz = null; rendre(); return; }

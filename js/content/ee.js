@@ -10,7 +10,7 @@
  * par exemple : "audio": "audio/ee/codes-1.mp3"
  *
  * Fichier généré par  node scripts/modele-ewe.js  (les traductions existantes sont conservées).
- * Avancement : 1 textes traduits sur 581.
+ * Avancement : 1 textes traduits sur 873.
  */
 window.CG_CONTENU = window.CG_CONTENU || {};
 window.CG_CONTENU.ee = {
@@ -104,6 +104,18 @@ window.CG_CONTENU.ee = {
     "jeu_fin_score_un": "",  // FR : Tu as bien répondu à {score} message sur {total}.
     "jeu_rejouer": "",  // FR : Rejouer
     "jeu_contexte": "",  // FR : La situation
+    "jeu_choisir": "",  // FR : Choisis ton niveau
+    "jeu_choisir_texte": "",  // FR : Chaque partie compte jusqu'à 10 messages tirés au hasard.
+    "jeu_changer_niveau": "",  // FR : Changer de niveau
+    "niveau_facile": "",  // FR : Facile
+    "niveau_moyen": "",  // FR : Moyen
+    "niveau_expert": "",  // FR : Expert
+    "niveau_tout": "",  // FR : Tout mélangé
+    "niveau_facile_texte": "",  // FR : Les arnaques les plus courantes.
+    "niveau_moyen_texte": "",  // FR : Des pièges plus discrets.
+    "niveau_expert_texte": "",  // FR : Ceux qui trompent même les plus prudents.
+    "niveau_tout_texte": "",  // FR : Un peu de tout, au hasard.
+    "niveau_messages": "",  // FR : {n} messages
     "jeu_continuer": "",  // FR : Essayer d'autres messages
     "canal_sms": "",  // FR : SMS
     "canal_whatsapp": "",  // FR : WhatsApp
@@ -166,6 +178,17 @@ window.CG_CONTENU.ee = {
     "pied_texte": "",  // FR : Site gratuit et sans publicité. Ta progression reste sur ton téléphone : rien n'est envoyé.
     "pied_code": "",  // FR : Code source
     "pied_contact": "",  // FR : Proposer une amélioration
+    "menu_mentions": "",  // FR : Mentions et confidentialité
+    "independance": "",  // FR : {site} est un projet indépendant. Il n'est lié ni à l'ANCy, ni au CERT.tg, ni aux opérateurs, banques ou réseaux sociaux cités, dont les noms appartiennent à leurs propriétaires.
+    "partage_titre": "",  // FR : Fais passer le mot
+    "partage_texte": "",  // FR : Plus on est nombreux à connaître ces arnaques, moins elles marchent. Envoie {site} à ta famille et à tes groupes.
+    "partage_whatsapp": "",  // FR : Partager sur WhatsApp
+    "partage_copier": "",  // FR : Copier le lien
+    "partage_copie_ok": "",  // FR : Lien copié, tu peux le coller où tu veux.
+    "partage_copie_echec": "",  // FR : Copie impossible ici. Voici le lien : {url}
+    "partage_site": "",  // FR : Apprends à repérer les arnaques Mobile Money, WhatsApp et faux emplois, en français et en ewe. C'est gratuit 👉 {url}
+    "partage_jeu": "",  // FR : J'ai eu {score}/{total} à « Arnaque ou pas ? » sur {site} 🛡️ Niveau : {rang}. Et toi, tu repères les arnaques ? 👉 {url}
+    "partage_quiz": "",  // FR : J'ai fait {score}/{total} au quiz « {theme} » sur {site} ✅ Teste-toi aussi 👉 {url}
     "hors_ligne": "",  // FR : Tu es hors connexion. Les leçons déjà ouvertes restent disponibles.
     "page_introuvable": "",  // FR : Cette page n'existe pas.
     "retour_accueil": "",  // FR : Retour à l'accueil
@@ -843,6 +866,469 @@ window.CG_CONTENU.ee = {
         ""  // FR : Une demande d'argent en échange du silence.
       ],
       "explication": ""  // FR : Ne paie pas : il reviendrait demander plus. Fais des captures d'écran, bloque, signale, et parles-en à une personne de confiance.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : +228 9• •• •• 30
+      "messages": [
+        ""  // FR : Bonjour, ici votre agent Mobile Money. Pour finir votre retrait, envoyez-moi votre code PIN par SMS. Merci.
+      ],
+      "indices": [
+        "",  // FR : On te demande ton code PIN.
+        "",  // FR : Un vrai agent n'a jamais besoin de ton code.
+        ""  // FR : Le message vient d'un numéro ordinaire.
+      ],
+      "explication": ""  // FR : Ton code PIN ne se donne à personne, ni par SMS, ni de vive voix. Supprime le message et bloque le numéro.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Sécurité Facebook <alerte@securite-fb-compte[.]com>
+      "messages": [
+        ""  // FR : Votre compte sera supprimé dans 24 heures suite à un signalement. Pour l'éviter, confirmez votre mot de passe ici : securite-fb-compte[.]com/verifier
+      ],
+      "indices": [
+        "",  // FR : L'adresse de l'expéditeur n'est pas celle de Facebook.
+        "",  // FR : On te menace d'une suppression rapide.
+        ""  // FR : On te demande ton mot de passe via un lien.
+      ],
+      "explication": ""  // FR : C'est du hameçonnage : la fausse page vole ton mot de passe. Pour vérifier, ouvre toi-même l'application Facebook, jamais le lien reçu.
+    },
+    {
+      "contexte": "",  // FR : Tu viens de te connecter à ton compte Gmail sur un ordinateur du cybercafé.
+      "expediteur": "",  // FR : Google
+      "messages": [
+        ""  // FR : G-482915 est votre code de validation Google.
+      ],
+      "indices": [
+        "",  // FR : C'est toi qui viens de demander à te connecter.
+        ""  // FR : Le code est à taper sur l'écran devant toi, pas à envoyer à quelqu'un.
+      ],
+      "explication": ""  // FR : Tout est normal. Pense seulement à te déconnecter de ton compte avant de quitter le cybercafé.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Service client ✅
+      "messages": [
+        "",  // FR : Bonjour, suite à la mise à jour des cartes SIM, votre ligne sera suspendue ce soir.
+        ""  // FR : Pour garder votre numéro, communiquez-nous le code à 6 chiffres que vous allez recevoir par SMS.
+      ],
+      "indices": [
+        "",  // FR : Un compte avec une coche verte peut être faux.
+        "",  // FR : On te demande un code reçu par SMS.
+        ""  // FR : La menace de suspension sert à te presser.
+      ],
+      "explication": ""  // FR : Avec ce code, l'escroc peut prendre ton WhatsApp ou ton compte Mobile Money. Aucun service client ne demande un code reçu par SMS.
+    },
+    {
+      "contexte": "",  // FR : Tu as oublié ton mot de passe Facebook et tu viens d'appuyer sur « Mot de passe oublié ».
+      "expediteur": "",  // FR : Facebook
+      "messages": [
+        ""  // FR : Votre code de réinitialisation Facebook est 482 113. Ne le communiquez à personne.
+      ],
+      "indices": [
+        "",  // FR : Tu viens de le demander toi-même.
+        ""  // FR : Le message dit de ne le donner à personne.
+      ],
+      "explication": ""  // FR : Tape ce code dans l'application, puis choisis un nouveau mot de passe solide, différent de tes autres comptes.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : +228 9• •• •• 75
+      "messages": [
+        "",  // FR : Bonjour, ici le service sécurité de votre banque. Une opération suspecte de 300 000 F est en cours sur votre compte.
+        ""  // FR : Pour l'annuler, je vais vous envoyer un code par SMS. Lisez-le moi vite, sinon l'argent part.
+      ],
+      "indices": [
+        "",  // FR : On te fait peur avec une grosse somme.
+        "",  // FR : On te demande de lire un code reçu par SMS.
+        ""  // FR : L'urgence t'empêche de réfléchir.
+      ],
+      "explication": ""  // FR : Ce code sert justement à valider l'opération de l'escroc. Raccroche, puis appelle ta banque au numéro inscrit sur ta carte ou en agence.
+    },
+    {
+      "contexte": "",  // FR : Ce SMS arrive sous le nom « Mixx ». Deux minutes plus tard, un inconnu t'appelle pour récupérer l'argent.
+      "expediteur": "",  // FR : Mixx
+      "messages": [
+        ""  // FR : Transfert reçu : 50 000 F de AFI K. Nouveau solde : 50 210 F.
+      ],
+      "indices": [
+        "",  // FR : Le nom d'un expéditeur peut être imité.
+        "",  // FR : Un inconnu appelle juste après pour se faire rembourser.
+        ""  // FR : Seul ton solde, vu dans le menu officiel, fait foi.
+      ],
+      "explication": ""  // FR : Même un SMS qui affiche le nom de l'opérateur peut être faux. Vérifie ton solde toi-même : tu verras que rien n'est arrivé.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Promo Fin d'Année 🇹🇬
+      "messages": [
+        "",  // FR : 🎉 Félicitations ! Votre numéro a été tiré au sort. Vous gagnez 100 000 F !
+        ""  // FR : Pour recevoir votre gain, envoyez 2 000 F de frais d'activation au 9• •• •• 61.
+      ],
+      "indices": [
+        "",  // FR : Tu n'as participé à aucun tirage.
+        "",  // FR : Il faut payer pour recevoir le gain.
+        ""  // FR : Le paiement va sur un numéro ordinaire.
+      ],
+      "explication": ""  // FR : Payer pour gagner, c'est toujours une arnaque. Les 2 000 F de chaque victime vont directement à l'escroc.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : +228 7• •• •• 19
+      "messages": [
+        "",  // FR : Bonjour, je suis agent Mobile Money. J'ai fait un dépôt sur votre numéro par erreur.
+        ""  // FR : Vous allez recevoir un SMS avec un code : tapez-le sur votre téléphone pour confirmer le remboursement.
+      ],
+      "indices": [
+        "",  // FR : Un inconnu te demande de taper un code.
+        "",  // FR : Un remboursement se fait par l'opérateur, pas par toi.
+        ""  // FR : Il se présente comme agent pour te rassurer.
+      ],
+      "explication": ""  // FR : En tapant ce code, tu peux envoyer ton propre argent. Raccroche et vérifie ton solde dans le menu officiel.
+    },
+    {
+      "contexte": "",  // FR : Tu viens d'envoyer 5 000 F à ta sœur depuis l'application officielle.
+      "expediteur": "",  // FR : Mixx
+      "messages": [
+        ""  // FR : Transfert de 5 000 F vers ADJOA M. effectué. Nouveau solde : 12 300 F.
+      ],
+      "indices": [
+        "",  // FR : Tu viens de faire l'opération toi-même.
+        ""  // FR : Le message ne demande rien.
+      ],
+      "explication": ""  // FR : C'est la confirmation de ton propre envoi. Rien à faire.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Investissement Togo Prospérité
+      "messages": [
+        ""  // FR : 💰 Placez 20 000 F aujourd'hui, recevez 60 000 F dans 7 jours ! Déjà 3 000 membres payés ✅ Preuves en commentaires 👇 Inscription par WhatsApp uniquement.
+      ],
+      "indices": [
+        "",  // FR : Tripler son argent en une semaine est impossible.
+        "",  // FR : Les « preuves » se fabriquent facilement.
+        ""  // FR : Tout se passe sur WhatsApp, sans entreprise identifiable.
+      ],
+      "explication": ""  // FR : C'est une fausse plateforme d'investissement : les premiers sont parfois payés avec l'argent des suivants, puis tout disparaît.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : +228 9• •• •• 22
+      "messages": [
+        "",  // FR : Bonjour, je suis commerçante au grand marché. Je t'ai envoyé 15 000 F par erreur au lieu de mon fournisseur 😥
+        "",  // FR : 📷 Capture d'écran : « Transfert de 15 000 F réussi »
+        ""  // FR : Renvoie stp, c'est l'argent de la marchandise 🙏
+      ],
+      "indices": [
+        "",  // FR : Une capture d'écran se fabrique en deux minutes.
+        "",  // FR : On te demande de renvoyer toi-même.
+        ""  // FR : L'histoire touchante sert à t'émouvoir.
+      ],
+      "explication": ""  // FR : Une capture ne prouve rien. Vérifie ton solde dans le menu officiel, et si un vrai envoi est arrivé par erreur, c'est l'opérateur qui l'annule.
+    },
+    {
+      "contexte": "",  // FR : Ton retrait a échoué. Tu as appelé toi-même le service client avec le numéro trouvé dans l'application officielle.
+      "expediteur": "",  // FR : Service client
+      "messages": [
+        "",  // FR : Bonjour, nous voyons votre retrait échoué. L'argent revient automatiquement sur votre compte sous 24 heures.
+        ""  // FR : Avez-vous d'autres questions ?
+      ],
+      "indices": [
+        "",  // FR : C'est toi qui as appelé le numéro officiel.
+        ""  // FR : On ne te demande ni code, ni manipulation.
+      ],
+      "explication": ""  // FR : Tout est normal. La règle reste la même : même au vrai service client, on ne donne jamais son code PIN.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : MobileMoney
+      "messages": [
+        ""  // FR : Votre compte est suspendu pour vérification d'identité. Réactivez-le ici avec votre numéro et votre code PIN : mobilemoney-togo-verif[.]com
+      ],
+      "indices": [
+        "",  // FR : Le lien ne mène pas au site officiel.
+        "",  // FR : On te demande ton code PIN sur une page web.
+        ""  // FR : La suspension est inventée pour te faire peur.
+      ],
+      "explication": ""  // FR : Aucun opérateur ne demande ton code PIN sur un site. En cas de doute, appelle le service client avec le numéro officiel.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : +44 •• •• •• 03
+      "messages": [
+        "",  // FR : Hello 👋 Gagnez 5 000 F par jour en aimant des vidéos YouTube. Tâche simple, paiement immédiat sur Mobile Money !
+        ""  // FR : Pour débloquer les tâches mieux payées, il faut juste un dépôt de 10 000 F.
+      ],
+      "indices": [
+        "",  // FR : Un numéro étranger inconnu.
+        "",  // FR : Beaucoup d'argent pour un travail très simple.
+        ""  // FR : Il faut payer pour « débloquer » la suite.
+      ],
+      "explication": ""  // FR : C'est l'arnaque aux tâches : on te paie un peu au début, puis on te demande de déposer toujours plus. Bloque et signale le numéro.
+    },
+    {
+      "contexte": "",  // FR : Ce message arrive dans le groupe WhatsApp de la famille.
+      "expediteur": "",  // FR : Tante Akossiwa
+      "messages": [
+        ""  // FR : Bonsoir à tous. Je viens d'envoyer un code par erreur à quelqu'un du groupe 🙈 Celui qui l'a reçu, envoie-le moi en privé stp, c'est urgent.
+      ],
+      "indices": [
+        "",  // FR : On demande un code reçu par SMS.
+        "",  // FR : Le compte de ta tante a sans doute déjà été volé.
+        ""  // FR : Le voleur vise maintenant tout le groupe.
+      ],
+      "explication": ""  // FR : Appelle ta tante pour la prévenir, et dis au groupe de ne rien envoyer. Puis active la vérification en deux étapes.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : WhatsApp Support ✅
+      "messages": [
+        "",  // FR : Votre compte WhatsApp sera désactivé dans 24 h pour activité suspecte.
+        ""  // FR : Pour le garder, répondez avec le code de vérification que vous venez de recevoir.
+      ],
+      "indices": [
+        "",  // FR : WhatsApp ne te demande jamais ton code par message.
+        "",  // FR : La coche verte et le nom peuvent être imités.
+        ""  // FR : La menace de désactivation sert à te presser.
+      ],
+      "explication": ""  // FR : Ne réponds pas. Bloque et signale ce compte, puis active la vérification en deux étapes.
+    },
+    {
+      "contexte": "",  // FR : Ce matin au marché, ton amie Sena t'a dit qu'elle allait t'envoyer la vidéo du mariage.
+      "expediteur": "",  // FR : Sena
+      "messages": [
+        "",  // FR : Voici la vidéo du mariage comme promis 🎉💃
+        ""  // FR : 🎬 Vidéo (2 min)
+      ],
+      "indices": [
+        "",  // FR : Ton amie t'avait prévenu de vive voix.
+        ""  // FR : Elle ne demande ni argent, ni code, ni clic sur un lien.
+      ],
+      "explication": ""  // FR : Tout est normal. Méfie-toi seulement si un « fichier » te demande d'installer une application ou de te connecter.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Kodjo (ton cousin)
+      "messages": [
+        "",  // FR : Frère, je suis bloqué à la frontière, la police veut 30 000 F sinon ils gardent ma moto 😰
+        ""  // FR : Envoie vite sur ce numéro : 9• •• •• 51. Je te rembourse ce soir, je ne peux pas appeler ici.
+      ],
+      "indices": [
+        "",  // FR : Le message vient bien du compte de ton cousin, mais ce compte peut avoir été volé.
+        "",  // FR : L'argent part vers un autre numéro que le sien.
+        ""  // FR : « Je ne peux pas appeler » : il évite la vérification.
+      ],
+      "explication": ""  // FR : Appelle Kodjo sur son numéro habituel, ou une personne qui est avec lui. Un compte piraté écrit exactement comme ça.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : +229 •• •• •• 14
+      "messages": [
+        "",  // FR : Bonjour maman, c'est moi, j'ai perdu mon téléphone 😢 Enregistre ce nouveau numéro.
+        ""  // FR : Envoie-moi 10 000 F pour acheter une nouvelle puce stp.
+      ],
+      "indices": [
+        "",  // FR : Un numéro inconnu, même pas du Togo.
+        "",  // FR : Il ne dit pas son prénom.
+        ""  // FR : La demande d'argent arrive tout de suite.
+      ],
+      "explication": ""  // FR : Appelle ton enfant sur son ancien numéro ou un proche avant tout. Un escroc envoie ce message à des centaines de « mamans ».
+    },
+    {
+      "contexte": "",  // FR : Hier soir, ta fille Ama t'a appelée pour dire que son téléphone était gâté et qu'elle t'écrirait depuis celui de sa copine Délali.
+      "expediteur": "",  // FR : +228 9• •• •• 46
+      "messages": [
+        ""  // FR : Maman c'est Ama 😊 Je t'écris avec le téléphone de Délali comme je t'ai dit. Je rentre à 18 h, ne t'inquiète pas.
+      ],
+      "indices": [
+        "",  // FR : Ta fille t'avait prévenue par un appel.
+        ""  // FR : Elle ne demande ni argent ni code.
+      ],
+      "explication": ""  // FR : C'est cohérent. Si ce numéro te demande un jour de l'argent, rappelle quand même Ama ou Délali avant.
+    },
+    {
+      "contexte": "",  // FR : Tu vois cette publication dans un groupe Facebook d'offres d'emploi.
+      "expediteur": "",  // FR : Offres d'emploi Lomé 2026
+      "messages": [
+        ""  // FR : 🔥 RECRUTEMENT IMMÉDIAT : 25 hôtesses pour un hôtel de luxe. Salaire 300 000 F/mois. Inscription : 10 000 F au 9• •• •• 07. Dépêchez-vous !
+      ],
+      "indices": [
+        "",  // FR : Des frais d'inscription à payer.
+        "",  // FR : Le nom de l'hôtel n'est jamais donné.
+        ""  // FR : Salaire très élevé et pression du temps.
+      ],
+      "explication": ""  // FR : Un vrai employeur ne fait pas payer pour postuler. Les 10 000 F de chaque candidate vont à l'escroc.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : rh.recrutement.ong@gmail[.]com
+      "messages": [
+        "",  // FR : Félicitations ! Votre profil a été retenu pour un poste de chargé de projet dans notre ONG.
+        ""  // FR : Merci d'envoyer 35 000 F pour la visite médicale obligatoire auprès de notre clinique partenaire, avant vendredi.
+      ],
+      "indices": [
+        "",  // FR : Une ONG sérieuse n'utilise pas une adresse Gmail pour recruter.
+        "",  // FR : Tu dois payer avant même un entretien.
+        ""  // FR : La « clinique partenaire » est choisie par eux.
+      ],
+      "explication": ""  // FR : Frais de visite médicale, de dossier ou de badge : c'est le même piège. Ne paie rien et vérifie l'ONG par ses canaux officiels.
+    },
+    {
+      "contexte": "",  // FR : La semaine dernière, tu as passé un entretien dans les bureaux d'une entreprise de Lomé.
+      "expediteur": "",  // FR : Service des ressources humaines
+      "messages": [
+        ""  // FR : Bonjour, nous avons le plaisir de vous proposer le poste. Votre contrat vous sera remis lors de votre premier jour, lundi à 8 h, dans nos bureaux. Bienvenue !
+      ],
+      "indices": [
+        "",  // FR : Tu as vraiment passé un entretien dans leurs bureaux.
+        ""  // FR : On ne te demande ni argent ni document à envoyer.
+      ],
+      "explication": ""  // FR : Bonne nouvelle, et rien de suspect. Ton contrat se signe sur place, dans les bureaux de l'entreprise.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Concours Fonction Publique 2026 – Infos
+      "messages": [
+        ""  // FR : 📢 Les résultats sont disponibles ! Pour consulter ta note et réserver ta place, paie 7 500 F de frais de dossier sur ce numéro : 9• •• •• 90. Clôture ce soir.
+      ],
+      "indices": [
+        "",  // FR : Les résultats officiels ne se paient pas.
+        "",  // FR : Paiement sur un numéro Mobile Money ordinaire.
+        ""  // FR : Délai très court pour t'empêcher de vérifier.
+      ],
+      "explication": ""  // FR : Les résultats d'un concours public sont publiés sur les canaux officiels de l'institution. Va vérifier toi-même.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Bourses Études Canada <bourses-canada-2026@outlook[.]com>
+      "messages": [
+        "",  // FR : Vous avez obtenu une bourse d'études complète au Canada (frais de scolarité, logement et billet d'avion) !
+        ""  // FR : Pour confirmer, payez 85 000 F de frais de traitement du visa avant la fin de la semaine.
+      ],
+      "indices": [
+        "",  // FR : Tu n'as postulé à aucune bourse.
+        "",  // FR : Une adresse e-mail gratuite pour un organisme « officiel ».
+        ""  // FR : Il faut payer pour « confirmer ».
+      ],
+      "explication": ""  // FR : Les vraies bourses ne te contactent pas sans candidature et ne font pas payer par Mobile Money. Vérifie sur le site officiel de l'organisme.
+    },
+    {
+      "contexte": "",  // FR : Tu as postulé à un stage via le site officiel d'une banque.
+      "expediteur": "",  // FR : Recrutement
+      "messages": [
+        ""  // FR : Merci pour votre candidature. Nous l'étudions avec attention et reviendrons vers vous si votre profil correspond à nos besoins.
+      ],
+      "indices": [
+        "",  // FR : Tu as vraiment postulé sur le site officiel.
+        ""  // FR : On ne te demande rien.
+      ],
+      "explication": ""  // FR : C'est un accusé de réception classique. Rien de suspect.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Recruteur International
+      "messages": [
+        "",  // FR : Travail au Canada 🇨🇦 Logement offert, billet d'avion payé, salaire 2 000 000 F/mois.
+        ""  // FR : Il faut juste 150 000 F pour le visa de travail. Places très limitées !
+      ],
+      "indices": [
+        "",  // FR : Une offre trop belle, sans entreprise nommée.
+        "",  // FR : Tu dois payer le « visa » toi-même à un inconnu.
+        ""  // FR : Places limitées pour te presser.
+      ],
+      "explication": ""  // FR : Les faux départs à l'étranger coûtent très cher aux victimes. Aucune vraie entreprise ne recrute ainsi sur WhatsApp.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Grande Tombola Nationale
+      "messages": [
+        ""  // FR : 🏍️ Partage cette publication et commente « OUI » pour gagner une moto neuve ! Les gagnants paieront seulement 5 000 F de livraison.
+      ],
+      "indices": [
+        "",  // FR : Une page inconnue qui promet un gros lot.
+        "",  // FR : Il faut payer la « livraison ».
+        ""  // FR : Le partage sert à toucher encore plus de victimes.
+      ],
+      "explication": ""  // FR : Il n'y a pas de moto. Ne partage pas, et signale la page à Facebook.
+    },
+    {
+      "contexte": "",  // FR : Ce profil porte le nom et la photo d'un ancien camarade de classe. Il a été créé hier.
+      "expediteur": "",  // FR : Ton « ancien camarade »
+      "messages": [
+        "",  // FR : Salut l'ami, ça fait longtemps ! Je travaille maintenant dans une banque 😎
+        ""  // FR : Je peux te faire un prêt de 500 000 F sans garantie. Il faut juste 15 000 F de frais de dossier.
+      ],
+      "indices": [
+        "",  // FR : Un profil tout neuf qui copie un ami.
+        "",  // FR : Un prêt facile contre des frais payés d'avance.
+        ""  // FR : Une banque ne prête pas par Messenger.
+      ],
+      "explication": ""  // FR : Contacte ton vrai camarade par un autre moyen pour le prévenir, puis signale le faux profil.
+    },
+    {
+      "contexte": "",  // FR : Tu discutes depuis trois semaines avec « Grace », rencontrée sur Facebook. Elle ne répond jamais aux appels vidéo.
+      "expediteur": "",  // FR : Grace ❤️
+      "messages": [
+        "",  // FR : Mon cœur, je t'ai envoyé un colis avec des cadeaux et de l'argent pour qu'on se voie bientôt 🥰
+        ""  // FR : La douane le bloque et demande 120 000 F. Paie vite stp, sinon ils le renvoient ❤️
+      ],
+      "indices": [
+        "",  // FR : Une relation uniquement en ligne, jamais en vidéo.
+        "",  // FR : Un colis bloqué qu'il faut payer.
+        ""  // FR : Les mots d'amour servent à faire baisser ta garde.
+      ],
+      "explication": ""  // FR : C'est une arnaque aux sentiments. Il n'y a ni colis ni douane. Ne paie rien, garde les preuves et parles-en à un proche.
+    },
+    {
+      "contexte": "",  // FR : Il y a cinq minutes, tu as changé toi-même ton mot de passe Facebook.
+      "expediteur": "",  // FR : Facebook
+      "messages": [
+        ""  // FR : Votre mot de passe a été modifié. Si vous êtes à l'origine de cette modification, vous n'avez rien à faire.
+      ],
+      "indices": [
+        "",  // FR : Tu viens de faire ce changement toi-même.
+        ""  // FR : Le message ne demande ni clic, ni code.
+      ],
+      "explication": ""  // FR : C'est une simple confirmation. Si un jour tu reçois ce message sans avoir rien changé, sécurise ton compte tout de suite.
+    },
+    {
+      "contexte": "",  // FR : Tu gères la page Facebook de ta boutique.
+      "expediteur": "",  // FR : Meta Support Pages
+      "messages": [
+        "",  // FR : ⚠️ Votre page a enfreint nos règles sur les droits d'auteur et sera supprimée dans 24 h.
+        ""  // FR : Si c'est une erreur, faites appel ici : meta-support-appel[.]com
+      ],
+      "indices": [
+        "",  // FR : Le lien ne mène pas au vrai site de Facebook.
+        "",  // FR : La menace de suppression rapide sert à te presser.
+        ""  // FR : Les vraies alertes apparaissent dans les paramètres de ta page.
+      ],
+      "explication": ""  // FR : La fausse page d'appel vole tes identifiants et ta page. Vérifie dans l'application Facebook, jamais via le lien reçu.
+    },
+    {
+      "contexte": "",  // FR : 
+      "expediteur": "",  // FR : Inconnu
+      "messages": [
+        ""  // FR : J'ai piraté ta caméra et j'ai des vidéos de toi. Envoie 50 000 F avant demain, sinon je les envoie à tous tes contacts.
+      ],
+      "indices": [
+        "",  // FR : Une menace sans aucune preuve.
+        "",  // FR : Une demande d'argent avec un délai court.
+        ""  // FR : Le même message est envoyé à des milliers de personnes.
+      ],
+      "explication": ""  // FR : C'est presque toujours du bluff. Ne paie pas, ne réponds pas, garde le message comme preuve et change tes mots de passe par précaution.
+    },
+    {
+      "contexte": "",  // FR : Hier, ta cousine t'a montré la nouvelle page Facebook de sa boutique de pagnes.
+      "expediteur": "",  // FR : Pagnes de chez Ayaba
+      "messages": [
+        ""  // FR : Merci d'avoir aimé notre page 💛 Nouveaux pagnes en stock, passez nous voir au marché !
+      ],
+      "indices": [
+        "",  // FR : Tu connais la boutique et la personne derrière.
+        ""  // FR : Pas de demande d'argent, de code ni de lien suspect.
+      ],
+      "explication": ""  // FR : C'est un message de remerciement normal.
     }
   ],
   "pourquoi": [
@@ -859,6 +1345,50 @@ window.CG_CONTENU.ee = {
       "texte": ""  // FR : Pas de compte, pas de publicité, pas de suivi. Ta progression reste dans ton téléphone.
     }
   ],
+  "mentions": {
+    "titre": "",  // FR : Mentions et confidentialité
+    "sections": [
+      {
+        "titre": "",  // FR : Qui édite ce site
+        "paragraphes": [
+          ""  // FR : {site} est un projet personnel et indépendant de {auteur}, créé pour aider le public togolais à reconnaître les arnaques numériques.
+        ]
+      },
+      {
+        "titre": "",  // FR : Aucun lien officiel
+        "paragraphes": [
+          "",  // FR : Le site n'est affilié ni à l'Agence nationale de la cybersécurité (ANCy), ni au CERT.tg, ni à aucun opérateur, banque ou réseau social. Les noms de marques cités appartiennent à leurs propriétaires et servent uniquement à expliquer les arnaques.
+          ""  // FR : Les messages du jeu sont des exemples inventés à partir d'arnaques réelles. Les numéros sont masqués et les liens désactivés.
+        ]
+      },
+      {
+        "titre": "",  // FR : Tes données
+        "paragraphes": [
+          "",  // FR : Le site ne collecte aucune donnée personnelle : pas de compte, pas de cookies, pas de publicité, pas de mesure d'audience.
+          ""  // FR : Ta progression et la langue choisie sont enregistrées uniquement dans ton navigateur. Tu peux les effacer à tout moment avec « Effacer ma progression », en bas de page.
+        ]
+      },
+      {
+        "titre": "",  // FR : Les informations
+        "paragraphes": [
+          ""  // FR : Le contenu sert à la sensibilisation. Il ne remplace pas les conseils de ton opérateur, de ta banque ou des autorités. En cas d'arnaque, contacte le CERT.tg ou la police.
+        ]
+      },
+      {
+        "titre": "",  // FR : Hébergement
+        "paragraphes": [
+          ""  // FR : Le site est hébergé par GitHub Pages (GitHub, Inc.).
+        ]
+      },
+      {
+        "titre": "",  // FR : Licences
+        "paragraphes": [
+          ""  // FR : Code sous licence MIT. Polices Unbounded et Onest sous licence SIL Open Font License. Icônes Phosphor Icons sous licence MIT.
+        ]
+      }
+    ],
+    "contact": ""  // FR : Une question ou une erreur à signaler :
+  },
   "dictionnaire": [
     {
       "terme": "",  // FR : Arnaque

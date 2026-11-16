@@ -26,7 +26,7 @@ const fichierFr = path.join(racine, "js/content/fr.js");
 const fichierEe = path.join(racine, "js/content/ee.js");
 const fichierCsv = path.join(racine, "docs/traduction-ewe.csv");
 
-const TECHNIQUES = new Set(["id", "module", "lecon", "canal", "verdict", "bonne", "scenario_accueil", "url"]);
+const TECHNIQUES = new Set(["id", "module", "lecon", "canal", "verdict", "bonne", "scenario_accueil", "url", "niveau"]);
 
 function charger(fichier) {
   const bac = { window: {} };

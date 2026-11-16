@@ -2,7 +2,7 @@
  * Service worker : garde le site disponible hors connexion.
  * Change VERSION à chaque mise en ligne pour que les téléphones récupèrent les nouveaux fichiers.
  */
-const VERSION = "cybergbe-v3";
+const VERSION = "cybergbe-v4";
 
 const FICHIERS = [
   "./",
