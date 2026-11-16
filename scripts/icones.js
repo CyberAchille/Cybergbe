@@ -28,7 +28,11 @@ const ICONES = {
   partager: "share-network", copier: "copy", lien: "link", balance: "scales", envoyer: "paper-plane-tilt",
   pousse: "plant", jauge: "gauge", crane: "skull", melange: "shuffle",
   memo: "cards", coeur: "heart", oeilbarre: "eye-slash", glisser: "hand-swipe-right", chrono: "timer",
-  portemonnaie: "wallet", horloge: "clock", navigateur: "browser", ouvert: "lock-open", cible2: "target", puzzle: "puzzle-piece"
+  portemonnaie: "wallet", horloge: "clock", navigateur: "browser", ouvert: "lock-open", cible2: "target", puzzle: "puzzle-piece",
+  loupe: "detective", coller: "clipboard-text", attestation: "certificate", animer: "projector-screen", imprimer: "printer",
+  qr: "qr-code", telecharger: "download-simple", pleinecran: "arrows-out", main: "hand-palm", fermer: "x-circle",
+  megaphone: "megaphone", identite: "identification-card", lienbrise: "link-break", billet: "money", changement: "user-switch",
+  codepin: "password", sablier: "hourglass-high", stop2: "warning-octagon", tableau: "chalkboard-teacher", effacer: "trash", crayon: "pencil-simple"
 };
 const STYLES = ["bold", "duotone", "fill"];
 

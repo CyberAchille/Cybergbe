@@ -10,7 +10,7 @@
  * par exemple : "audio": "audio/ee/codes-1.mp3"
  *
  * Fichier généré par  node scripts/modele-ewe.js  (les traductions existantes sont conservées).
- * Avancement : 1 textes traduits sur 1162.
+ * Avancement : 1 textes traduits sur 1358.
  */
 window.CG_CONTENU = window.CG_CONTENU || {};
 window.CG_CONTENU.ee = {
@@ -22,6 +22,10 @@ window.CG_CONTENU.ee = {
     "menu_dico": "",  // FR : Petit dictionnaire
     "menu_signaler": "",  // FR : En cas d'arnaque
     "menu_apropos": "",  // FR : À propos
+    "menu_verifier": "",  // FR : Vérifier un message
+    "menu_animer": "",  // FR : Mode animateur
+    "menu_affiche": "",  // FR : Affiches à imprimer
+    "menu_attestation": "",  // FR : Ton attestation
     "accueil_titre": "",  // FR : Arnaque ou pas ?
     "accueil_intro": "",  // FR : Apprends à reconnaître les pièges du téléphone : Mobile Money, WhatsApp, faux emplois, faux profils. Cinq thèmes courts, en français et bientôt en ewe.
     "accueil_jeu_consigne": "",  // FR : Tu reçois ce message. Qu'en penses-tu ?
@@ -81,9 +85,13 @@ window.CG_CONTENU.ee = {
     "nav_lecons": "",  // FR : Leçons
     "nav_jeu": "",  // FR : Jeux
     "nav_dico": "",  // FR : Mots
+    "nav_verifier": "",  // FR : Vérifier
     "nav_aide": "",  // FR : Aide
     "accueil_lecons_titre": "",  // FR : Les leçons
     "accueil_lecons_intro": "",  // FR : Cinq thèmes de trois leçons. Compte environ cinq minutes par thème.
+    "lecons_dico_titre": "",  // FR : Un mot pas clair ?
+    "lecons_dico_texte": "",  // FR : Le petit dictionnaire explique simplement les mots de la sécurité numérique.
+    "lecons_dico_bouton": "",  // FR : Ouvrir le dictionnaire
     "accueil_aide_titre": "",  // FR : Tu t'es fait avoir ?
     "accueil_aide_texte": "",  // FR : Ce n'est pas une honte : les escrocs sont des professionnels. Agis vite et signale-le.
     "accueil_aide_bouton": "",  // FR : Voir quoi faire
@@ -195,7 +203,8 @@ window.CG_CONTENU.ee = {
     "hors_ligne": "",  // FR : Tu es hors connexion. Les leçons déjà ouvertes restent disponibles.
     "page_introuvable": "",  // FR : Cette page n'existe pas.
     "retour_accueil": "",  // FR : Retour à l'accueil
-    "aller_contenu": ""  // FR : Aller au contenu
+    "aller_contenu": "",  // FR : Aller au contenu
+    "qr_label": ""  // FR : QR code vers {url}
   },
   "modules": [
     {
@@ -1960,6 +1969,279 @@ window.CG_CONTENU.ee = {
           "reflexe": ""  // FR : C'est une arnaque, je fuis
         }
       ]
+    }
+  },
+  "outils": {
+    "verifier": {
+      "titre": "",  // FR : Vérifie un message
+      "intro": "",  // FR : Tu as reçu un SMS ou un message WhatsApp bizarre ? Colle-le ici avant de répondre : on te montre les signaux d'alerte, un par un.
+      "label": "",  // FR : Le message reçu
+      "placeholder": "",  // FR : Colle ou recopie le message ici…
+      "coller": "",  // FR : Coller
+      "coller_aide": "",  // FR : Appuie longuement dans la case, puis choisis « Coller ».
+      "analyser": "",  // FR : Vérifier le message
+      "prive": "",  // FR : Le message reste dans ton téléphone : rien n'est envoyé ni enregistré.
+      "exemples_titre": "",  // FR : Pas de message sous la main ? Essaie un exemple :
+      "exemples": [
+        {
+          "nom": "",  // FR : Transfert par erreur
+          "texte": ""  // FR : Bonsoir, je vous ai envoyé 25 000 F par erreur sur votre Mobile Money. C'est l'argent de l'hôpital de ma mère. SVP renvoyez-moi vite au 9X XX XX XX, que Dieu vous bénisse 🙏
+        },
+        {
+          "nom": "",  // FR : Recrutement
+          "texte": ""  // FR : FÉLICITATIONS ! Votre candidature est retenue pour le grand recrutement 2026, sans diplôme, salaire 150 000 F par mois. Payez les frais de dossier de 10 000 F avant 18h pour confirmer votre place : recrutement-officiel-togo.online/inscription
+        },
+        {
+          "nom": "",  // FR : Compte bloqué
+          "texte": ""  // FR : Service client Mixx : votre compte sera bloqué ce soir pour une mise à jour. Pour le garder actif, confirmez votre code PIN sur mixx-verification.com
+        },
+        {
+          "nom": "",  // FR : Code WhatsApp
+          "texte": ""  // FR : Ton code WhatsApp : 482-913. Ne partage pas ce code.
+        }
+      ],
+      "vide": "",  // FR : Écris ou colle d'abord un message dans la case.
+      "niveaux": [
+        {
+          "titre": "",  // FR : Aucun piège connu repéré
+          "texte": ""  // FR : Ça ne veut pas dire que le message est sûr. Dans le doute, vérifie auprès de la personne ou du service, sur un numéro que tu connais déjà.
+        },
+        {
+          "titre": "",  // FR : À vérifier
+          "texte": ""  // FR : Un détail demande de la prudence. Lis l'explication avant de répondre.
+        },
+        {
+          "titre": "",  // FR : Suspect
+          "texte": ""  // FR : Ce message utilise des techniques d'escrocs. Ne réponds pas, ne clique pas et ne paie rien avant d'avoir vérifié.
+        },
+        {
+          "titre": "",  // FR : Très suspect
+          "texte": ""  // FR : Ce message ressemble fort à une arnaque. Ne réponds pas, ne donne aucun code et n'envoie pas d'argent.
+        }
+      ],
+      "signaux_titre": "",  // FR : Ce qu'on a repéré
+      "signaux_nb": "",  // FR : {n} signaux d'alerte
+      "signaux_nb_un": "",  // FR : {n} signal d'alerte
+      "jeu_liens": "",  // FR : S'entraîner à lire les liens
+      "bon_signe_titre": "",  // FR : Un bon signe
+      "bon_signe_texte": "",  // FR : Le message te conseille de ne pas partager ton code : c'est ce que font les vrais services. Attention quand même : si tu reçois un code sans l'avoir demandé, quelqu'un essaie peut-être d'entrer dans ton compte. Ne le donne à personne.
+      "reflexes_titre": "",  // FR : Les bons réflexes
+      "reflexes": [
+        "",  // FR : Ne donne jamais ton code PIN ni un code reçu par SMS.
+        "",  // FR : Vérifie ton solde dans le menu officiel de ton opérateur, pas dans un SMS.
+        "",  // FR : Rappelle la personne ou le service sur un numéro que tu connais déjà.
+        ""  // FR : Si tu as déjà répondu ou payé, agis vite et préviens le CERT.tg.
+      ],
+      "limite": "",  // FR : Cet outil repère les pièges les plus courants, mais il ne remplace pas ton jugement : un escroc peut écrire un message sans aucun de ces mots.
+      "recommencer": "",  // FR : Vérifier un autre message
+      "signaler": "",  // FR : J'ai déjà répondu : que faire ?
+      "partage_titre": "",  // FR : Envoie cet outil à tes proches
+      "partage": "",  // FR : Un outil gratuit pour vérifier un message suspect avant de répondre. Rien n'est envoyé 👉 {url}#verifier
+      "accueil_titre": "",  // FR : Un message bizarre ? Vérifie-le
+      "accueil_texte": "",  // FR : Colle un SMS ou un message WhatsApp : les signaux d'alerte s'allument, avec l'explication de chacun.
+      "accueil_exemple": "",  // FR : Envoie-moi vite le code reçu par SMS, sinon ton compte sera bloqué ce soir.
+      "accueil_bouton": "",  // FR : Vérifier un message
+      "signaux": [
+        {
+          "titre": "",  // FR : Demande de code secret
+          "texte": ""  // FR : Personne de sérieux ne te demande ton code PIN ni un code reçu par SMS : ni ton opérateur, ni WhatsApp, ni ta banque. Celui qui a ce code peut vider ton compte ou voler ton WhatsApp.
+        },
+        {
+          "titre": "",  // FR : Le coup du « transfert par erreur »
+          "texte": ""  // FR : Avant de renvoyer quoi que ce soit, vérifie ton solde dans le menu officiel de ton opérateur. Le faux SMS de transfert vient souvent d'un numéro ordinaire.
+        },
+        {
+          "titre": "",  // FR : On te demande de payer d'abord
+          "texte": ""  // FR : Un vrai employeur, un vrai concours ou un vrai gain ne te demande jamais de payer des frais à l'avance. C'est le signe le plus sûr d'une arnaque.
+        },
+        {
+          "titre": "",  // FR : Chantage
+          "texte": ""  // FR : Ne paie pas : payer n'arrête presque jamais le chantage. Garde les preuves, bloque la personne et signale-la au CERT.tg.
+        },
+        {
+          "titre": "",  // FR : On te demande d'installer une application
+          "texte": ""  // FR : Une application envoyée par un inconnu peut prendre le contrôle de ton téléphone et de ton Mobile Money. N'installe que depuis le magasin officiel, et seulement si tu l'as choisie toi-même.
+        },
+        {
+          "titre": "",  // FR : Une adresse trompeuse
+          "texte": ""  // FR : L'adresse colle le nom d'une marque ou des mots rassurants (officiel, vérification, bonus…) à un site inconnu. Les vrais services n'utilisent pas ce genre d'adresse.
+        },
+        {
+          "titre": "",  // FR : On te presse
+          "texte": ""  // FR : « Vite », « urgent », « avant ce soir » : l'escroc veut t'empêcher de réfléchir ou de demander conseil. Un vrai service te laisse le temps de vérifier.
+        },
+        {
+          "titre": "",  // FR : Menace de blocage
+          "texte": ""  // FR : Ton opérateur ou un réseau social ne bloque pas ton compte par un simple message qui exige une action immédiate. Vérifie dans l'application officielle ou au guichet.
+        },
+        {
+          "titre": "",  // FR : Cadeau ou argent trop facile
+          "texte": ""  // FR : Personne ne gagne à un jeu auquel il n'a pas joué, et aucun placement sérieux ne double ton argent en quelques jours.
+        },
+        {
+          "titre": "",  // FR : Changement de numéro ou de canal
+          "texte": ""  // FR : « J'ai changé de numéro », « écris-moi sur WhatsApp » : appelle la personne sur son ancien numéro pour vérifier que c'est bien elle.
+        },
+        {
+          "titre": "",  // FR : Demande d'argent
+          "texte": ""  // FR : Avant d'envoyer de l'argent, appelle la personne par un appel normal. Les escrocs se font souvent passer pour un proche en difficulté.
+        },
+        {
+          "titre": "",  // FR : On te demande le secret
+          "texte": ""  // FR : « N'en parle à personne » : l'escroc veut t'empêcher de demander conseil. Parles-en toujours à quelqu'un de confiance.
+        },
+        {
+          "titre": "",  // FR : Demande d'informations personnelles
+          "texte": ""  // FR : Ta pièce d'identité, ta date de naissance ou un mot de passe permettent de se faire passer pour toi. Ne les envoie pas à un inconnu.
+        },
+        {
+          "titre": "",  // FR : Offre d'emploi à vérifier
+          "texte": ""  // FR : « Sans diplôme », « sans entretien », gros salaire : vérifie l'offre sur le site officiel de l'entreprise, ou colle-la dans ArnaKO.
+        },
+        {
+          "titre": "",  // FR : Un lien raccourci
+          "texte": ""  // FR : Un lien raccourci (bit.ly, tinyurl…) cache la vraie adresse : on ne sait pas où il mène avant d'avoir cliqué.
+        },
+        {
+          "titre": "",  // FR : Un lien à vérifier
+          "texte": ""  // FR : N'ouvre pas un lien reçu d'un inconnu. Regarde le vrai nom du site : c'est la partie juste avant le premier « / ».
+        },
+        {
+          "titre": "",  // FR : Se présente comme un service officiel
+          "texte": ""  // FR : Les escrocs se font passer pour un opérateur, une banque ou l'État. Rappelle toi-même le numéro officiel, jamais celui donné dans le message.
+        }
+      ]
+    },
+    "attestation": {
+      "titre": "",  // FR : Ton attestation
+      "intro": "",  // FR : Termine les 5 thèmes, leçons et quiz, pour obtenir une attestation à ton nom, à garder ou à partager.
+      "verrou_titre": "",  // FR : Encore {n} étapes
+      "verrou_titre_un": "",  // FR : Encore {n} étape
+      "verrou_texte": "",  // FR : Chaque leçon et chaque quiz terminés te rapprochent de ton attestation.
+      "continuer": "",  // FR : Continuer
+      "pret_titre": "",  // FR : Bravo, tu as tout terminé !
+      "pret_texte": "",  // FR : Écris ton nom tel qu'il doit apparaître sur l'attestation. Il reste dans ton téléphone.
+      "nom_label": "",  // FR : Ton prénom et ton nom
+      "nom_exemple": "",  // FR : Par exemple : Afi Mensah
+      "nom_vide": "",  // FR : Écris ton nom pour créer l'attestation.
+      "creer": "",  // FR : Créer mon attestation
+      "modifier": "",  // FR : Changer le nom
+      "telecharger": "",  // FR : Télécharger l'image
+      "partager": "",  // FR : Partager l'image
+      "partage_texte": "",  // FR : J'ai terminé les 5 thèmes de {site} pour reconnaître les arnaques du téléphone 🎓 Fais-le aussi, c'est gratuit 👉 {url}
+      "apercu": "",  // FR : Aperçu de ton attestation
+      "annonce": "",  // FR : Tous les thèmes sont terminés : ton attestation t'attend dans Leçons.
+      "bloc_titre": "",  // FR : Ton attestation
+      "bloc_pret": "",  // FR : Tu as tout terminé : crée ton attestation à ton nom.
+      "bloc_verrou": "",  // FR : Termine les 5 thèmes pour obtenir ton attestation à ton nom.
+      "bloc_bouton": "",  // FR : Obtenir mon attestation
+      "doc_titre": "",  // FR : Attestation de parcours
+      "doc_certifie": "",  // FR : {site} atteste que
+      "doc_texte": "",  // FR : a suivi les 5 thèmes de sensibilisation aux arnaques du téléphone et d'internet, et terminé leurs quiz.
+      "doc_badges": "",  // FR : Badges obtenus
+      "doc_score": "",  // FR : Quiz : {score} bonnes réponses sur {total}
+      "doc_date": "",  // FR : Délivrée le {date}
+      "doc_numero": "",  // FR : N° {code}
+      "doc_note": "",  // FR : Attestation de suivi délivrée par le site {site}. Elle ne remplace pas un diplôme.
+      "doc_qr": "",  // FR : Toi aussi, apprends ici
+      "premier_jour": "",  // FR : 1er
+      "mois": [
+        "",  // FR : janvier
+        "",  // FR : février
+        "",  // FR : mars
+        "",  // FR : avril
+        "",  // FR : mai
+        "",  // FR : juin
+        "",  // FR : juillet
+        "",  // FR : août
+        "",  // FR : septembre
+        "",  // FR : octobre
+        "",  // FR : novembre
+        ""  // FR : décembre
+      ]
+    },
+    "animer": {
+      "titre": "",  // FR : Mode animateur
+      "intro": "",  // FR : Pour animer une séance en groupe : à l'école, dans une association, à l'église ou en réunion de quartier. Affiche les messages en grand et faites voter la salle.
+      "comment_titre": "",  // FR : Comment ça marche
+      "comment": [
+        "",  // FR : Branche ton ordinateur ou ton téléphone sur un vidéoprojecteur ou une télé. Sans écran, montre simplement ton téléphone à un petit groupe.
+        "",  // FR : Un message s'affiche en grand. La salle vote à main levée : arnaque ou message normal ?
+        "",  // FR : Indique ce que la majorité a choisi : la bonne réponse et les indices s'affichent. Prenez le temps d'en parler.
+        ""  // FR : À la fin, chacun peut scanner le QR code pour continuer seul sur son téléphone.
+      ],
+      "reglages": "",  // FR : Préparer la séance
+      "theme_label": "",  // FR : Thème
+      "theme_tous": "",  // FR : Tous les thèmes
+      "nombre_label": "",  // FR : Nombre de messages
+      "nombre_messages": "",  // FR : {n} messages
+      "commencer": "",  // FR : Commencer la séance
+      "clavier": "",  // FR : Au clavier : A pour arnaque, N pour normal, flèche droite pour continuer, F pour le plein écran, Échap pour quitter.
+      "affiche_titre": "",  // FR : Affiches et cartes à imprimer
+      "affiche_texte": "",  // FR : Une affiche A4 et des petites cartes avec un QR code, à coller ou à distribuer après la séance.
+      "affiche_bouton": "",  // FR : Voir les affiches
+      "compteur": "",  // FR : Message {n} sur {total}
+      "vote": "",  // FR : Levez la main : arnaque ou message normal ?
+      "salle_dit": "",  // FR : La majorité de la salle a choisi :
+      "arnaque": "",  // FR : Arnaque
+      "normal": "",  // FR : Normal
+      "bien_vu": "",  // FR : La salle a vu juste !
+      "piege": "",  // FR : La salle s'est fait piéger !
+      "discussion_arnaque": "",  // FR : À discuter : quel détail aurait dû vous alerter ?
+      "discussion_normal": "",  // FR : À discuter : qu'est-ce qui montre que ce message est normal ?
+      "suivant": "",  // FR : Message suivant
+      "bilan": "",  // FR : Voir le bilan
+      "plein_ecran": "",  // FR : Plein écran
+      "quitter": "",  // FR : Quitter
+      "bilan_titre": "",  // FR : Bilan de la séance
+      "bilan_score": "",  // FR : La salle a vu juste {n} fois sur {total}.
+      "bilan_score_un": "",  // FR : La salle a vu juste {n} fois sur {total}.
+      "bilan_texte": "",  // FR : Merci à tous ! Pour continuer seul, scannez ce code avec l'appareil photo de votre téléphone.
+      "reflexes_titre": "",  // FR : Les 3 réflexes à retenir
+      "reflexes": [
+        "",  // FR : Ton code ne se donne à personne, jamais.
+        "",  // FR : Un transfert « par erreur » ? Vérifie ton solde dans le menu officiel.
+        ""  // FR : On te demande de payer d'abord ? C'est une arnaque.
+      ],
+      "nouvelle": "",  // FR : Nouvelle séance
+      "accueil_titre": "",  // FR : Tu animes un groupe ?
+      "accueil_texte": ""  // FR : Enseignant, association, église, groupement : affiche les messages en grand, faites voter la salle, puis distribuez les affiches avec QR code.
+    },
+    "affiche": {
+      "titre": "",  // FR : Affiches à imprimer
+      "intro": "",  // FR : Imprime l'affiche ou les petites cartes, puis colle-les au marché, à l'école, dans une boutique Mobile Money ou à l'église.
+      "format_affiche": "",  // FR : Affiche A4
+      "format_cartes": "",  // FR : 8 petites cartes
+      "imprimer": "",  // FR : Imprimer
+      "imprimer_aide": "",  // FR : Dans la fenêtre d'impression, choisis « Enregistrer en PDF » pour garder un fichier.
+      "titre_affiche": "",  // FR : Arnaque ou pas ?
+      "sous_titre": "",  // FR : Avant de répondre à un message, pose-toi ces questions.
+      "regles": [
+        {
+          "titre": "",  // FR : On te demande un code ?
+          "texte": ""  // FR : Ton code PIN et les codes reçus par SMS ne se donnent à personne. Jamais.
+        },
+        {
+          "titre": "",  // FR : Un transfert « par erreur » ?
+          "texte": ""  // FR : Vérifie ton solde dans le menu officiel de ton opérateur avant de renvoyer quoi que ce soit.
+        },
+        {
+          "titre": "",  // FR : On te demande de payer d'abord ?
+          "texte": ""  // FR : Un vrai emploi, un vrai concours ou un vrai cadeau ne se paie jamais à l'avance.
+        },
+        {
+          "titre": "",  // FR : Un proche a « changé de numéro » ?
+          "texte": ""  // FR : Appelle-le sur son ancien numéro avant d'envoyer de l'argent.
+        }
+      ],
+      "qr_texte": "",  // FR : Scanne ce code pour apprendre et t'entraîner gratuitement, en français et en ewe.
+      "cert": "",  // FR : Victime d'une arnaque ? CERT.tg : {tel}
+      "carte_regles": [
+        "",  // FR : Ton code ne se donne à personne.
+        "",  // FR : Transfert « par erreur » ? Vérifie ton solde.
+        ""  // FR : Payer d'abord ? C'est une arnaque.
+      ],
+      "carte_qr": ""  // FR : Apprends gratuitement
     }
   },
   "dictionnaire": [

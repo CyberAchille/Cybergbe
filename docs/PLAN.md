@@ -18,7 +18,9 @@ Aider le **grand public togolais** à reconnaître les arnaques du téléphone e
 Accueil (#accueil)
 ├── Message à juger « Arnaque ou pas ? »
 ├── Liste des 5 thèmes
+├── « Un message bizarre ? Vérifie-le » : démonstration de l'outil
 ├── « Joue et apprends » : accès rapide aux jeux
+├── « Tu animes un groupe ? » : mode animateur et affiches
 ├── Bande de progression tissée
 └── Lien « Tu t'es fait avoir ? »
 
@@ -35,6 +37,10 @@ Salle de jeux (#jeux)                6 jeux, record enregistré pour chacun
 ├── Casse-mot de passe (#mot-de-passe)  Testeur de solidité + 6 duels
 ├── La journée d'Afi (#histoire)     Histoire à choix, 7 scènes, 60 000 F à protéger
 └── Mémo des réflexes (#memo)        Associer chaque piège au bon réflexe
+Vérifie un message (#verifier)       Analyse d'un SMS collé, signaux surlignés et expliqués
+Ton attestation (#attestation)       Image à son nom après les 5 thèmes, avec QR code
+Mode animateur (#animer)             Séance en groupe : vote à main levée, bilan et QR code
+Affiches (#affiche)                  Affiche A4 et 8 cartes par page, à imprimer
 Mentions (#mentions)                 Indépendance, données, licences
 Petit dictionnaire (#dictionnaire)   25 mots, colonne ewe à remplir
 En cas d'arnaque (#signaler)         6 étapes + contacts CERT.tg
@@ -61,6 +67,7 @@ js/content/fr.js         Tout le contenu en français (langue de référence)
 js/content/ee.js         Le même contenu en ewe (à remplir)
 js/app.js                Navigation, quiz, salle de jeux, progression, records, badges, animations
 js/icones.js             Icônes Phosphor (licence MIT)
+js/qrcode.js             Génération des QR codes (licence MIT)
 sw.js                    Mode hors connexion
 fonts/                   Unbounded et Onest (licence OFL), avec les lettres ewe
 audio/ee/                Enregistrements des leçons en ewe
@@ -86,9 +93,10 @@ docs/                    Ce plan, le guide de traduction, le tableau CSV
 - Observer : où bloquent-elles ? quels mots ne comprennent-elles pas ? quels messages du jeu les piègent ?
 
 **V2 : diffuser et grandir**
+- Fait : mode animateur pour les séances en groupe, affiche A4 et cartes à imprimer avec QR code, attestation de fin de parcours, outil « Vérifie un message ».
 - Fiches imprimables par thème pour les animateurs (radios communautaires, associations, groupements de femmes, églises).
 - Nouveaux messages du jeu à partir des alertes du CERT.tg et des arnaques signalées par les utilisateurs.
-- Badge ou attestation de fin de parcours.
+- Enrichir « Vérifie un message » avec les tournures ewe et mina des escrocs, dès que la traduction avance.
 - Autres langues gbe (mina) si la demande existe.
 
 ## 6. Partenaires à contacter

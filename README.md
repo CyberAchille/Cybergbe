@@ -15,6 +15,10 @@ Site gratuit pour apprendre à reconnaître les arnaques du téléphone et d'int
   - **Casse-mot de passe** : un testeur qui estime en combien de temps un pirate trouverait un mot de passe (calcul fait dans le téléphone, rien n'est envoyé), puis 6 duels « lequel est le plus solide ? ».
   - **La journée d'Afi** : une histoire à choix. Afi, vendeuse au marché, reçoit 7 messages piégés dans la journée ; chaque mauvais choix lui coûte de l'argent.
   - **Mémo des réflexes** : un jeu de mémoire où l'on associe chaque piège au bon réflexe.
+- **Vérifie un message** : on colle un SMS ou un message WhatsApp reçu, et les signaux d'alerte s'allument dans le texte (demande de code, faux transfert, frais à payer, lien trompeur, urgence, chantage…), chacun avec son explication et la leçon à revoir. L'analyse se fait dans le téléphone : rien n'est envoyé ni enregistré.
+- **Une attestation de parcours** à son nom, créée dans le téléphone une fois les 5 thèmes terminés : image aux couleurs du Togo avec les badges obtenus et un QR code, à télécharger ou partager directement sur WhatsApp.
+- **Un mode animateur** pour les séances en groupe (école, association, église, quartier) : les messages s'affichent en grand sur un vidéoprojecteur, la salle vote à main levée, puis la réponse et les indices apparaissent. Bilan final avec un QR code à scanner. Se pilote aussi au clavier.
+- **Des affiches à imprimer** : une affiche A4 et 8 petites cartes par page, avec les réflexes essentiels et un QR code vers le site.
 - **Partage sur WhatsApp** du site ou de son score, avec une image d'aperçu soignée.
 - **Un petit dictionnaire** de 25 mots, avec une colonne ewe.
 - **Une page « En cas d'arnaque »** : les 6 bons réflexes et les contacts du CERT.tg.
@@ -60,6 +64,7 @@ Si tu passes à un nom de domaine, change l'adresse dans `js/config.js` (`siteUr
 | `js/content/ee.js` | Le contenu en ewe, même structure |
 | `js/app.js` | Navigation, quiz, salle de jeux, progression, records, badges, animations, langues |
 | `js/icones.js` | Icônes Phosphor utilisées par le site (généré par `scripts/icones.js`) |
+| `js/qrcode.js` | Génération des QR codes (chargé seulement par les pages qui en affichent) |
 | `scripts/modele-ewe.js` | Outil de traduction (mise à jour de `ee.js`, export/import CSV) |
 | `docs/PLAN.md` | Arborescence, contenu, feuille de route, partenaires |
 | `docs/TRADUCTION.md` | Guide pour les traducteurs et les voix ewe |
@@ -80,3 +85,4 @@ Si tu passes à un nom de domaine, change l'adresse dans `js/config.js` (`siteUr
 - Code : MIT (voir `LICENSE`).
 - Polices Unbounded et Onest : SIL Open Font License 1.1 (voir `fonts/OFL-unbounded.txt` et `fonts/OFL-onest.txt`).
 - Icônes Phosphor : MIT (voir `js/LICENCE-phosphor.txt`).
+- QR Code Generator de Kazuhiko Arase : MIT (voir `js/LICENCE-qrcode.txt`).

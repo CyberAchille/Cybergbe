@@ -2,7 +2,7 @@
  * Service worker : garde le site disponible hors connexion.
  * Change VERSION à chaque mise en ligne pour que les téléphones récupèrent les nouveaux fichiers.
  */
-const VERSION = "cybergbe-v5";
+const VERSION = "cybergbe-v6";
 
 const FICHIERS = [
   "./",
@@ -13,6 +13,7 @@ const FICHIERS = [
   "js/content/fr.js",
   "js/content/ee.js",
   "js/app.js",
+  "js/qrcode.js",
   "fonts/onest-latin-400-normal.woff2",
   "fonts/onest-latin-500-normal.woff2",
   "fonts/onest-latin-700-normal.woff2",
