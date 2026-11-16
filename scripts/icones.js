@@ -26,7 +26,9 @@ const ICONES = {
   argent: "hand-coins", mallette: "briefcase", personnes: "users-three", oeil: "eye", sceau: "seal-check",
   cible: "crosshair", lecture: "play", livre2: "book-bookmark",
   partager: "share-network", copier: "copy", lien: "link", balance: "scales", envoyer: "paper-plane-tilt",
-  pousse: "plant", jauge: "gauge", crane: "skull", melange: "shuffle"
+  pousse: "plant", jauge: "gauge", crane: "skull", melange: "shuffle",
+  memo: "cards", coeur: "heart", oeilbarre: "eye-slash", glisser: "hand-swipe-right", chrono: "timer",
+  portemonnaie: "wallet", horloge: "clock", navigateur: "browser", ouvert: "lock-open", cible2: "target", puzzle: "puzzle-piece"
 };
 const STYLES = ["bold", "duotone", "fill"];
 

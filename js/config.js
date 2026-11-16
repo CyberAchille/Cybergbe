@@ -48,7 +48,7 @@ window.CG_CONFIG = {
 
   /* Langues proposées. « ee » est le code ISO 639-1 de l'ewe. */
   langues: [
-    { code: "fr", nom: "Français" },
-    { code: "ee", nom: "Eʋegbe" }
+    { code: "fr", nom: "Français", court: "FR" },
+    { code: "ee", nom: "Eʋegbe", court: "Eʋe" }
   ]
 };

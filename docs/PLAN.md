@@ -18,6 +18,7 @@ Aider le **grand public togolais** à reconnaître les arnaques du téléphone e
 Accueil (#accueil)
 ├── Message à juger « Arnaque ou pas ? »
 ├── Liste des 5 thèmes
+├── « Joue et apprends » : accès rapide aux jeux
 ├── Bande de progression tissée
 └── Lien « Tu t'es fait avoir ? »
 
@@ -27,7 +28,13 @@ Leçons (#lecons)
     ├── Quiz du thème, 4 questions (#quiz-<id>)
     └── Entraînement ciblé (#jeu-<id>)
 
-Arnaque ou pas ? (#jeu)              48 messages en 3 niveaux, dont 14 normaux
+Salle de jeux (#jeux)                6 jeux, record enregistré pour chacun
+├── Arnaque ou pas ? (#jeu)          48 messages en 3 niveaux, dont 14 normaux
+├── Chasse aux pièges (#pieges)      7 messages, 26 passages suspects à toucher
+├── Lien piégé ? (#liens)            16 adresses à classer d'un glissement
+├── Casse-mot de passe (#mot-de-passe)  Testeur de solidité + 6 duels
+├── La journée d'Afi (#histoire)     Histoire à choix, 7 scènes, 60 000 F à protéger
+└── Mémo des réflexes (#memo)        Associer chaque piège au bon réflexe
 Mentions (#mentions)                 Indépendance, données, licences
 Petit dictionnaire (#dictionnaire)   25 mots, colonne ewe à remplir
 En cas d'arnaque (#signaler)         6 étapes + contacts CERT.tg
@@ -52,7 +59,7 @@ css/style.css            Styles et animations : couleurs du drapeau togolais
 js/config.js             Nom du site, liens, couleurs, coordonnées CERT.tg
 js/content/fr.js         Tout le contenu en français (langue de référence)
 js/content/ee.js         Le même contenu en ewe (à remplir)
-js/app.js                Navigation, quiz, jeu, progression, badges, animations
+js/app.js                Navigation, quiz, salle de jeux, progression, records, badges, animations
 js/icones.js             Icônes Phosphor (licence MIT)
 sw.js                    Mode hors connexion
 fonts/                   Unbounded et Onest (licence OFL), avec les lettres ewe

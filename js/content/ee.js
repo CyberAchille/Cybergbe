@@ -10,7 +10,7 @@
  * par exemple : "audio": "audio/ee/codes-1.mp3"
  *
  * Fichier généré par  node scripts/modele-ewe.js  (les traductions existantes sont conservées).
- * Avancement : 1 textes traduits sur 873.
+ * Avancement : 1 textes traduits sur 1162.
  */
 window.CG_CONTENU = window.CG_CONTENU || {};
 window.CG_CONTENU.ee = {
@@ -18,7 +18,7 @@ window.CG_CONTENU.ee = {
     "langue": "Eʋegbe",  // FR : Français
     "menu_accueil": "",  // FR : Accueil
     "menu_lecons": "",  // FR : Leçons
-    "menu_jeu": "",  // FR : Arnaque ou pas ?
+    "menu_jeu": "",  // FR : Jeux
     "menu_dico": "",  // FR : Petit dictionnaire
     "menu_signaler": "",  // FR : En cas d'arnaque
     "menu_apropos": "",  // FR : À propos
@@ -26,7 +26,10 @@ window.CG_CONTENU.ee = {
     "accueil_intro": "",  // FR : Apprends à reconnaître les pièges du téléphone : Mobile Money, WhatsApp, faux emplois, faux profils. Cinq thèmes courts, en français et bientôt en ewe.
     "accueil_jeu_consigne": "",  // FR : Tu reçois ce message. Qu'en penses-tu ?
     "accueil_cta_lecons": "",  // FR : Commencer les leçons
-    "accueil_cta_jeu": "",  // FR : Jouer à « Arnaque ou pas ? »
+    "accueil_cta_jeu": "",  // FR : Découvrir les jeux
+    "accueil_jeux_titre": "",  // FR : Joue et apprends
+    "accueil_jeux_intro": "",  // FR : Six jeux pour t'entraîner à repérer les pièges, seul ou en famille.
+    "accueil_jeux_tout": "",  // FR : Voir tous les jeux
     "accueil_atouts": [
       "",  // FR : Gratuit
       "",  // FR : Sans inscription
@@ -76,7 +79,7 @@ window.CG_CONTENU.ee = {
     "pourquoi_titre": "",  // FR : Pensé pour le Togo
     "nav_accueil": "",  // FR : Accueil
     "nav_lecons": "",  // FR : Leçons
-    "nav_jeu": "",  // FR : Jeu
+    "nav_jeu": "",  // FR : Jeux
     "nav_dico": "",  // FR : Mots
     "nav_aide": "",  // FR : Aide
     "accueil_lecons_titre": "",  // FR : Les leçons
@@ -1388,6 +1391,576 @@ window.CG_CONTENU.ee = {
       }
     ],
     "contact": ""  // FR : Une question ou une erreur à signaler :
+  },
+  "jeux": {
+    "salle_titre": "",  // FR : La salle de jeux
+    "salle_intro": "",  // FR : Six jeux courts pour t'entraîner à déjouer les arnaques. On apprend en s'amusant, et on peut battre son record.
+    "record": "",  // FR : Record : {score}
+    "nouveau": "",  // FR : Nouveau
+    "jouer": "",  // FR : Jouer
+    "rejouer": "",  // FR : Rejouer
+    "retour_salle": "",  // FR : Autres jeux
+    "termine": "",  // FR : Partie terminée
+    "nouveau_record": "",  // FR : Nouveau record !
+    "partage": "",  // FR : J'ai fait {score} au jeu « {jeu} » sur {site} 🎮 À toi de jouer ! 👉 {url}
+    "cartes": [
+      {
+        "titre": "",  // FR : Arnaque ou pas ?
+        "texte": "",  // FR : Des messages réalistes arrivent sur un téléphone : à toi de dire si c'est une arnaque.
+        "duree": ""  // FR : 3 min
+      },
+      {
+        "titre": "",  // FR : Chasse aux pièges
+        "texte": "",  // FR : Touche chaque passage suspect d'un message. Trois erreurs et c'est fini !
+        "duree": ""  // FR : 4 min
+      },
+      {
+        "titre": "",  // FR : Lien piégé ?
+        "texte": "",  // FR : Glisse chaque adresse à gauche ou à droite : vrai site ou faux site ?
+        "duree": ""  // FR : 2 min
+      },
+      {
+        "titre": "",  // FR : Casse-mot de passe
+        "texte": "",  // FR : Découvre en combien de temps un pirate trouverait un mot de passe.
+        "duree": ""  // FR : 3 min
+      },
+      {
+        "titre": "",  // FR : La journée d'Afi
+        "texte": "",  // FR : Aide Afi, vendeuse au marché, à finir sa journée sans perdre son argent.
+        "duree": ""  // FR : 5 min
+      },
+      {
+        "titre": "",  // FR : Mémo des réflexes
+        "texte": "",  // FR : Retourne les cartes et associe chaque piège au bon réflexe.
+        "duree": ""  // FR : 2 min
+      }
+    ],
+    "pieges": {
+      "titre": "",  // FR : Chasse aux pièges
+      "intro": "",  // FR : Chaque message cache plusieurs pièges. Touche les passages suspects pour les débusquer.
+      "consigne": "",  // FR : Touche les passages suspects (l'expéditeur compte aussi). Chaque erreur coûte un cœur.
+      "compteur": "",  // FR : Message {n} sur {total}
+      "trouves": "",  // FR : Pièges trouvés : {n} sur {total}
+      "vies": "",  // FR : Cœurs restants : {n}
+      "bien": "",  // FR : Bien vu !
+      "pas_suspect": "",  // FR : Ce passage n'est pas suspect. Cherche encore !
+      "tous": "",  // FR : Bravo, tu as trouvé tous les pièges de ce message !
+      "perdu": "",  // FR : Plus de cœurs… Voici les pièges que tu as manqués :
+      "suivant": "",  // FR : Message suivant
+      "fin": "",  // FR : Tu as trouvé {score} pièges sur {total}.
+      "messages": [
+        {
+          "expediteur": "",  // FR : +228 9• •• •• 17
+          "piege_expediteur": "",  // FR : Un vrai message d'opérateur n'arrive pas d'un numéro de téléphone ordinaire.
+          "morceaux": [
+            {
+              "texte": ""  // FR : Bonsoir,
+            },
+            {
+              "texte": "",  // FR : je me suis trompé en envoyant 25 000 F sur ton numéro.
+              "piege": ""  // FR : Le faux « transfert par erreur » : vérifie toujours ton solde dans le menu officiel.
+            },
+            {
+              "texte": ""  // FR : Je m'appelle Koffi.
+            },
+            {
+              "texte": "",  // FR : C'est l'argent pour l'hôpital de ma mère,
+              "piege": ""  // FR : Une histoire touchante pour t'émouvoir et te presser.
+            },
+            {
+              "texte": "",  // FR : renvoie-le moi vite stp 🙏
+              "piege": ""  // FR : Un remboursement se fait par l'opérateur, jamais par toi.
+            },
+            {
+              "texte": ""  // FR : Que Dieu te bénisse.
+            }
+          ]
+        },
+        {
+          "expediteur": "",  // FR : Recrutement Togo 2026
+          "piege_expediteur": "",  // FR : 
+          "morceaux": [
+            {
+              "texte": ""  // FR : Bonjour à tous !
+            },
+            {
+              "texte": "",  // FR : Une grande société recrute 40 agents
+              "piege": ""  // FR : Le nom de la « grande société » n'est jamais donné.
+            },
+            {
+              "texte": ""  // FR : pour la caisse et l'accueil.
+            },
+            {
+              "texte": "",  // FR : Salaire : 250 000 F, sans diplôme.
+              "piege": ""  // FR : Un gros salaire sans diplôme ni expérience : trop beau pour être vrai.
+            },
+            {
+              "texte": "",  // FR : Frais de dossier : 5 000 F par Mobile Money.
+              "piege": ""  // FR : Un vrai employeur ne fait jamais payer les candidats.
+            },
+            {
+              "texte": "",  // FR : Il ne reste que 3 places !
+              "piege": ""  // FR : La pression du temps t'empêche de vérifier.
+            },
+            {
+              "texte": ""  // FR : Bonne journée.
+            }
+          ]
+        },
+        {
+          "expediteur": "",  // FR : Sécurité Facebook <alerte@securite-fb-compte[.]com>
+          "piege_expediteur": "",  // FR : L'adresse de l'expéditeur ne finit pas par facebook.com.
+          "morceaux": [
+            {
+              "texte": "",  // FR : Cher utilisateur,
+              "piege": ""  // FR : Un vrai service t'appelle par ton nom, pas « cher utilisateur ».
+            },
+            {
+              "texte": ""  // FR : votre compte a été signalé.
+            },
+            {
+              "texte": "",  // FR : Il sera supprimé dans 24 heures.
+              "piege": ""  // FR : La menace et le délai très court servent à te faire paniquer.
+            },
+            {
+              "texte": "",  // FR : Confirmez votre mot de passe ici :
+              "piege": ""  // FR : Aucun service ne demande ton mot de passe par e-mail.
+            },
+            {
+              "texte": "",  // FR : securite-fb-compte[.]com/verifier
+              "piege": ""  // FR : Ce lien ne mène pas au vrai site de Facebook.
+            },
+            {
+              "texte": ""  // FR : L'équipe Facebook
+            }
+          ]
+        },
+        {
+          "expediteur": "",  // FR : +228 7• •• •• 52
+          "piege_expediteur": "",  // FR : 
+          "morceaux": [
+            {
+              "texte": ""  // FR : Bonjour, ici le service client.
+            },
+            {
+              "texte": ""  // FR : Suite à une mise à jour,
+            },
+            {
+              "texte": "",  // FR : votre compte sera bloqué ce soir.
+              "piege": ""  // FR : La menace de blocage sert à te faire peur.
+            },
+            {
+              "texte": "",  // FR : Tapez le code que je vais vous dicter,
+              "piege": ""  // FR : Ne tape jamais un code dicté par quelqu'un au téléphone.
+            },
+            {
+              "texte": "",  // FR : puis entrez votre code secret pour confirmer.
+              "piege": ""  // FR : Personne, jamais, n'a besoin de ton code secret.
+            },
+            {
+              "texte": ""  // FR : Merci de votre fidélité.
+            }
+          ]
+        },
+        {
+          "expediteur": "",  // FR : +229 •• •• •• 14
+          "piege_expediteur": "",  // FR : Un numéro inconnu, et même pas du Togo.
+          "morceaux": [
+            {
+              "texte": "",  // FR : Maman, c'est moi,
+              "piege": ""  // FR : Il ne dit pas son prénom : ce message est envoyé à des centaines de mamans.
+            },
+            {
+              "texte": ""  // FR : mon téléphone est tombé dans l'eau.
+            },
+            {
+              "texte": ""  // FR : Enregistre ce nouveau numéro.
+            },
+            {
+              "texte": "",  // FR : Envoie-moi 10 000 F tout de suite,
+              "piege": ""  // FR : Une demande d'argent immédiate, avant toute vérification.
+            },
+            {
+              "texte": "",  // FR : je t'explique après, je ne peux pas appeler.
+              "piege": ""  // FR : Il évite l'appel pour ne pas être démasqué.
+            }
+          ]
+        },
+        {
+          "expediteur": "",  // FR : Investissement Togo Prospérité
+          "piege_expediteur": "",  // FR : 
+          "morceaux": [
+            {
+              "texte": ""  // FR : 💰 Placez 20 000 F aujourd'hui,
+            },
+            {
+              "texte": "",  // FR : recevez 60 000 F dans 7 jours !
+              "piege": ""  // FR : Tripler son argent en une semaine est impossible.
+            },
+            {
+              "texte": "",  // FR : Déjà 3 000 membres payés ✅
+              "piege": ""  // FR : Les « preuves » de gains se fabriquent très facilement.
+            },
+            {
+              "texte": ""  // FR : Rejoignez-nous
+            },
+            {
+              "texte": "",  // FR : uniquement par WhatsApp.
+              "piege": ""  // FR : Aucune entreprise identifiable : tout se passe en privé.
+            }
+          ]
+        },
+        {
+          "expediteur": "",  // FR : MobileMoney
+          "piege_expediteur": "",  // FR : 
+          "morceaux": [
+            {
+              "texte": "",  // FR : Votre compte est suspendu
+              "piege": ""  // FR : Une fausse alerte pour te faire peur.
+            },
+            {
+              "texte": ""  // FR : pour vérification d'identité.
+            },
+            {
+              "texte": "",  // FR : Réactivez-le ici avec votre code PIN :
+              "piege": ""  // FR : Aucun opérateur ne demande ton code PIN sur un site.
+            },
+            {
+              "texte": "",  // FR : mobilemoney-togo-verif[.]com
+              "piege": ""  // FR : Ce lien ne mène pas au site officiel de l'opérateur.
+            },
+            {
+              "texte": ""  // FR : Service client 24 h/24.
+            }
+          ]
+        }
+      ]
+    },
+    "liens": {
+      "titre": "",  // FR : Lien piégé ?
+      "intro": "",  // FR : Les escrocs fabriquent des adresses qui ressemblent aux vraies. Apprends à lire le vrai nom d'un site.
+      "regle_titre": "",  // FR : La règle d'or
+      "regle": "",  // FR : Le vrai nom du site se trouve juste avant le premier « / ». Lis-le en partant de la fin : c'est lui qui compte, pas le début.
+      "astuce": "",  // FR : Sur téléphone, tu peux aussi glisser la carte : à gauche si c'est un piège, à droite si c'est officiel.
+      "compteur": "",  // FR : Lien {n} sur {total}
+      "bouton_piege": "",  // FR : Lien piégé
+      "bouton_vrai": "",  // FR : Lien officiel
+      "bien": "",  // FR : Bien vu !
+      "rate": "",  // FR : Raté !
+      "etait_piege": "",  // FR : C'était un lien piégé.
+      "etait_vrai": "",  // FR : C'était un lien officiel.
+      "vrai_nom": "",  // FR : Vrai nom du site : {domaine}
+      "suivant": "",  // FR : Lien suivant
+      "fin": "",  // FR : Tu as bien jugé {score} liens sur {total}.
+      "items": [
+        {
+          "explication": ""  // FR : Juste avant le premier « / », on lit facebook.com : c'est bien Facebook.
+        },
+        {
+          "explication": ""  // FR : Le début imite Facebook, mais le vrai nom, juste avant le « / », est connexion-securisee.net.
+        },
+        {
+          "explication": ""  // FR : « m. » indique la version mobile. Le nom finit bien par facebook.com.
+        },
+        {
+          "explication": ""  // FR : Regarde bien : deux zéros à la place des « o ». Les escrocs jouent sur les lettres qui se ressemblent.
+        },
+        {
+          "explication": ""  // FR : C'est WhatsApp pour ordinateur. Le nom finit bien par whatsapp.com.
+        },
+        {
+          "explication": ""  // FR : « WhatsApp Gold » n'existe pas : ce site veut te faire installer une fausse application.
+        },
+        {
+          "explication": ""  // FR : C'est la vraie page de connexion de Google : le nom finit par google.com.
+        },
+        {
+          "explication": ""  // FR : Tout le début est un leurre : le vrai nom est verification-compte.info.
+        },
+        {
+          "explication": ""  // FR : C'est le site officiel du CERT.tg, le centre national de réponse aux incidents de cybersécurité.
+        },
+        {
+          "explication": ""  // FR : Ce n'est pas cert.tg mais cert-tg-alerte.com. Et le CERT.tg ne distribue pas de récompenses.
+        },
+        {
+          "explication": ""  // FR : Juste avant le « / », on lit youtube.com : c'est bien YouTube.
+        },
+        {
+          "explication": ""  // FR : Piège ! Avant le « / », on lit com-video.watch. « youtube » n'est qu'un mot placé au début.
+        },
+        {
+          "explication": ""  // FR : « fr. » indique la version française de Wikipédia, dont le nom est wikipedia.org.
+        },
+        {
+          "explication": ""  // FR : Un site qui demande ton code PIN est toujours une arnaque, quel que soit son nom.
+        },
+        {
+          "explication": ""  // FR : Gmail se trouve à l'adresse mail.google.com : le nom finit bien par google.com.
+        },
+        {
+          "explication": ""  // FR : N'importe qui peut créer un blog gratuit sur blogspot.com. Un vrai organisme de bourses n'utilise pas ça.
+        }
+      ]
+    },
+    "motdepasse": {
+      "titre": "",  // FR : Casse-mot de passe
+      "intro": "",  // FR : Un ordinateur de pirate peut tester des milliards de mots de passe par seconde. Le tien tiendrait combien de temps ?
+      "testeur_titre": "",  // FR : Teste un mot de passe
+      "testeur_label": "",  // FR : Écris un mot de passe inventé (pas le vrai !)
+      "prive": "",  // FR : Rien n'est envoyé ni enregistré : le calcul se fait dans ton téléphone.
+      "afficher": "",  // FR : Afficher
+      "masquer": "",  // FR : Masquer
+      "vide": "",  // FR : Commence à écrire pour voir le résultat.
+      "temps": "",  // FR : Un pirate le trouverait en :
+      "niveaux": [
+        "",  // FR : Très faible
+        "",  // FR : Faible
+        "",  // FR : Moyen
+        "",  // FR : Solide
+        ""  // FR : Très solide
+      ],
+      "criteres": [
+        "",  // FR : Au moins 12 caractères
+        "",  // FR : Plusieurs mots, comme une petite phrase
+        "",  // FR : Des chiffres ou des symboles
+        "",  // FR : Pas de mot de passe courant, de prénom ni de date
+        ""  // FR : Pas de suite comme 1234 ou azerty
+      ],
+      "unites": {
+        "instant": "",  // FR : Moins d'une seconde
+        "seconde": [
+          "",  // FR : {n} seconde
+          ""  // FR : {n} secondes
+        ],
+        "minute": [
+          "",  // FR : {n} minute
+          ""  // FR : {n} minutes
+        ],
+        "heure": [
+          "",  // FR : {n} heure
+          ""  // FR : {n} heures
+        ],
+        "jour": [
+          "",  // FR : {n} jour
+          ""  // FR : {n} jours
+        ],
+        "mois": [
+          "",  // FR : {n} mois
+          ""  // FR : {n} mois
+        ],
+        "an": [
+          "",  // FR : {n} an
+          ""  // FR : {n} ans
+        ],
+        "siecles": "",  // FR : Des siècles
+        "milliers": "",  // FR : Des milliers d'années
+        "millions": "",  // FR : Des millions d'années
+        "milliards": ""  // FR : Des milliards d'années
+      },
+      "defi_titre": "",  // FR : Le duel des mots de passe
+      "defi_intro": "",  // FR : Lequel des deux tiendrait le plus longtemps face à un pirate ?
+      "compteur": "",  // FR : Duel {n} sur {total}
+      "plus_solide": "",  // FR : Le plus solide
+      "bien": "",  // FR : Bien vu !
+      "rate": "",  // FR : Raté !
+      "suivant": "",  // FR : Duel suivant
+      "fin": ""  // FR : Tu as gagné {score} duels sur {total}.
+    },
+    "histoire": {
+      "titre": "",  // FR : La journée d'Afi
+      "intro": "",  // FR : Afi vend des pagnes au grand marché de Lomé. Ce matin, elle a 60 000 F sur son compte Mobile Money. Les escrocs vont tout essayer : aide-la à faire les bons choix !
+      "commencer": "",  // FR : Commencer la journée
+      "porte_monnaie": "",  // FR : Porte-monnaie
+      "vigilance": "",  // FR : Vigilance
+      "que_faire": "",  // FR : Que doit faire Afi ?
+      "continuer": "",  // FR : Continuer
+      "fin_argent": "",  // FR : Il reste {argent} F à Afi sur 60 000 F.
+      "fin_points": "",  // FR : Vigilance : {points} sur {total}
+      "fins": [
+        {
+          "titre": "",  // FR : Rude journée pour Afi…
+          "texte": ""  // FR : Les escrocs ont eu Afi plusieurs fois. Rejoue et aide-la à les déjouer : chaque bon réflexe compte.
+        },
+        {
+          "titre": "",  // FR : Afi s'en sort, de justesse
+          "texte": ""  // FR : Quelques pièges l'ont fait hésiter. Rejoue pour trouver tous les bons réflexes.
+        },
+        {
+          "titre": "",  // FR : Afi, reine de la vigilance
+          "texte": ""  // FR : Afi termine la journée sans perdre un franc à cause des escrocs. Tu as les bons réflexes !
+        }
+      ],
+      "scenes": [
+        {
+          "heure": "",  // FR : 7 h 30
+          "texte": "",  // FR : Afi reçoit un SMS : « Vous avez reçu 20 000 F. » Une minute après, un inconnu appelle en pleurant : « Je me suis trompé de numéro, renvoie-moi l'argent, c'est pour l'hôpital ! »
+          "choix": [
+            {
+              "texte": "",  // FR : Renvoyer vite les 20 000 F, le pauvre…
+              "consequence": ""  // FR : Le SMS était faux : aucun argent n'était arrivé. Afi vient d'envoyer 20 000 F de sa poche à un escroc.
+            },
+            {
+              "texte": "",  // FR : Vérifier son solde dans le menu officiel
+              "consequence": ""  // FR : Le solde n'a pas bougé : le SMS était faux. Afi raccroche et bloque le numéro. Bravo !
+            },
+            {
+              "texte": "",  // FR : Rappeler l'inconnu pour en savoir plus
+              "consequence": ""  // FR : L'escroc insiste et invente d'autres histoires. Afi ne perd rien, mais le bon réflexe était de vérifier son solde tout de suite.
+            }
+          ]
+        },
+        {
+          "heure": "",  // FR : 9 h
+          "texte": "",  // FR : Sur WhatsApp, son cousin Kodjo écrit : « Je t'ai envoyé un code à 6 chiffres par erreur, renvoie-le moi stp. » Justement, Afi vient de recevoir un code par SMS.
+          "choix": [
+            {
+              "texte": "",  // FR : Envoyer le code, c'est Kodjo
+              "consequence": ""  // FR : Le compte de Kodjo était piraté. Avec ce code, l'escroc prend le WhatsApp d'Afi et écrit à tous ses clients pour leur demander de l'argent.
+            },
+            {
+              "texte": "",  // FR : Ne rien envoyer et appeler Kodjo
+              "consequence": ""  // FR : Kodjo n'a rien demandé : son compte a été volé. Afi le prévient et active la vérification en deux étapes.
+            },
+            {
+              "texte": "",  // FR : Ignorer le message
+              "consequence": ""  // FR : Afi garde son compte, mais Kodjo et la famille ne sont pas prévenus. Un appel aurait aidé tout le monde.
+            }
+          ]
+        },
+        {
+          "heure": "",  // FR : 11 h
+          "texte": "",  // FR : Une cliente sur Facebook commande 10 pagnes pour 45 000 F. Elle envoie une capture d'écran « Paiement effectué » et demande la livraison tout de suite.
+          "choix": [
+            {
+              "texte": "",  // FR : Livrer : la capture prouve le paiement
+              "consequence": ""  // FR : La capture était fausse. Afi a perdu 45 000 F de marchandise.
+            },
+            {
+              "texte": "",  // FR : Vérifier son solde avant de livrer
+              "consequence": ""  // FR : Aucun paiement n'est arrivé et la « cliente » disparaît. Une capture d'écran ne prouve rien !
+            },
+            {
+              "texte": "",  // FR : Demander une deuxième capture
+              "consequence": ""  // FR : Une deuxième fausse capture arrive en trente secondes. Afi livre… et perd 45 000 F de marchandise.
+            }
+          ]
+        },
+        {
+          "heure": "",  // FR : 13 h
+          "texte": "",  // FR : Le téléphone sonne : « Bonjour, service client. Votre compte sera bloqué ce soir. Tapez le code que je vais vous dicter, puis votre code secret. »
+          "choix": [
+            {
+              "texte": "",  // FR : Taper le code dicté et son code secret
+              "consequence": ""  // FR : Le code dicté a envoyé l'argent d'Afi à l'escroc. Son compte est vidé.
+            },
+            {
+              "texte": "",  // FR : Raccrocher et appeler le numéro officiel
+              "consequence": ""  // FR : Le vrai service client confirme : son compte va très bien. C'était une arnaque.
+            },
+            {
+              "texte": "",  // FR : Donner seulement son code secret
+              "consequence": ""  // FR : Avec le code secret, l'escroc vide le compte. Personne, jamais, n'a besoin de ce code.
+            }
+          ]
+        },
+        {
+          "heure": "",  // FR : 15 h
+          "texte": "",  // FR : Sa fille Ama lui montre une offre : « Hôtesse dans un grand hôtel, 300 000 F par mois. Frais de dossier : 10 000 F. » Elle supplie sa mère de payer.
+          "choix": [
+            {
+              "texte": "",  // FR : Payer les 10 000 F pour l'avenir d'Ama
+              "consequence": ""  // FR : Il n'y avait pas d'hôtel. Les frais sont partis chez l'escroc, comme ceux de centaines d'autres candidates.
+            },
+            {
+              "texte": "",  // FR : Chercher l'offre avec le mot « arnaque » sur internet
+              "consequence": ""  // FR : Plusieurs personnes signalent déjà cette fausse offre. Afi explique à Ama : un vrai employeur ne fait jamais payer.
+            },
+            {
+              "texte": "",  // FR : Partager l'offre dans le groupe de la famille
+              "consequence": ""  // FR : Afi ne perd rien… mais trois cousines paient les frais. Avant de partager, on vérifie.
+            }
+          ]
+        },
+        {
+          "heure": "",  // FR : 17 h
+          "texte": "",  // FR : Une page Facebook annonce : « Bravo, tu as gagné une moto ! Paie juste 3 000 F de livraison. »
+          "choix": [
+            {
+              "texte": "",  // FR : Payer 3 000 F : une moto pour ce prix, c'est rien !
+              "consequence": ""  // FR : Il n'y a pas de moto. Les « frais de livraison » étaient le vrai but de l'arnaque.
+            },
+            {
+              "texte": "",  // FR : Ignorer et signaler la page
+              "consequence": ""  // FR : Bien joué ! Afi n'a participé à aucun concours : payer pour gagner, c'est toujours une arnaque.
+            }
+          ]
+        },
+        {
+          "heure": "",  // FR : 19 h
+          "texte": "",  // FR : Sa voisine Délali pleure : elle s'est fait arnaquer de 50 000 F et a honte d'en parler.
+          "choix": [
+            {
+              "texte": "",  // FR : Lui conseiller de garder les preuves et de signaler au CERT.tg et à la police
+              "consequence": ""  // FR : Délali garde les captures et signale. Ce n'est pas une honte : signaler aide aussi à protéger les autres.
+            },
+            {
+              "texte": "",  // FR : Lui dire de ne rien dire à personne
+              "consequence": ""  // FR : Sans signalement, l'escroc continue avec d'autres victimes. Se faire avoir n'est jamais une honte.
+            },
+            {
+              "texte": "",  // FR : Lui conseiller de payer quelqu'un pour récupérer l'argent
+              "consequence": ""  // FR : Les « récupérateurs d'argent » sont souvent… d'autres escrocs. On ne paie jamais pour récupérer.
+            }
+          ]
+        }
+      ]
+    },
+    "memo": {
+      "titre": "",  // FR : Mémo des réflexes
+      "intro": "",  // FR : Retourne les cartes deux par deux et associe chaque piège (rouge) au bon réflexe (vert).
+      "piege": "",  // FR : Piège
+      "reflexe": "",  // FR : Réflexe
+      "cachee": "",  // FR : Carte cachée
+      "coups": "",  // FR : Coups : {n}
+      "paires": "",  // FR : Paires : {n} sur {total}
+      "fin": "",  // FR : Tu as trouvé toutes les paires en {n} coups.
+      "partage_score": "",  // FR : {n} coups
+      "paires_liste": [
+        {
+          "piege": "",  // FR : Un code reçu par SMS
+          "reflexe": ""  // FR : Je ne le donne à personne
+        },
+        {
+          "piege": "",  // FR : « Je me suis trompé de numéro »
+          "reflexe": ""  // FR : Je vérifie mon solde
+        },
+        {
+          "piege": "",  // FR : Des frais pour un emploi
+          "reflexe": ""  // FR : Je ne paie jamais
+        },
+        {
+          "piege": "",  // FR : Le « service client » m'appelle
+          "reflexe": ""  // FR : Je rappelle le numéro officiel
+        },
+        {
+          "piege": "",  // FR : Un proche a « changé de numéro »
+          "reflexe": ""  // FR : J'appelle son ancien numéro
+        },
+        {
+          "piege": "",  // FR : Un lien reçu par message
+          "reflexe": ""  // FR : J'ouvre moi-même le site officiel
+        },
+        {
+          "piege": "",  // FR : On menace de publier une photo
+          "reflexe": ""  // FR : Je ne paie pas, je garde les preuves
+        },
+        {
+          "piege": "",  // FR : « Ton argent double en 7 jours »
+          "reflexe": ""  // FR : C'est une arnaque, je fuis
+        }
+      ]
+    }
   },
   "dictionnaire": [
     {

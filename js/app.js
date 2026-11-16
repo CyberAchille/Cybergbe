@@ -11,7 +11,7 @@
   var CFG = window.CG_CONFIG;
   var BRUT = window.CG_CONTENU;
   var ICONES = window.CG_ICONES || { bold: {}, duotone: {}, fill: {} };
-  var CHAMPS_TECHNIQUES = { id: 1, module: 1, lecon: 1, canal: 1, verdict: 1, bonne: 1, scenario_accueil: 1, url: 1, niveau: 1 };
+  var CHAMPS_TECHNIQUES = { id: 1, module: 1, lecon: 1, canal: 1, verdict: 1, bonne: 1, scenario_accueil: 1, url: 1, niveau: 1, domaine: 1, duels: 1 };
   var TAILLE_PARTIE = 10;
   var CALME = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   if (!CALME) document.documentElement.classList.add("js-anime");
@@ -400,15 +400,15 @@
       '<div class="une-texte"><h1 tabindex="-1">' + titre + "</h1>" +
       '<p class="une-intro">' + h(t("accueil_intro")) + "</p>" +
       '<div class="une-actions"><a class="bouton bouton-jaune" href="#lecons">' + h(t("accueil_cta_lecons")) + ic("fleche") + "</a>" +
-      '<a class="bouton bouton-clair" href="#jeu">' + ic("jeu", "fill") + h(t("accueil_cta_jeu")) + "</a></div>" +
+      '<a class="bouton bouton-clair" href="#jeux">' + ic("jeu", "fill") + h(t("accueil_cta_jeu")) + "</a></div>" +
       '<ul class="atouts-ligne">' + atouts.map(function (x) { return "<li>" + ic("valide", "fill") + h(x) + "</li>"; }).join("") + "</ul>" +
       "</div>" +
       '<div class="une-jeu" data-inclinaison>' + scenarioHTML(sc, "accueil", anime) + "</div>" +
       "</div></section>" +
 
-      '<div class="defile" role="region" aria-label="' + esc(typo(t("bandeau_label"))) + '"><div class="defile-piste">' +
+      '<div class="defile-zone"><div class="defile" role="region" aria-label="' + esc(typo(t("bandeau_label"))) + '"><div class="defile-piste">' +
       '<ul class="defile-liste">' + listeDefile + '</ul><ul class="defile-liste" aria-hidden="true">' + listeDefile + "</ul>" +
-      "</div></div>" +
+      "</div></div></div>" +
 
       '<section class="chiffre"><div class="conteneur chiffre-grille"' + revele(0) + ">" +
       '<p class="chiffre-nombre" data-compteur="' + esc(t("chiffre_nombre").replace(/\D/g, "")) + '">' + h(t("chiffre_nombre")) + "</p>" +
@@ -418,6 +418,11 @@
       '<section class="section"><div class="conteneur">' +
       '<div class="section-tete"' + revele(0) + "><h2>" + h(t("accueil_lecons_titre")) + "</h2><p>" + h(t("accueil_lecons_intro")) + "</p></div>" +
       tuilesThemes() + "</div></section>" +
+
+      '<section class="section section-jeux"><div class="conteneur">' +
+      '<div class="section-tete"' + revele(0) + "><h2>" + h(t("accueil_jeux_titre")) + "</h2><p>" + h(t("accueil_jeux_intro")) + "</p></div>" +
+      cartesJeuxHTML(true) +
+      '<p class="voir-tout"><a class="bouton bouton-second" href="#jeux">' + h(t("accueil_jeux_tout")) + ic("fleche") + "</a></p></div></section>" +
 
       '<section class="section section-blanche"><div class="conteneur">' +
       '<div class="progression-grille"' + revele(0) + ">" +
@@ -712,6 +717,660 @@
   };
 
   /* ================================================================== */
+  /* Salle de jeux                                                      */
+  /* ================================================================== */
+  var JEUX = [
+    { id: "arnaque", ancre: "#jeu", icone: "jeu", couleur: "#D21034" },
+    { id: "pieges", ancre: "#pieges", icone: "cible2", couleur: "#E2621B" },
+    { id: "liens", ancre: "#liens", icone: "navigateur", couleur: "#006A4E" },
+    { id: "motdepasse", ancre: "#mot-de-passe", icone: "cle", couleur: "#E0A800" },
+    { id: "histoire", ancre: "#histoire", icone: "portemonnaie", couleur: "#14946A" },
+    { id: "memo", ancre: "#memo", icone: "memo", couleur: "#7B3F8C" }
+  ];
+  function J() { return C.jeux; }
+  function remplir(s, vars) {
+    s = String(s == null ? "" : s);
+    Object.keys(vars || {}).forEach(function (k) { s = s.split("{" + k + "}").join(vars[k]); });
+    return s;
+  }
+  function infoJeu(id) { return JEUX.filter(function (x) { return x.id === id; })[0]; }
+  function carteJeu(id) { return J().cartes.filter(function (c) { return c.id === id; })[0] || {}; }
+  function styleJeu(id) { var c = infoJeu(id).couleur; return "--c:" + c + ";--ct:" + c + ";--sc:" + texteSur(c); }
+
+  /* Records (meilleur score de chaque jeu, gardés dans le navigateur) */
+  function records() { etat.prog.jeux = etat.prog.jeux || {}; return etat.prog.jeux; }
+  function enregistrerRecord(id, score, total, moinsEstMieux) {
+    var r = records(), ancien = r[id];
+    var mieux = !ancien || (moinsEstMieux ? score < ancien.score : score / total > ancien.score / ancien.total);
+    if (mieux) { r[id] = { score: score, total: total }; sauverProg(); }
+    return mieux && !!ancien;
+  }
+  function texteRecord(id) {
+    var r = records()[id];
+    if (!r) return "";
+    if (id === "memo") return remplir(J().memo.coups, { n: r.score });
+    return r.score + "\u00a0/\u00a0" + r.total;
+  }
+
+  function cartesJeuxHTML(compact) {
+    return '<ul class="salle' + (compact ? " salle-compacte" : "") + '">' + JEUX.map(function (jeu, k) {
+      var c = carteJeu(jeu.id), rec = texteRecord(jeu.id);
+      return "<li" + revele(k, 70).replace('style="', 'style="' + styleJeu(jeu.id) + ";") + '><a class="carte-jeu" href="' + jeu.ancre + '">' +
+        '<span class="carte-jeu-icone">' + ic(jeu.icone, "duotone") + "</span>" +
+        '<span class="carte-jeu-titre">' + h(c.titre) + "</span>" +
+        (compact ? "" : '<span class="carte-jeu-texte">' + h(c.texte) + "</span>") +
+        '<span class="carte-jeu-pied"><span class="carte-jeu-duree">' + ic("chrono") + h(c.duree) + "</span>" +
+        (rec ? '<span class="carte-jeu-record">' + ic("trophee", "fill") + h(rec) + "</span>"
+             : (jeu.id !== "arnaque" ? '<span class="carte-jeu-nouveau">' + h(J().nouveau) + "</span>" : "")) +
+        "</span></a></li>";
+    }).join("") + "</ul>";
+  }
+
+  pages.jeux = function () {
+    return pageTete('<h1 tabindex="-1">' + h(J().salle_titre) + "</h1><p>" + h(J().salle_intro) + "</p>") +
+      '<div class="page"><div class="conteneur">' + cartesJeuxHTML(false) + "</div></div>";
+  };
+
+  function teteJeu(id, intro) {
+    var c = carteJeu(id);
+    return pageTete(ariane("#jeux", J().salle_titre) +
+      '<div class="page-tete-ligne"><span class="pastille">' + ic(infoJeu(id).icone, "duotone") + "</span><div>" +
+      '<h1 tabindex="-1">' + h(c.titre) + "</h1><p>" + h(intro) + "</p></div></div>", "", styleJeu(id));
+  }
+
+  function resultatJeu(id, o) {
+    var nouveau = o.record;
+    return '<div class="resultat" style="' + styleJeu(id) + '"><p class="surtitre">' + h(J().termine) + "</p>" +
+      etoilesHTML(o.etoiles) +
+      '<p class="score">' + h(o.score) + "</p>" +
+      (o.titre ? '<p><span class="rang">' + h(o.titre) + "</span></p>" : "") +
+      (nouveau ? '<p class="nouveau-record">' + ic("trophee", "fill") + h(J().nouveau_record) + "</p>" : "") +
+      "<p>" + h(o.texte) + "</p>" + (o.lecon ? '<p class="lecon-fin">' + ic("ampoule", "fill") + "<span>" + h(o.lecon) + "</span></p>" : "") +
+      '<div class="actions"><button type="button" class="bouton" data-rejouer-jeu="' + id + '">' + ic("rejouer") + h(J().rejouer) + "</button>" +
+      '<a class="bouton bouton-second" href="#jeux">' + h(J().retour_salle) + "</a></div>" +
+      partageHTML(remplir(J().partage, { score: o.partage || o.score.replace(/\u00a0/g, ""), jeu: carteJeu(id).titre })) + "</div>";
+  }
+
+  function finJeuFete(etoiles) {
+    if (etoiles >= 2) setTimeout(function () { confettis(window.innerWidth / 2, window.innerHeight * .3, 150); }, 350);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Jeu : Chasse aux pièges                                            */
+  /* ------------------------------------------------------------------ */
+  function nbPieges(m) { return m.morceaux.filter(function (x) { return x.piege; }).length + (m.piege_expediteur ? 1 : 0); }
+
+  pages.pieges = function () {
+    var P = J().pieges;
+    if (!etat.pieges) {
+      var total = P.messages.reduce(function (a, m) { return a + nbPieges(m); }, 0);
+      etat.pieges = { ordre: melanger(P.messages.map(function (m, i) { return i; })), i: 0, vies: 3, trouves: {}, score: 0, total: total, msgFini: false, fini: false };
+    }
+    return teteJeu("pieges", P.intro) + '<div class="page"><div class="conteneur"><div class="jeu-pieges" data-pieges style="' + styleJeu("pieges") + '">' + piegesCorps() + "</div></div></div>";
+  };
+
+  function coeursHTML(vies) {
+    var html = '<span class="coeurs" role="img" aria-label="' + esc(typo(remplir(J().pieges.vies, { n: vies }))) + '">';
+    for (var k = 0; k < 3; k++) html += '<span class="coeur' + (k < vies ? "" : " perdu") + '">' + ic("coeur", k < vies ? "fill" : "bold") + "</span>";
+    return html + "</span>";
+  }
+
+  function piegesCorps() {
+    var P = J().pieges, s = etat.pieges;
+    if (s.fini) {
+      var et = nbEtoiles(s.score, s.total);
+      return resultatJeu("pieges", { etoiles: et, score: s.score + "\u00a0/\u00a0" + s.total, texte: remplir(P.fin, { score: s.score, total: s.total }), record: s.record });
+    }
+    var m = P.messages[s.ordre[s.i]];
+    var trouves = Object.keys(s.trouves).length;
+    return '<p class="consigne-jeu">' + ic("cible2", "fill") + "<span>" + h(P.consigne) + "</span></p>" +
+      '<div class="jeu-tete"><span class="compteur" tabindex="-1">' + h(remplir(P.compteur, { n: s.i + 1, total: s.ordre.length })) + "</span>" +
+      '<span data-coeurs>' + coeursHTML(s.vies) + "</span></div>" +
+      '<div class="barre-progres" aria-hidden="true"><span data-barre-pieges style="width:' + Math.round(trouves / nbPieges(m) * 100) + '%"></span></div>' +
+      '<p class="pieges-trouves" data-pieges-trouves aria-live="polite">' + h(remplir(P.trouves, { n: trouves, total: nbPieges(m) })) + "</p>" +
+      '<div class="scenario scenario-pieges"><div class="telephone" data-canal="' + m.canal + '"><div class="telephone-ecran">' +
+      '<div class="statut" aria-hidden="true"><span>' + heure() + '</span><span class="statut-icones">' + ic("signal", "fill") + ic("wifi") + ic("batterie", "fill") + "</span></div>" +
+      '<div class="conv-entete"><span class="avatar">' + ic(ICONE_CANAL[m.canal] || "sms", "fill") + "</span>" +
+      '<span><button type="button" class="segment segment-expediteur" data-segment="-1">' + h(m.expediteur) + '</button><span class="conv-canal">' + h(t("canal_" + m.canal)) + "</span></span></div>" +
+      '<div class="conv-fil"><p class="bulle">' + m.morceaux.map(function (x, k) {
+        return '<button type="button" class="segment" data-segment="' + k + '">' + h(x.texte) + "</button>";
+      }).join(" ") + "</p></div></div></div></div>" +
+      '<div class="pieges-retour" data-explication aria-live="polite"></div>' +
+      '<div data-pieges-fin></div>';
+  }
+
+  function toucherSegment(btn) {
+    var P = J().pieges, s = etat.pieges;
+    if (!s || s.msgFini || btn.classList.contains("trouve")) return;
+    var m = P.messages[s.ordre[s.i]], k = parseInt(btn.getAttribute("data-segment"), 10);
+    var piege = k === -1 ? m.piege_expediteur : m.morceaux[k].piege;
+    var zone = main.querySelector("[data-explication]");
+    if (piege) {
+      s.trouves[k] = true; s.score++;
+      btn.classList.add("trouve");
+      btn.setAttribute("aria-pressed", "true");
+      zone.innerHTML = '<div class="explication bonne">' + ic("valide", "fill") + "<p><strong>" + h(P.bien) + "</strong> " + h(piege) + "</p></div>";
+      confettisDepuis(btn, 28);
+    } else {
+      s.vies--;
+      secouer(btn);
+      btn.classList.add("rate");
+      setTimeout(function () { btn.classList.remove("rate"); }, 700);
+      zone.innerHTML = '<div class="explication mauvaise">' + ic("croix") + "<p>" + h(P.pas_suspect) + "</p></div>";
+      main.querySelector("[data-coeurs]").innerHTML = coeursHTML(s.vies);
+      secouer(main.querySelector(".coeurs"));
+    }
+    var n = Object.keys(s.trouves).length, total = nbPieges(m);
+    main.querySelector("[data-pieges-trouves]").textContent = typo(remplir(P.trouves, { n: n, total: total }));
+    main.querySelector("[data-barre-pieges]").style.width = Math.round(n / total * 100) + "%";
+    if (n === total) finMessagePieges(true);
+    else if (s.vies <= 0) finMessagePieges(false);
+  }
+
+  function finMessagePieges(gagne) {
+    var P = J().pieges, s = etat.pieges, m = P.messages[s.ordre[s.i]];
+    s.msgFini = true;
+    var manques = [];
+    if (!gagne) {
+      if (m.piege_expediteur && !s.trouves[-1]) { manques.push(m.piege_expediteur); main.querySelector('[data-segment="-1"]').classList.add("manque"); }
+      m.morceaux.forEach(function (x, k) {
+        if (x.piege && !s.trouves[k]) { manques.push(x.piege); main.querySelector('[data-segment="' + k + '"]').classList.add("manque"); }
+      });
+    } else {
+      confettis(window.innerWidth / 2, window.innerHeight * .4, 70);
+    }
+    main.querySelectorAll(".segment").forEach(function (b) { b.disabled = true; });
+    var derniere = s.i + 1 >= s.ordre.length;
+    var zone = main.querySelector("[data-pieges-fin]");
+    zone.innerHTML = (gagne
+      ? '<div class="explication bonne grande">' + ic("sceau", "fill") + "<p><strong>" + h(P.tous) + "</strong></p></div>"
+      : '<div class="explication mauvaise grande">' + ic("alerte", "fill") + "<div><p><strong>" + h(P.perdu) + "</strong></p><ul>" +
+        manques.map(function (x) { return "<li>" + h(x) + "</li>"; }).join("") + "</ul></div></div>") +
+      '<div class="actions"><button type="button" class="bouton" data-pieges-suivant>' + h(derniere ? t("quiz_resultat") : P.suivant) + ic("fleche") + "</button></div>";
+    var b = zone.querySelector("[data-pieges-suivant]");
+    b.focus({ preventScroll: true });
+    setTimeout(function () { faireDefiler(b); }, 150);
+  }
+
+  function piegesSuivant() {
+    var s = etat.pieges;
+    s.i++; s.vies = 3; s.trouves = {}; s.msgFini = false;
+    if (s.i >= s.ordre.length) {
+      s.fini = true;
+      s.record = enregistrerRecord("pieges", s.score, s.total);
+      finJeuFete(nbEtoiles(s.score, s.total));
+    }
+    main.querySelector("[data-pieges]").innerHTML = piegesCorps();
+    window.scrollTo(0, 0);
+    var c = main.querySelector(".compteur, .resultat .surtitre");
+    if (c) { c.setAttribute("tabindex", "-1"); c.focus({ preventScroll: true }); }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Jeu : Lien piégé ?                                                 */
+  /* ------------------------------------------------------------------ */
+  pages.liens = function () {
+    var L = J().liens;
+    if (!etat.liens) etat.liens = { ordre: melanger(L.items.map(function (x, i) { return i; })).slice(0, TAILLE_PARTIE), i: 0, score: 0, reponse: null, fini: false };
+    return teteJeu("liens", L.intro) +
+      '<div class="page"><div class="conteneur"><div class="jeu-liens" data-liens style="' + styleJeu("liens") + '">' + liensCorps() + "</div></div></div>";
+  };
+
+  function urlSurlignee(item) {
+    var url = item.url, m = /^(https?:\/\/)([^/]+)(.*)$/.exec(url);
+    if (!m) return esc(url);
+    var hote = m[2], idx = hote.lastIndexOf(item.domaine);
+    if (idx < 0) return esc(url);
+    return '<span class="url-gris">' + esc(m[1]) + "</span>" + esc(hote.slice(0, idx)) + '<mark class="domaine">' + esc(item.domaine) + "</mark>" + '<span class="url-gris">' + esc(m[3]) + "</span>";
+  }
+
+  function liensCorps() {
+    var L = J().liens, s = etat.liens;
+    if (s.fini) {
+      var et = nbEtoiles(s.score, s.ordre.length);
+      return resultatJeu("liens", { etoiles: et, score: s.score + "\u00a0/\u00a0" + s.ordre.length, texte: remplir(L.fin, { score: s.score, total: s.ordre.length }), lecon: L.regle, record: s.record });
+    }
+    var item = L.items[s.ordre[s.i]], rep = s.reponse;
+    var https = /^https:/.test(item.url);
+    var html = '<aside class="regle"><span class="regle-icone">' + ic("ampoule", "duotone") + "</span><div><strong>" + h(L.regle_titre) + "</strong><p>" + h(L.regle) + "</p></div></aside>" +
+      '<div class="jeu-tete"><span class="compteur" tabindex="-1">' + h(remplir(L.compteur, { n: s.i + 1, total: s.ordre.length })) + "</span>" +
+      '<span class="jeton jeton-score">' + ic("etoile", "fill") + s.score + "</span></div>" +
+      '<div class="barre-progres" aria-hidden="true"><span style="width:' + Math.round(s.i / s.ordre.length * 100) + '%"></span></div>' +
+      '<div class="carte-lien' + (rep ? (rep.juste ? " juste" : " rate") : "") + '" data-carte-lien>' +
+      '<div class="navigateur-barre"><span class="navigateur-points" aria-hidden="true"><i></i><i></i><i></i></span>' +
+      '<span class="navigateur-url">' + ic(https ? "cadenas" : "ouvert", "fill") + '<span class="url-texte" lang="en">' + (rep ? urlSurlignee(item) : esc(item.url)) + "</span></span></div>" +
+      '<div class="navigateur-page" aria-hidden="true"><span></span><span></span><span></span><span class="court"></span></div>' +
+      '<span class="tampon tampon-piege" aria-hidden="true">' + h(L.bouton_piege) + '</span><span class="tampon tampon-vrai" aria-hidden="true">' + h(L.bouton_vrai) + "</span>" +
+      "</div>";
+    if (!rep) {
+      html += '<div class="choix-lien"><button type="button" class="bouton-lien-choix piege" data-lien="piege">' + ic("alerte", "fill") + "<span>" + h(L.bouton_piege) + "</span></button>" +
+        '<button type="button" class="bouton-lien-choix vrai" data-lien="vrai">' + ic("valide", "fill") + "<span>" + h(L.bouton_vrai) + "</span></button></div>" +
+        '<p class="astuce">' + ic("glisser") + "<span>" + h(L.astuce) + "</span></p>";
+    } else {
+      html += '<div class="retour ' + (item.vrai ? "normal" : "arnaque") + (rep.juste ? " juste" : " rate") + '" tabindex="-1">' +
+        '<div class="retour-tete">' + ic(rep.juste ? "valide" : "alerte", "fill") + '<p class="retour-titre">' + h(rep.juste ? L.bien : L.rate) + "</p></div>" +
+        '<p class="retour-verdict">' + h(item.vrai ? L.etait_vrai : L.etait_piege) + "</p>" +
+        '<p class="vrai-nom">' + h(remplir(L.vrai_nom, { domaine: "" })) + '<strong lang="en">' + esc(item.domaine) + "</strong></p>" +
+        "<p>" + h(item.explication) + "</p>" +
+        '<div class="actions"><button type="button" class="bouton" data-lien-suivant>' + h(s.i + 1 >= s.ordre.length ? t("quiz_resultat") : L.suivant) + ic("fleche") + "</button></div></div>";
+    }
+    return html;
+  }
+
+  function repondreLien(choixVrai, sortie) {
+    var L = J().liens, s = etat.liens;
+    if (!s || s.reponse || s.fini) return;
+    var item = L.items[s.ordre[s.i]];
+    var juste = choixVrai === item.vrai;
+    if (juste) s.score++;
+    s.reponse = { juste: juste };
+    var carte = main.querySelector("[data-carte-lien]");
+    var suite = function () {
+      main.querySelector("[data-liens]").innerHTML = liensCorps();
+      var c = main.querySelector("[data-carte-lien]");
+      if (juste) confettisDepuis(c, 50); else secouer(c);
+      var r = main.querySelector(".retour");
+      if (r) { r.focus({ preventScroll: true }); setTimeout(function () { faireDefiler(r); }, 150); }
+    };
+    if (sortie && carte && !CALME) {
+      carte.classList.add(choixVrai ? "sort-droite" : "sort-gauche");
+      setTimeout(suite, 260);
+    } else suite();
+  }
+
+  function lienSuivant() {
+    var s = etat.liens;
+    s.i++; s.reponse = null;
+    if (s.i >= s.ordre.length) {
+      s.fini = true;
+      s.record = enregistrerRecord("liens", s.score, s.ordre.length);
+      finJeuFete(nbEtoiles(s.score, s.ordre.length));
+    }
+    main.querySelector("[data-liens]").innerHTML = liensCorps();
+    window.scrollTo(0, 0);
+    var c = main.querySelector(".compteur, .resultat .surtitre");
+    if (c) { c.setAttribute("tabindex", "-1"); c.focus({ preventScroll: true }); }
+  }
+
+  /* Glisser la carte du lien (doigt ou souris) */
+  var glisse = null;
+  document.addEventListener("pointerdown", function (ev) {
+    var carte = ev.target.closest && ev.target.closest("[data-carte-lien]");
+    if (!carte || !etat.liens || etat.liens.reponse) return;
+    glisse = { carte: carte, x0: ev.clientX, dx: 0, id: ev.pointerId };
+    try { carte.setPointerCapture(ev.pointerId); } catch (e) { /* rien */ }
+    carte.classList.add("glisse");
+  });
+  document.addEventListener("pointermove", function (ev) {
+    if (!glisse || ev.pointerId !== glisse.id) return;
+    glisse.dx = ev.clientX - glisse.x0;
+    glisse.carte.style.transform = "translateX(" + glisse.dx + "px) rotate(" + (glisse.dx / 18).toFixed(1) + "deg)";
+    glisse.carte.style.setProperty("--penche", Math.max(-1, Math.min(1, glisse.dx / 110)).toFixed(2));
+    glisse.carte.classList.toggle("vers-gauche", glisse.dx < -30);
+    glisse.carte.classList.toggle("vers-droite", glisse.dx > 30);
+  });
+  function finGlisse(ev) {
+    if (!glisse || ev.pointerId !== glisse.id) return;
+    var g = glisse; glisse = null;
+    g.carte.classList.remove("glisse");
+    if (Math.abs(g.dx) > 90) { repondreLien(g.dx > 0, true); return; }
+    g.carte.style.transform = "";
+    g.carte.classList.remove("vers-gauche", "vers-droite");
+  }
+  document.addEventListener("pointerup", finGlisse);
+  document.addEventListener("pointercancel", finGlisse);
+
+  /* ------------------------------------------------------------------ */
+  /* Jeu : Casse-mot de passe                                           */
+  /* ------------------------------------------------------------------ */
+  var MDP_COURANTS = ["123456", "1234567", "12345678", "123456789", "1234567890", "12345", "password", "motdepasse", "azerty", "azertyuiop", "qwerty", "000000", "111111", "123123", "iloveyou", "jetaime", "soleil", "bonjour", "admin", "abc123", "football", "princesse", "amour", "dieu", "jesus", "jesuschrist", "togo", "togo228", "lome", "lome228", "bienvenue", "chocolat", "doudou", "loulou", "sunshine", "monkey", "dragon"];
+  var MOTS_COURANTS = ["password", "motdepasse", "passe", "azerty", "qwerty", "soleil", "bonjour", "amour", "jetaime", "iloveyou", "dieu", "jesus", "togo", "lome", "maman", "papa", "bebe", "princesse", "football", "admin", "kodjo", "koffi", "kofi", "kossi", "komla", "kokou", "yao", "kwami", "kouami", "kodzo", "ama", "afi", "afiwa", "akossiwa", "adjoa", "abla", "akouvi", "ayele", "edem", "sena", "mawuli", "mawuena", "elom", "yawa", "essi", "dela", "delali", "yaovi", "mensah", "kafui", "dzifa", "enyonam", "mawunyo", "nana", "grace", "joseph", "marie", "emmanuel"];
+  var SUITES = ["0123456789", "1234567890", "abcdefghijklmnopqrstuvwxyz", "azertyuiop", "qwertyuiop", "qsdfghjklm", "wxcvbn", "9876543210"];
+  function sansLeet(s) { return s.replace(/@/g, "a").replace(/0/g, "o").replace(/[1!|]/g, "i").replace(/3/g, "e").replace(/\$/g, "s").replace(/5/g, "s").replace(/7/g, "t"); }
+
+  /* Estimation simple et locale de la solidité : rien ne quitte le téléphone */
+  function estimerMdp(m) {
+    var r = { bits: 0, courant: false, suite: false, longueur: m.length >= 12,
+      mots: /[a-zA-ZÀ-ÿ]{3,}[\s\-_.!@#+*]+[a-zA-ZÀ-ÿ0-9]{2,}/.test(m), variete: /[\d\W_]/.test(m) };
+    if (!m) return r;
+    var bas = m.toLowerCase(), net = sansLeet(bas), lettres = net.replace(/[^a-z]/g, "");
+    var pool = 0;
+    if (/[a-z]/.test(m)) pool += 26;
+    if (/[A-Z]/.test(m)) pool += 26;
+    if (/\d/.test(m)) pool += 10;
+    if (/[^a-zA-Z\d]/.test(m)) pool += 33;
+    var parCar = Math.log2(Math.max(pool, 10));
+    if (MDP_COURANTS.indexOf(bas) !== -1 || MDP_COURANTS.indexOf(net) !== -1 || (MDP_COURANTS.indexOf(lettres) !== -1 && lettres.length >= m.length - 3)) {
+      r.courant = true; r.bits = 6; return r;
+    }
+    var bits = m.length * parCar;
+    MOTS_COURANTS.forEach(function (w) {
+      if (w.length >= 3 && (bas.indexOf(w) !== -1 || net.indexOf(w) !== -1)) { bits -= Math.max(0, w.length * parCar - 11); r.courant = true; }
+    });
+    var annees = m.match(/(19|20)\d\d/g);
+    if (annees) { bits -= annees.length * Math.max(0, 4 * parCar - 7); r.courant = true; }
+    SUITES.forEach(function (s) {
+      for (var i = 0; i + 4 <= s.length; i++) {
+        if (bas.indexOf(s.substr(i, 4)) !== -1) { bits -= 4 * parCar - 3; r.suite = true; break; }
+      }
+    });
+    var rep = m.match(/(.)\1{2,}/g);
+    if (rep) rep.forEach(function (x) { bits -= (x.length - 1) * parCar; r.suite = true; });
+    r.bits = Math.max(bits, 4);
+    return r;
+  }
+  function secondesMdp(bits) { return Math.pow(2, bits) / 2 / 1e10; }   // 10 milliards d'essais par seconde
+  function niveauMdp(s) { return s < 3600 ? 0 : s < 2592000 ? 1 : s < 3.15576e9 ? 2 : s < 3.15576e13 ? 3 : 4; }
+  function dureeTexte(s) {
+    var U = J().motdepasse.unites, an = 31557600;
+    var f = function (cle, n) { n = Math.round(n); return remplir(U[cle][n <= 1 ? 0 : 1], { n: milliers(n) }); };
+    if (s < 1) return U.instant;
+    if (s < 60) return f("seconde", s);
+    if (s < 3600) return f("minute", s / 60);
+    if (s < 86400) return f("heure", s / 3600);
+    if (s < 2592000) return f("jour", s / 86400);
+    if (s < an) return f("mois", s / 2592000);
+    if (s < 100 * an) return f("an", s / an);
+    if (s < 1000 * an) return U.siecles;
+    if (s < 1e6 * an) return U.milliers;
+    if (s < 1e9 * an) return U.millions;
+    return U.milliards;
+  }
+
+  pages.motdepasse = function () {
+    var M = J().motdepasse;
+    if (!etat.duel) etat.duel = { ordre: melanger(M.duels.map(function (d, i) { return i; })), sens: M.duels.map(function () { return Math.random() < .5; }), i: 0, score: 0, reponse: null, fini: false };
+    return teteJeu("motdepasse", M.intro) + '<div class="page"><div class="conteneur jeu-mdp" style="' + styleJeu("motdepasse") + '">' +
+      '<section class="testeur"' + revele(0) + "><h2>" + ic("cle", "duotone") + h(M.testeur_titre) + "</h2>" +
+      '<label for="mdp-test">' + h(M.testeur_label) + "</label>" +
+      '<div class="champ-mdp"><input id="mdp-test" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-mdp>' +
+      '<button type="button" class="bouton-oeil" data-mdp-voir aria-pressed="false">' + ic("oeil") + "<span>" + h(M.afficher) + "</span></button></div>" +
+      '<p class="prive">' + ic("bouclier", "fill") + "<span>" + h(M.prive) + "</span></p>" +
+      '<div class="jauge niveau-vide" data-jauge aria-live="polite">' +
+      '<div class="jauge-barre" aria-hidden="true"><span></span></div>' +
+      '<p class="jauge-temps"><span>' + h(M.temps) + '</span> <strong data-jauge-temps>…</strong></p>' +
+      '<p class="jauge-niveau" data-jauge-niveau>' + h(M.vide) + "</p></div>" +
+      '<ul class="criteres" data-criteres>' + M.criteres.map(function (c, k) {
+        return '<li data-critere="' + k + '">' + ic("croix") + "<span>" + h(c) + "</span></li>";
+      }).join("") + "</ul></section>" +
+      '<section class="duel" data-duel' + revele(1) + ">" + duelCorps() + "</section>" +
+      "</div></div>";
+  };
+
+  function majJauge(valeur) {
+    var M = J().motdepasse, jauge = main.querySelector("[data-jauge]");
+    if (!jauge) return;
+    var r = estimerMdp(valeur);
+    var crit = [r.longueur, r.mots, r.variete, valeur && !r.courant, valeur && !r.suite];
+    main.querySelectorAll("[data-critere]").forEach(function (li, k) {
+      var ok = !!crit[k];
+      if (li.classList.contains("ok") !== ok) {
+        li.classList.toggle("ok", ok);
+        li.querySelector("svg").outerHTML = ic(ok ? "valide" : "croix", ok ? "fill" : "bold");
+      }
+    });
+    if (!valeur) {
+      jauge.className = "jauge niveau-vide";
+      main.querySelector("[data-jauge-temps]").textContent = "…";
+      main.querySelector("[data-jauge-niveau]").textContent = typo(M.vide);
+      return;
+    }
+    var s = secondesMdp(r.bits), n = niveauMdp(s);
+    jauge.className = "jauge niveau-" + n;
+    main.querySelector("[data-jauge-temps]").textContent = typo(dureeTexte(s));
+    main.querySelector("[data-jauge-niveau]").textContent = typo(M.niveaux[n]);
+  }
+
+  function duelCorps() {
+    var M = J().motdepasse, s = etat.duel;
+    if (s.fini) {
+      var et = nbEtoiles(s.score, s.ordre.length);
+      return resultatJeu("motdepasse", { etoiles: et, score: s.score + "\u00a0/\u00a0" + s.ordre.length, texte: remplir(M.fin, { score: s.score, total: s.ordre.length }), lecon: M.lecon, record: s.record });
+    }
+    var d = M.duels[s.ordre[s.i]];
+    var paire = s.sens[s.ordre[s.i]] ? [d[1], d[0]] : [d[0], d[1]];
+    var forces = paire.map(function (x) { return estimerMdp(x).bits; });
+    var gagnant = forces[0] >= forces[1] ? 0 : 1;
+    var html = "<h2>" + ic("crane", "duotone") + h(M.defi_titre) + "</h2><p class=\"discret\">" + h(M.defi_intro) + "</p>" +
+      '<div class="jeu-tete"><span class="compteur" tabindex="-1">' + h(remplir(M.compteur, { n: s.i + 1, total: s.ordre.length })) + "</span>" +
+      '<span class="jeton jeton-score">' + ic("etoile", "fill") + s.score + "</span></div>" +
+      '<div class="duel-choix">' + paire.map(function (x, k) {
+        var sec = secondesMdp(forces[k]), niv = niveauMdp(sec);
+        var cls = s.reponse ? (k === gagnant ? " gagnant" : " perdant") + (k === s.reponse.choix ? " choisi" : "") : "";
+        return '<button type="button" class="mdp-carte niveau-' + niv + cls + '" data-duel-choix="' + k + '"' + (s.reponse ? " disabled" : "") + ">" +
+          '<code lang="en">' + esc(x) + "</code>" +
+          (s.reponse ? '<span class="mdp-verdict">' + (k === gagnant ? '<span class="mdp-badge">' + ic("trophee", "fill") + h(M.plus_solide) + "</span>" : "") +
+            '<span class="mdp-temps">' + ic("chrono") + h(dureeTexte(sec)) + "</span><span class=\"mdp-niveau\">" + h(M.niveaux[niv]) + "</span></span>" : "") +
+          "</button>";
+      }).join('<span class="duel-vs" aria-hidden="true">VS</span>') + "</div>";
+    if (s.reponse) {
+      html += '<div class="explication ' + (s.reponse.juste ? "bonne" : "mauvaise") + '">' + ic(s.reponse.juste ? "valide" : "alerte", "fill") +
+        "<p><strong>" + h(s.reponse.juste ? M.bien : M.rate) + "</strong> " + h(M.lecon) + "</p></div>" +
+        '<div class="actions"><button type="button" class="bouton" data-duel-suivant>' + h(s.i + 1 >= s.ordre.length ? t("quiz_resultat") : M.suivant) + ic("fleche") + "</button></div>";
+    }
+    return html;
+  }
+
+  function choisirDuel(k, btn) {
+    var M = J().motdepasse, s = etat.duel;
+    if (!s || s.reponse || s.fini) return;
+    var d = M.duels[s.ordre[s.i]];
+    var paire = s.sens[s.ordre[s.i]] ? [d[1], d[0]] : [d[0], d[1]];
+    var f = paire.map(function (x) { return estimerMdp(x).bits; });
+    var gagnant = f[0] >= f[1] ? 0 : 1;
+    var juste = k === gagnant;
+    if (juste) { s.score++; confettisDepuis(btn, 50); }
+    s.reponse = { choix: k, juste: juste };
+    var zone = main.querySelector("[data-duel]");
+    zone.innerHTML = duelCorps();
+    if (!juste) secouer(zone.querySelector(".mdp-carte.choisi"));
+    var b = zone.querySelector("[data-duel-suivant]");
+    if (b) { b.focus({ preventScroll: true }); setTimeout(function () { faireDefiler(b); }, 150); }
+  }
+
+  function duelSuivant() {
+    var s = etat.duel;
+    s.i++; s.reponse = null;
+    if (s.i >= s.ordre.length) {
+      s.fini = true;
+      s.record = enregistrerRecord("motdepasse", s.score, s.ordre.length);
+      finJeuFete(nbEtoiles(s.score, s.ordre.length));
+    }
+    var zone = main.querySelector("[data-duel]");
+    zone.innerHTML = duelCorps();
+    faireDefiler(zone);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Jeu : La journée d'Afi                                             */
+  /* ------------------------------------------------------------------ */
+  var ARGENT_DEPART = 60000;
+  pages.histoire = function () {
+    var Hs = J().histoire;
+    if (!etat.histoire) etat.histoire = { scene: -1, argent: ARGENT_DEPART, points: 0, choix: null, fini: false };
+    return teteJeu("histoire", carteJeu("histoire").texte) +
+      '<div class="page"><div class="conteneur"><div class="jeu-histoire" data-histoire style="' + styleJeu("histoire") + '">' + histoireCorps() + "</div></div></div>";
+  };
+
+  function pointsMax() { return J().histoire.scenes.reduce(function (a, s) { return a + Math.max.apply(null, s.choix.map(function (c) { return c.points; })); }, 0); }
+
+  function histoireCorps() {
+    var Hs = J().histoire, s = etat.histoire, max = pointsMax();
+    if (s.scene === -1) {
+      return '<div class="histoire-intro"' + revele(0) + '><span class="histoire-avatar">' + ic("portemonnaie", "duotone") + "</span>" +
+        "<p>" + h(Hs.intro) + "</p>" +
+        '<p class="histoire-solde-depart">' + ic("portemonnaie", "fill") + "<strong>" + milliers(ARGENT_DEPART) + "\u00a0F</strong></p>" +
+        '<button type="button" class="bouton bouton-jaune" data-histoire-debut>' + ic("lecture", "fill") + h(Hs.commencer) + "</button></div>";
+    }
+    if (s.fini) {
+      var fin = Hs.fins[s.points >= max - 2 ? 2 : s.points >= max / 2 ? 1 : 0];
+      var et = nbEtoiles(s.points, max);
+      return resultatJeu("histoire", {
+        etoiles: et, score: s.points + "\u00a0/\u00a0" + max, titre: fin.titre,
+        texte: fin.texte + " " + remplir(Hs.fin_argent, { argent: milliers(s.argent) }), record: s.record
+      });
+    }
+    var sc = Hs.scenes[s.scene];
+    var points = "";
+    for (var k = 0; k < Hs.scenes.length; k++) points += '<span class="' + (k < s.scene ? "passee" : k === s.scene ? "actuelle" : "") + '"></span>';
+    var html = '<div class="hud">' +
+      '<span class="hud-argent" data-argent>' + ic("portemonnaie", "fill") + '<span class="hud-label">' + h(Hs.porte_monnaie) + '</span><strong data-argent-valeur>' + milliers(s.argent) + "\u00a0F</strong></span>" +
+      '<span class="hud-vigilance">' + ic("bouclier", "fill") + '<span class="hud-label">' + h(Hs.vigilance) + "</span><strong>" + s.points + "</strong></span>" +
+      '<span class="hud-progres" aria-hidden="true">' + points + "</span></div>" +
+      '<article class="scene"><p class="scene-heure">' + ic("horloge", "fill") + h(sc.heure) + "</p>" +
+      '<p class="scene-texte">' + h(sc.texte) + "</p>" +
+      '<p class="scene-question">' + h(Hs.que_faire) + "</p>" +
+      '<ul class="options">' + sc.choix.map(function (c, k) {
+        var cls = "";
+        if (s.choix !== null) cls = (c.points === 2 ? " juste" : c.points === 1 ? " moyen" : " faux") + (k === s.choix ? " choisi" : "");
+        return '<li style="--i:' + k + '"><button type="button" class="' + cls.trim() + '" data-histoire-choix="' + k + '"' + (s.choix !== null ? " disabled" : "") + '><span class="lettre" aria-hidden="true">' + "ABC".charAt(k) + "</span><span>" + h(c.texte) + "</span></button></li>";
+      }).join("") + "</ul>";
+    if (s.choix !== null) {
+      var ch = sc.choix[s.choix];
+      html += '<div class="consequence ' + (ch.points === 2 ? "bonne" : ch.points === 1 ? "moyenne" : "mauvaise") + '" tabindex="-1">' +
+        ic(ch.points === 2 ? "valide" : ch.points === 1 ? "info" : "alerte", "fill") + "<div><p>" + h(ch.consequence) + "</p>" +
+        (ch.argent ? '<p class="consequence-argent">' + ic("portemonnaie", "fill") + "−" + milliers(-ch.argent) + "\u00a0F</p>" : "") + "</div></div>" +
+        '<div class="actions"><button type="button" class="bouton" data-histoire-suite>' + h(s.scene + 1 >= Hs.scenes.length ? t("quiz_resultat") : Hs.continuer) + ic("fleche") + "</button></div>";
+    }
+    return html + "</article>";
+  }
+
+  function animerArgent(de, a) {
+    var el = main.querySelector("[data-argent-valeur]");
+    if (!el) return;
+    var bloc = main.querySelector("[data-argent]");
+    if (a < de) {
+      secouer(bloc);
+      var perte = document.createElement("span");
+      perte.className = "perte";
+      perte.textContent = "−" + milliers(de - a) + "\u00a0F";
+      bloc.appendChild(perte);
+      setTimeout(function () { perte.remove(); }, 1600);
+    }
+    if (CALME) { el.textContent = milliers(a) + "\u00a0F"; return; }
+    var debut = null;
+    (function pas(ts) {
+      if (!debut) debut = ts;
+      var p = Math.min(1, (ts - debut) / 700);
+      el.textContent = milliers(Math.round(de + (a - de) * (1 - Math.pow(1 - p, 3)))) + "\u00a0F";
+      if (p < 1) requestAnimationFrame(pas);
+    })(performance.now());
+  }
+
+  function choisirHistoire(k, btn) {
+    var s = etat.histoire;
+    if (!s || s.choix !== null || s.fini) return;
+    var c = J().histoire.scenes[s.scene].choix[k];
+    var avant = s.argent;
+    s.choix = k;
+    s.points += c.points;
+    s.argent = Math.max(0, s.argent + (c.argent || 0));
+    main.querySelector("[data-histoire]").innerHTML = histoireCorps();
+    main.querySelector("[data-argent-valeur]").textContent = milliers(avant) + "\u00a0F";
+    animerArgent(avant, s.argent);
+    if (c.points === 2) confettisDepuis(main.querySelector('[data-histoire-choix="' + k + '"]'), 50);
+    var cons = main.querySelector(".consequence");
+    if (cons) { cons.focus({ preventScroll: true }); setTimeout(function () { faireDefiler(main.querySelector("[data-histoire-suite]")); }, 150); }
+  }
+
+  function histoireSuite() {
+    var s = etat.histoire;
+    s.scene++; s.choix = null;
+    if (s.scene >= J().histoire.scenes.length) {
+      s.fini = true;
+      s.record = enregistrerRecord("histoire", s.points, pointsMax());
+      finJeuFete(nbEtoiles(s.points, pointsMax()));
+    }
+    main.querySelector("[data-histoire]").innerHTML = histoireCorps();
+    window.scrollTo(0, 0);
+    var c = main.querySelector(".scene-heure, .resultat .surtitre");
+    if (c) { c.setAttribute("tabindex", "-1"); c.focus({ preventScroll: true }); }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Jeu : Mémo des réflexes                                            */
+  /* ------------------------------------------------------------------ */
+  var PAIRES_MEMO = 6;
+  pages.memo = function () {
+    var Mo = J().memo;
+    if (!etat.memo) {
+      var choisies = melanger(Mo.paires_liste.map(function (p, i) { return i; })).slice(0, PAIRES_MEMO);
+      var cartes = [];
+      choisies.forEach(function (p) { cartes.push({ p: p, type: "piege" }); cartes.push({ p: p, type: "reflexe" }); });
+      etat.memo = { cartes: melanger(cartes), ouvertes: [], trouvees: {}, coups: 0, bloque: false, fini: false };
+    }
+    return teteJeu("memo", Mo.intro) + '<div class="page"><div class="conteneur"><div class="jeu-memo" data-memo style="' + styleJeu("memo") + '">' + memoCorps() + "</div></div></div>";
+  };
+
+  function etoilesMemo(coups) { return coups <= 9 ? 3 : coups <= 13 ? 2 : coups <= 18 ? 1 : 0; }
+
+  function memoCorps() {
+    var Mo = J().memo, s = etat.memo;
+    if (s.fini) {
+      var et = etoilesMemo(s.coups);
+      return resultatJeu("memo", { etoiles: et, score: remplir(Mo.coups, { n: s.coups }), partage: remplir(Mo.partage_score, { n: s.coups }), texte: remplir(Mo.fin, { n: s.coups }), record: s.record });
+    }
+    return '<div class="jeu-tete"><span class="jeton jeton-score" data-memo-coups>' + ic("memo", "fill") + h(remplir(Mo.coups, { n: s.coups })) + "</span>" +
+      '<span class="jeton" data-memo-paires>' + h(remplir(Mo.paires, { n: Object.keys(s.trouvees).length, total: PAIRES_MEMO })) + "</span></div>" +
+      '<ul class="memo-grille">' + s.cartes.map(function (c, k) {
+        var paire = Mo.paires_liste[c.p];
+        var visible = s.ouvertes.indexOf(k) !== -1 || s.trouvees[c.p];
+        return '<li><button type="button" class="carte-memo ' + c.type + (visible ? " retournee" : "") + (s.trouvees[c.p] ? " trouvee" : "") + '" data-carte="' + k + '"' +
+          ' aria-label="' + esc(typo(visible ? (c.type === "piege" ? Mo.piege : Mo.reflexe) + " : " + paire[c.type] : Mo.cachee + " " + (k + 1))) + '">' +
+          '<span class="carte-interieur"><span class="carte-dos" aria-hidden="true">' + ic("bouclier", "duotone") + "</span>" +
+          '<span class="carte-face" aria-hidden="true"><span class="carte-type">' + ic(c.type === "piege" ? "alerte" : "valide", "fill") + h(c.type === "piege" ? Mo.piege : Mo.reflexe) + "</span>" +
+          '<span class="carte-texte">' + h(paire[c.type]) + "</span></span></span></button></li>";
+      }).join("") + "</ul>";
+  }
+
+  function retournerCarte(k, btn) {
+    var Mo = J().memo, s = etat.memo;
+    if (!s || s.bloque || s.fini) return;
+    var c = s.cartes[k];
+    if (s.trouvees[c.p] || s.ouvertes.indexOf(k) !== -1) return;
+    var paire = Mo.paires_liste[c.p];
+    s.ouvertes.push(k);
+    btn.classList.add("retournee");
+    btn.setAttribute("aria-label", typo((c.type === "piege" ? Mo.piege : Mo.reflexe) + " : " + paire[c.type]));
+    if (s.ouvertes.length < 2) return;
+    s.coups++;
+    main.querySelector("[data-memo-coups]").innerHTML = ic("memo", "fill") + h(remplir(Mo.coups, { n: s.coups }));
+    var a = s.cartes[s.ouvertes[0]], b = s.cartes[s.ouvertes[1]];
+    var boutons = s.ouvertes.map(function (i) { return main.querySelector('[data-carte="' + i + '"]'); });
+    if (a.p === b.p && a.type !== b.type) {
+      s.trouvees[a.p] = true;
+      s.ouvertes = [];
+      boutons.forEach(function (x) { x.classList.add("trouvee"); });
+      confettisDepuis(btn, 35);
+      var n = Object.keys(s.trouvees).length;
+      main.querySelector("[data-memo-paires]").textContent = typo(remplir(Mo.paires, { n: n, total: PAIRES_MEMO }));
+      annoncer(Mo.paires_liste[a.p].reflexe, { titre: Mo.paires_liste[a.p].piege, icone: "valide" });
+      if (n === PAIRES_MEMO) {
+        s.fini = true;
+        s.record = enregistrerRecord("memo", s.coups, PAIRES_MEMO, true);
+        setTimeout(function () {
+          main.querySelector("[data-memo]").innerHTML = memoCorps();
+          finJeuFete(etoilesMemo(s.coups));
+          var t0 = main.querySelector(".resultat .surtitre");
+          if (t0) { t0.setAttribute("tabindex", "-1"); t0.focus({ preventScroll: true }); faireDefiler(t0); }
+        }, 900);
+      }
+    } else {
+      s.bloque = true;
+      setTimeout(function () {
+        boutons.forEach(function (x) { secouer(x); });
+      }, 350);
+      setTimeout(function () {
+        boutons.forEach(function (x, i) {
+          x.classList.remove("retournee");
+          x.setAttribute("aria-label", typo(Mo.cachee + " " + (s.ouvertes[i] + 1)));
+        });
+        s.ouvertes = []; s.bloque = false;
+      }, 1100);
+    }
+  }
+
+  /* ================================================================== */
   /* Routeur                                                            */
   /* ================================================================== */
   function route() {
@@ -722,8 +1381,14 @@
     if ((r = /^lecon-(.+)-(\d+)$/.exec(ancre))) return { nom: "lecons", type: "lecon", html: pages.lecon(r[1], r[2]) };
     if ((r = /^quiz-(.+)$/.exec(ancre))) return { nom: "lecons", html: pages.quiz(r[1]) };
     if ((r = /^theme-(.+)$/.exec(ancre))) return { nom: "lecons", html: pages.theme(r[1]) };
-    if (ancre === "jeu") return { nom: "jeu", html: pages.jeu() };
-    if ((r = /^jeu-(.+)$/.exec(ancre))) return { nom: "jeu", html: pages.jeu(r[1]) };
+    if (ancre === "jeux") return { nom: "jeux", html: pages.jeux() };
+    if (ancre === "jeu") return { nom: "jeux", html: pages.jeu() };
+    if ((r = /^jeu-(.+)$/.exec(ancre))) return { nom: "jeux", html: pages.jeu(r[1]) };
+    if (ancre === "pieges") return { nom: "jeux", html: pages.pieges() };
+    if (ancre === "liens") return { nom: "jeux", html: pages.liens() };
+    if (ancre === "mot-de-passe") return { nom: "jeux", html: pages.motdepasse() };
+    if (ancre === "histoire") return { nom: "jeux", html: pages.histoire() };
+    if (ancre === "memo") return { nom: "jeux", html: pages.memo() };
     if (ancre === "dictionnaire") return { nom: "dictionnaire", html: pages.dictionnaire() };
     if (ancre === "signaler") return { nom: "signaler", html: pages.signaler() };
     if (ancre === "a-propos") return { nom: "apropos", html: pages.apropos() };
@@ -761,14 +1426,15 @@
     var zone = document.querySelector("[data-langues]");
     if (!zone.querySelector("button")) {
       zone.innerHTML = '<span class="langues-curseur" aria-hidden="true"></span>' + CFG.langues.map(function (l) {
-        return '<button type="button" lang="' + l.code + '" data-langue="' + l.code + '">' + esc(l.nom) + "</button>";
+        return '<button type="button" lang="' + l.code + '" data-langue="' + l.code + '" aria-label="' + esc(l.nom) + '">' +
+          '<span class="langue-long" aria-hidden="true">' + esc(l.nom) + '</span><span class="langue-court" aria-hidden="true">' + esc(l.court || l.nom) + "</span></button>";
       }).join("");
     }
     zone.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-langue") === etat.langue)); });
     placerCurseurLangue();
 
     var liens = [
-      ["lecons", "#lecons", "menu_lecons"], ["jeu", "#jeu", "menu_jeu"], ["dictionnaire", "#dictionnaire", "menu_dico"],
+      ["lecons", "#lecons", "menu_lecons"], ["jeux", "#jeux", "menu_jeu"], ["dictionnaire", "#dictionnaire", "menu_dico"],
       ["signaler", "#signaler", "menu_signaler"], ["apropos", "#a-propos", "menu_apropos"]
     ];
     document.querySelector("[data-nav]").innerHTML = liens.map(function (l) {
@@ -776,7 +1442,7 @@
     }).join("");
 
     var onglets = [
-      ["accueil", "#accueil", "nav_accueil", "maison"], ["lecons", "#lecons", "nav_lecons", "livre"], ["jeu", "#jeu", "nav_jeu", "jeu"],
+      ["accueil", "#accueil", "nav_accueil", "maison"], ["lecons", "#lecons", "nav_lecons", "livre"], ["jeux", "#jeux", "nav_jeu", "jeu"],
       ["dictionnaire", "#dictionnaire", "nav_dico", "mots"], ["signaler", "#signaler", "nav_aide", "bouee"]
     ];
     document.querySelector("[data-onglets]").innerHTML = "<ul>" + onglets.map(function (o) {
@@ -1087,7 +1753,10 @@
     if (el.hasAttribute("data-choix")) { repondreScenario(el.closest("[data-scenario]"), el.getAttribute("data-choix"), el); return; }
     if (el.hasAttribute("data-suivant")) {
       etat.jeu.i++;
-      if (etat.jeu.i >= etat.jeu.ordre.length) { etat.jeu.termine = true; etat.jeu.i = etat.jeu.ordre.length - 1; }
+      if (etat.jeu.i >= etat.jeu.ordre.length) {
+        etat.jeu.termine = true; etat.jeu.i = etat.jeu.ordre.length - 1;
+        enregistrerRecord("arnaque", etat.jeu.score, etat.jeu.ordre.length);
+      }
       main.querySelector("[data-jeu]").innerHTML = jeuCorps();
       window.scrollTo(0, 0);
       var cible = main.querySelector(".compteur, .resultat .surtitre");
@@ -1104,6 +1773,37 @@
     if (el.hasAttribute("data-niveau")) { nouvellePartie(null, el.getAttribute("data-niveau")); rendre(); return; }
     if (el.hasAttribute("data-changer-niveau")) { etat.jeu = { choix: true }; rendre(); return; }
     if (el.hasAttribute("data-copier")) { copierLien(); return; }
+
+    // Salle de jeux
+    if (el.hasAttribute("data-rejouer-jeu")) {
+      var cleEtat = { pieges: "pieges", liens: "liens", motdepasse: "duel", histoire: "histoire", memo: "memo" }[el.getAttribute("data-rejouer-jeu")];
+      if (cleEtat) etat[cleEtat] = null;
+      rendre();
+      return;
+    }
+    if (el.hasAttribute("data-segment")) { toucherSegment(el); return; }
+    if (el.hasAttribute("data-pieges-suivant")) { piegesSuivant(); return; }
+    if (el.hasAttribute("data-lien")) { repondreLien(el.getAttribute("data-lien") === "vrai", true); return; }
+    if (el.hasAttribute("data-lien-suivant")) { lienSuivant(); return; }
+    if (el.hasAttribute("data-mdp-voir")) {
+      var champ = main.querySelector("[data-mdp]"), voir = champ.type === "password";
+      champ.type = voir ? "text" : "password";
+      el.setAttribute("aria-pressed", String(voir));
+      el.innerHTML = ic(voir ? "oeilbarre" : "oeil") + "<span>" + h(voir ? J().motdepasse.masquer : J().motdepasse.afficher) + "</span>";
+      return;
+    }
+    if (el.hasAttribute("data-duel-choix")) { choisirDuel(parseInt(el.getAttribute("data-duel-choix"), 10), el); return; }
+    if (el.hasAttribute("data-duel-suivant")) { duelSuivant(); return; }
+    if (el.hasAttribute("data-histoire-debut")) {
+      etat.histoire.scene = 0;
+      main.querySelector("[data-histoire]").innerHTML = histoireCorps();
+      var hh = main.querySelector(".scene-heure");
+      if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus({ preventScroll: true }); faireDefiler(hh); }
+      return;
+    }
+    if (el.hasAttribute("data-histoire-choix")) { choisirHistoire(parseInt(el.getAttribute("data-histoire-choix"), 10), el); return; }
+    if (el.hasAttribute("data-histoire-suite")) { histoireSuite(); return; }
+    if (el.hasAttribute("data-carte")) { retournerCarte(parseInt(el.getAttribute("data-carte"), 10), el); return; }
     if (el.hasAttribute("data-option")) { repondreQuiz(parseInt(el.getAttribute("data-option"), 10), el); return; }
     if (el.hasAttribute("data-quiz-suivant")) { quizSuivant(); return; }
     if (el.hasAttribute("data-recommencer")) { etat.quiz = null; rendre(); return; }
@@ -1138,6 +1838,7 @@
   });
 
   document.addEventListener("input", function (ev) {
+    if (ev.target.hasAttribute("data-mdp")) { majJauge(ev.target.value); return; }
     if (!ev.target.hasAttribute("data-dico-q")) return;
     var q = sansAccents(ev.target.value.trim().toLowerCase());
     var visibles = 0;

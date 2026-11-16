@@ -8,7 +8,13 @@ Site gratuit pour apprendre à reconnaître les arnaques du téléphone et d'int
 
 - **5 thèmes, 15 leçons courtes** : codes secrets, Mobile Money, WhatsApp, fausses offres d'emploi, réseaux sociaux.
 - **Un quiz par thème** (4 questions avec explications).
-- **« Arnaque ou pas ? »** : 48 messages réalistes (SMS, WhatsApp, appel, Facebook, e-mail) en 3 niveaux (facile, moyen, expert), dont 14 messages normaux pour ne pas apprendre à se méfier de tout. Parties de 10 messages tirés au hasard.
+- **Une salle de jeux** avec 6 jeux courts, chacun avec son record :
+  - **Arnaque ou pas ?** : 48 messages réalistes (SMS, WhatsApp, appel, Facebook, e-mail) en 3 niveaux (facile, moyen, expert), dont 14 messages normaux pour ne pas apprendre à se méfier de tout. Parties de 10 messages tirés au hasard.
+  - **Chasse aux pièges** : on touche chaque passage suspect d'un message (expéditeur, urgence, lien, demande de code…). 7 messages, 26 pièges, 3 erreurs permises par message.
+  - **Lien piégé ?** : 16 adresses à classer d'un glissement (vrai site ou faux site), avec le vrai domaine surligné pour apprendre à le lire.
+  - **Casse-mot de passe** : un testeur qui estime en combien de temps un pirate trouverait un mot de passe (calcul fait dans le téléphone, rien n'est envoyé), puis 6 duels « lequel est le plus solide ? ».
+  - **La journée d'Afi** : une histoire à choix. Afi, vendeuse au marché, reçoit 7 messages piégés dans la journée ; chaque mauvais choix lui coûte de l'argent.
+  - **Mémo des réflexes** : un jeu de mémoire où l'on associe chaque piège au bon réflexe.
 - **Partage sur WhatsApp** du site ou de son score, avec une image d'aperçu soignée.
 - **Un petit dictionnaire** de 25 mots, avec une colonne ewe.
 - **Une page « En cas d'arnaque »** : les 6 bons réflexes et les contacts du CERT.tg.
@@ -52,7 +58,7 @@ Si tu passes à un nom de domaine, change l'adresse dans `js/config.js` (`siteUr
 | `js/config.js` | Nom du site, liens, couleurs des thèmes, coordonnées du CERT.tg |
 | `js/content/fr.js` | Tout le contenu en français (référence) |
 | `js/content/ee.js` | Le contenu en ewe, même structure |
-| `js/app.js` | Navigation, quiz, jeu, progression, badges, animations, langues |
+| `js/app.js` | Navigation, quiz, salle de jeux, progression, records, badges, animations, langues |
 | `js/icones.js` | Icônes Phosphor utilisées par le site (généré par `scripts/icones.js`) |
 | `scripts/modele-ewe.js` | Outil de traduction (mise à jour de `ee.js`, export/import CSV) |
 | `docs/PLAN.md` | Arborescence, contenu, feuille de route, partenaires |

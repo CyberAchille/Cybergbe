@@ -26,7 +26,7 @@ const fichierFr = path.join(racine, "js/content/fr.js");
 const fichierEe = path.join(racine, "js/content/ee.js");
 const fichierCsv = path.join(racine, "docs/traduction-ewe.csv");
 
-const TECHNIQUES = new Set(["id", "module", "lecon", "canal", "verdict", "bonne", "scenario_accueil", "url", "niveau"]);
+const TECHNIQUES = new Set(["id", "module", "lecon", "canal", "verdict", "bonne", "scenario_accueil", "url", "niveau", "domaine", "duels"]);
 
 function charger(fichier) {
   const bac = { window: {} };
@@ -42,7 +42,8 @@ function modele(fr, ee) {
     const sortie = {};
     for (const cle of Object.keys(fr)) {
       if (TECHNIQUES.has(cle)) continue;
-      sortie[cle] = modele(fr[cle], ee && typeof ee === "object" ? ee[cle] : undefined);
+      const v = modele(fr[cle], ee && typeof ee === "object" ? ee[cle] : undefined);
+      if (v !== undefined) sortie[cle] = v; // les nombres et vrai/faux restent dans fr.js
     }
     return sortie;
   }
